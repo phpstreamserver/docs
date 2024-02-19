@@ -2,46 +2,65 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
+PHPRunner is a high performance event-loop based process manager, TCP, and UDP server.
+It's primarily designed to run web applications and can replace traditional web application stacks such as nginx + php-fpm and supervisord.
+It only requires php-cli to run and nothing more.  
+PHPRunner operates on a multi-process architecture with epoll and non-blocking IO, allowing each process to handle thousands of concurrent connections.
+It resides in memory, delivering exceptional performance.
+The built-in sever supports tcp, udp, text, http, https protocols and provides an option to implement custom protocols.  
+With a built-in PSR-7 HTTP server you can easily integrate any PSR-7 compatible framework with it in no time.
 
-Let's discover **Docusaurus in less than 5 minutes**.
+#### Requirements and limitations:
+- Unix based OS (no windows support);
+- *php-posix* and *php-pcntl* extensions;
+- *php-uv* extension is not required, but highly recommended for better performance.
 
-## Getting Started
-
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
+## Getting started
+### Install composer packages
 ```bash
-npm init docusaurus@latest my-website classic
+$ composer require luzrain/phprunner
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### Configure server
+The simple http server might look like this:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+```php title="server.php"
+use Luzrain\PhpRunner\Exception\HttpException;
+use Luzrain\PhpRunner\PhpRunner;
+use Luzrain\PhpRunner\Server\Connection\ConnectionInterface;
+use Luzrain\PhpRunner\Server\Http\Psr7\Response;
+use Luzrain\PhpRunner\Server\Protocols\Http;
+use Luzrain\PhpRunner\Server\Server;
+use Psr\Http\Message\ServerRequestInterface;
 
-## Start your site
+$phpRunner = new PhpRunner();
+$phpRunner->addWorkers(
+    new WorkerProcess(
+        name: 'HTTP Server',
+        onStart: function (WorkerProcess $worker) {
+            $worker->startServer(new Server(
+                listen: 'tcp://0.0.0.0:80',
+                protocol: new Http(),
+                onMessage: function (ConnectionInterface $connection, ServerRequestInterface $data): void {
+                    $response = match ($data->getUri()->getPath()) {
+                        '/' => new Response(body: 'Hello world'),
+                        '/ping' => new Response(body: 'pong'),
+                        default => throw HttpException::createNotFoundException(),
+                    };
+                    $connection->send($response);
+                },
+            ));
+        },
+    ),
+);
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+exit($phpRunner->run());
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### Run
+```bash
+$ php server.php start
+```
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Server http://127.0.0.1:80/ in you browser to see "Hello world" message.
