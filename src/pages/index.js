@@ -22,7 +22,7 @@ function HomepageHeader() {
               Get started
           </Link>
           <Link className="button button--secondary button--lg" href="https://github.com/luzrain/phprunner">
-              <GithubImg alt="" /> Github
+              <GithubImg alt="" /> GitHub
           </Link>
         </div>
       </div>
