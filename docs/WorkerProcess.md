@@ -88,7 +88,7 @@ Stop the tcp or udp listening server inside the worker process.
 
 ### addReloadStrategies()
 `WorkerProcess::addReloadStrategies(ReloadStrategyInterface ...$reloadStrategies): void`  
-Add one or more [reload strategies](/docs/category/reload-strategies). 
+Add one or more [reload strategies](/docs/reload-strategies). 
 
 ### setLogger()
 `WorkerProcess::setLogger(LoggerInterface $logger): void`  
