@@ -7,6 +7,8 @@ PhpRunner class is an entry point for an entire application running by PHPRunner
 
 Example:  
 ```php title="server.php"
+use Luzrain\PhpRunner\PhpRunner;
+
 // highlight-start
 $phpRunner = new PhpRunner(
     pidFile: '/run/phprunner.pid',
@@ -39,7 +41,7 @@ Timeout in seconds that master process will be waiting before force kill child p
 Type: `LoggerInterface|null`  
 Default: `null`  
 PSR-3 compatible logger.  
-PHPRunner uses the included logger implementation by default, which prints log entries to stdout and optionally to `logFile`.  
+If set to null, PHPRunner will use the default logger implementation that prints log entries to stdout and optionally to `logFile`.
 
 ## Methods
 

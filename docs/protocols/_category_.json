@@ -2,7 +2,7 @@
   "label": "Protocols",
   "position": 5,
   "link": {
-    "type": "generated-index",
-    "description": "PHPRunner was originally designed to handle the HTTP protocol and contains only a few protocol implementations. However, it is possible to implement custom protocols."
+    "type": "doc",
+    "id": "index"
   }
 }

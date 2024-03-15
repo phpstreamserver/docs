@@ -7,7 +7,15 @@ Server class describes the tcp or udp server running in worker process.
 
 Example:  
 ```php title="server.php"
-$phpRunner = new PhpRunner(/* configuration */);
+use Luzrain\PhpRunner\PhpRunner;
+use Luzrain\PhpRunner\Server\Connection\ConnectionInterface;
+use Luzrain\PhpRunner\Server\Http\Psr7\Response;
+use Luzrain\PhpRunner\Server\Protocols\Http;
+use Luzrain\PhpRunner\Server\Server;
+use Luzrain\PhpRunner\WorkerProcess;
+use Psr\Http\Message\ServerRequestInterface;
+
+$phpRunner = new PhpRunner();
 $phpRunner->addWorkers(
     new WorkerProcess(
         onStart: function (WorkerProcess $worker) {

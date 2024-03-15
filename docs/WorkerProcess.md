@@ -7,7 +7,10 @@ WorkerProcess class describes the worker process to run.
 
 Example:  
 ```php title="server.php"
-$phpRunner = new PhpRunner(/* configuration */);
+use Luzrain\PhpRunner\PhpRunner;
+use Luzrain\PhpRunner\WorkerProcess;
+
+$phpRunner = new PhpRunner();
 $phpRunner->addWorkers(
     // highlight-start
     new WorkerProcess(
@@ -144,7 +147,10 @@ This can be useful to give control to an external program and have it monitored 
 Example of a simple supervisor that keeps an external program alive: 
 
 ```php title="server.php"
-$phpRunner = new PhpRunner(/* configuration */);
+use Luzrain\PhpRunner\PhpRunner;
+use Luzrain\PhpRunner\WorkerProcess;
+
+$phpRunner = new PhpRunner();
 $phpRunner->addWorkers(
     new WorkerProcess(
         name: 'External program',
