@@ -28,6 +28,7 @@ The simple http server might look like this:
 ```php title="server.php"
 use Luzrain\PhpRunner\Exception\HttpException;
 use Luzrain\PhpRunner\PhpRunner;
+use Luzrain\PhpRunner\WorkerProcess;
 use Luzrain\PhpRunner\Server\Connection\ConnectionInterface;
 use Luzrain\PhpRunner\Server\Http\Psr7\Response;
 use Luzrain\PhpRunner\Server\Protocols\Http;
