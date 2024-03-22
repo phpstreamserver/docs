@@ -5,7 +5,14 @@
   width: 100%;
 }
 
+.featureTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.33em;
+}
+
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  display: inline-block;
+  height: 1.1em;
+  width: 1.1em;
 }

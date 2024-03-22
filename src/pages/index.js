@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
+import Layout from '@theme/Layout/Provider';
+import Footer from '@theme/Footer';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
 import Heading from '@theme/Heading';
@@ -37,9 +38,10 @@ export default function Home() {
       title={`${siteConfig.title}`}
       description="PHPStreamServer is a high-performance PHP application server and process manager written in PHP.">
       <HomepageHeader />
-      <main>
+      <main className={styles.main}>
         <HomepageFeatures />
       </main>
+      <Footer></Footer>
     </Layout>
   );
 }
