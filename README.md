@@ -1,6 +1,6 @@
 # PHPStreamServer Website
 
-PHPStreamServer documentation website [phpstreamserver.dev](https://phpstreamserver.dev/)
+PHPStreamServer documentation website [phprunner.dev](https://phprunner.dev/)
 
 ### Local Development
 

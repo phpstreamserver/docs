@@ -54,7 +54,7 @@ Worker process group. You should have root privileges to change the process grou
 
 ### onStart
 Type: `null|Closure(WorkerProcess):void`  
-Default: `null`
+Default: `null`  
 Callback that is executed after the worker process is started.
 Callback parameters:
 - `WorkerProcess`
