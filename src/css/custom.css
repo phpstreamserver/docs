@@ -30,3 +30,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-hero-background-color: #0a73f0;
 }
+
+.navbar__logo {
+  max-width: calc(var(--doc-sidebar-width) - var(--ifm-navbar-padding-horizontal) * 2);
+}

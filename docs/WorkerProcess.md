@@ -7,12 +7,12 @@ WorkerProcess class describes the worker process to run.
 
 Example:  
 ```php title="server.php"
-use Luzrain\PhpRunner\PhpRunner;
-use Luzrain\PhpRunner\WorkerProcess;
+use Luzrain\PHPStreamServer\Server;
+use Luzrain\PHPStreamServer\WorkerProcess;
 
-$phpRunner = new PhpRunner();
-$phpRunner->addWorkers(
-    // highlight-start
+$server = new Server();
+$server->addWorkers(
+// highlight-start
     new WorkerProcess(
         name: 'worker 1',
         count: 2,
@@ -20,10 +20,10 @@ $phpRunner->addWorkers(
             echo "Worker 1 has started";
         },
     )
-    // highlight-end
+// highlight-end
 );
 
-exit($phpRunner->run());
+exit($server->run());
 ```
 
 ## Constructor options
@@ -75,15 +75,15 @@ Callback parameters:
 
 ## Methods
 
-### startServer()
-`WorkerProcess::startServer(Server $server): void`  
-Starts the tcp or udp listening server inside the worker process.  
+### startListener()
+`WorkerProcess::startListener(Listener $listener): void`  
+Starts the tcp or udp listener inside the worker process.  
 Should be called after the worker process is started, usually in the `onStart` callback.  
-It is possible to run more than one server in a single worker process.  
-See more about [Server](/docs/Server) object.  
+It is possible to run more than one listener in a single worker process.  
+See more about [Listener](/docs/Listener) object.  
 
-### stopServer()
-`WorkerProcess::stopServer(Server $server): void`  
+### stopListener()
+`WorkerProcess::stopServer(Listener $listener): void`  
 Stop the tcp or udp listening server inside the worker process.  
 
 ### addReloadStrategies()
@@ -147,11 +147,11 @@ This can be useful to give control to an external program and have it monitored 
 Example of a simple supervisor that keeps an external program alive: 
 
 ```php title="server.php"
-use Luzrain\PhpRunner\PhpRunner;
-use Luzrain\PhpRunner\WorkerProcess;
+use Luzrain\PHPStreamServer\Server;
+use Luzrain\PHPStreamServer\WorkerProcess;
 
-$phpRunner = new PhpRunner();
-$phpRunner->addWorkers(
+$server = new Server();
+$server->addWorkers(
     new WorkerProcess(
         name: 'External program',
         count: 2,
@@ -164,5 +164,5 @@ $phpRunner->addWorkers(
     )
 );
 
-exit($phpRunner->run());
+exit($server->run());
 ```

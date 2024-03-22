@@ -7,7 +7,7 @@ const FeatureList = [
     title: 'PSR-7 HTTP server',
     description: (
       <>
-        PHPRunner has a built-in PSR-7 web server. You can easily integrate it with any PSR-7 compatible framework.
+        PHPStreamServer has a built-in PSR-7 web server. You can easily integrate it with any PSR-7 compatible framework.
       </>
     ),
   },
@@ -15,7 +15,7 @@ const FeatureList = [
     title: 'Supervisor',
     description: (
       <>
-        Run your own long-running processes. PHPRunner will keep them alive.
+        Run your own long-running processes. PHPStreamServer will keep them alive.
       </>
     ),
   },

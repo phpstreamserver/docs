@@ -8,12 +8,12 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PHPRunner',
+  title: 'PHPStreamServer',
   tagline: 'PHP Application Server',
-  favicon: 'img/phprunner-icon.png',
+  favicon: 'img/phpss-icon.png',
 
   // Set the production url of your site here
-  url: 'https://phprunner.dev',
+  url: 'https://phpstreamserver.dev',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -43,7 +43,7 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/luzrain/phprunner-doc/tree/master/',
+          editUrl: 'https://github.com/luzrain/phpstreamserver-doc/tree/master/',
         },
         // blog: {
         //   showReadingTime: true,
@@ -66,9 +66,9 @@ const config = {
       navbar: {
         //title: 'My Site',
         logo: {
-          alt: 'PHPRunner',
-          src: 'img/phprunner-light-theme.svg',
-          srcDark: 'img/phprunner-dark-theme.svg',
+          alt: 'PHPStreamServer',
+          src: 'img/phpss-light.svg',
+          srcDark: 'img/phpss-dark.svg',
         },
         items: [
           {
@@ -78,7 +78,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://github.com/luzrain/phprunner',
+            href: 'https://github.com/luzrain/phpstreamserver',
             label: 'GitHub',
             position: 'right',
           },
@@ -91,7 +91,7 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'PHPRunner docs',
+                label: 'PHPStreamServer docs',
                 to: '/docs/intro',
               },
             ],
@@ -100,12 +100,12 @@ const config = {
             title: 'Github',
             items: [
               {
-                label: 'PHPRunner',
-                href: 'https://github.com/luzrain/phprunner',
+                label: 'PHPStreamServer',
+                href: 'https://github.com/luzrain/phpstreamserver',
               },
               {
-                label: 'PHPRunner runtime for symfony applications',
-                href: 'https://github.com/luzrain/phprunner-bundle',
+                label: 'PHPStreamServer runtime for symfony applications',
+                href: 'https://github.com/luzrain/phpstreamserver-bundle',
               },
             ],
           },

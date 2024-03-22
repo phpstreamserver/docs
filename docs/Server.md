@@ -1,105 +1,76 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Server class
-Server class describes the tcp or udp server running in worker process.
+Server class is an entry point for an entire application running by PHPStreamServer.
 
 Example:  
 ```php title="server.php"
-use Luzrain\PhpRunner\PhpRunner;
-use Luzrain\PhpRunner\Server\Connection\ConnectionInterface;
-use Luzrain\PhpRunner\Server\Http\Psr7\Response;
-use Luzrain\PhpRunner\Server\Protocols\Http;
-use Luzrain\PhpRunner\Server\Server;
-use Luzrain\PhpRunner\WorkerProcess;
-use Psr\Http\Message\ServerRequestInterface;
+use Luzrain\PHPStreamServer\Server;
 
-$phpRunner = new PhpRunner();
-$phpRunner->addWorkers(
-    new WorkerProcess(
-        onStart: function (WorkerProcess $worker) {
-            $worker->startServer(
-                // highlight-start
-                new Server(
-                    listen: 'tcp://0.0.0.0:80',
-                    protocol: new Http(),
-                    onMessage: function (ConnectionInterface $connection, ServerRequestInterface $data): void {
-                        $connection->send(new Response(body: 'Hello world'));
-                    },
-                )
-                // highlight-end
-            );
-        },
-    ),
+// highlight-start
+$server = new Server(
+    pidFile: '/run/phpss.pid',
 );
+// highlight-end
 
-exit($phpRunner->run());
+exit($server->run());
 ```
 
 ## Constructor options
-### listen
-Listen address. This is a string formatted as `tcp://0.0.0.0:80` where protocol can be tcp or udp.  
-Type: `string`  
 
-### protocol
-Implementation of the ProtocolInterface.  
-Type: `ProtocolInterface`  
-Default: `new Raw()`  
-
-### tls
-Enable TLS encryption.  
-Type: `bool`  
-Default: `false`  
-
-### tlsCertificate
-Path to local certificate file on filesystem. It must be a PEM encoded file which contains your certificate and private key.  
-It can optionally contain the certificate chain of issuers.  
+### pidFile
 Type: `string|null`  
 Default: `null`  
+Defines a file to store the process ID of the main process.
+By default, the pid file is stored in /run/ or /tmp/ if the /run/ directory is not available for reading and writing.  
 
-### tlsCertificateKey
-Path to local private key file on filesystem in case of separate files for certificate (tlsCertificate) and private key.   
+### logFile
 Type: `string|null`  
 Default: `null`  
+Defines a file for storing logs. Only works with the default logger. (see option below)  
+By default, logs are not stored anywhere.  
 
-### onConnect
-Callback that is executed when a new TCP connection is established.  
-Type: `null|Closure(ConnectionInterface):void`  
-Default: `null`  
-Callback parameters:
- - `ConnectionInterface`
+### stopTimeout
+Type: `int`  
+Default: `3`  
+Timeout in seconds that master process will be waiting before force kill child processes after sending stop command.  
 
-### onMessage
-Callback that is executed when a new protocol speciefic message is received.  
-Type: `null|Closure(ConnectionInterface, mixed):void`  
+### logger
+Type: `LoggerInterface|null`  
 Default: `null`  
-Callback parameters:
- - `ConnectionInterface`
- - `mixed` protocol specific message
-
-### onClose
-Callback that is executed when a TCP connection is closed.  
-Type: `null|Closure(ConnectionInterface):void`  
-Default: `null`  
-Callback parameters:
- - `ConnectionInterface`
-
-### onError
-Callback that is executed when an error occurs on the client's connection.  
-Type: `null|Closure(ConnectionInterface, int, string):void`  
-Default: `null`  
-Callback parameters:  
- - `ConnectionInterface`
- - `int` error code
- - `string` error as string
+PSR-3 compatible logger.  
+If set to null, PHPStreamServer will use the default logger implementation that prints log entries to stdout and optionally to `logFile`.
 
 ## Methods
 
+### addWorkers()
+`Server::addWorkers(WorkerProcess ...$workers): self`  
+Add one or more `WorkerProcess` to the worker pool.  
+See more about [WorkerProcess](/docs/WorkerProcess) object.
+
+### run()
+`Server::run(string $cmd = ''): int`  
+Run PHPStreamServer. This is a blocking operation that will return an exit code on exit.  
+Command to run taken from command line options by default, but can be overridden in cmd parameter.  
+
 ### stop()
 `Server::stop(): void`  
-Stop the server.  
+Stop all worker processes and exit.
 
-### getListenAddress()
-`WorkerProcess::getListenAddress(): string`  
-Get the listening address. This is a string formatted as `tcp://0.0.0.0:80`.
+### reload()
+`Server::reload(): void`  
+Reload PHPStreamServer processes. Workers with the `reloadable` option set to `false` will not be reloaded.
+
+### getStatus()
+`Server::getStatus(): MasterProcessStatus`  
+Get an instance of the `MasterProcessStatus` class, which contains all the information about running processes.
+
+Note that stop(), reload() and getStatus() methods can be called not only by the master or worker processes, but also by any other process.
+For example, you can create a separate php file that reloads an already running PHPStreamServer instance.
+
+```php title="reload.php"
+$server = new Server();
+$server->reload();
+```

@@ -7,7 +7,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-import Logo from '@site/static/img/phprunner-light-theme.svg';
+import Logo from '@site/static/img/phpss-light.svg';
 import GithubImg from '@site/static/img/GitHub.svg';
 
 function HomepageHeader() {
@@ -15,13 +15,13 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
-        <Logo alt="PHPRunner" className="hero__title" className={styles.logo} />
+        <Logo alt="PHPStreamServer" className="hero__title" className={styles.logo} />
         <p className="hero__subtitle">High-performance PHP application server and process manager written in PHP.</p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/docs/intro">
               Get started
           </Link>
-          <Link className="button button--secondary button--lg" href="https://github.com/luzrain/phprunner">
+          <Link className="button button--secondary button--lg" href="https://github.com/luzrain/phpstreamserver">
               <GithubImg alt="" /> GitHub
           </Link>
         </div>
@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="PHPRunner is a high-performance PHP application server and process manager written in PHP.">
+      description="PHPStreamServer is a high-performance PHP application server and process manager written in PHP.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

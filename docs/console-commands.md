@@ -3,7 +3,7 @@ sidebar_position: 7
 ---
 
 # Console commands
-PHPRunner provides a number of commands for management.  
+PHPStreamServer provides a number of commands for management.  
 For example, to start the server, you would run the following command:  
 ```bash
 $ php server.php start
