@@ -43,7 +43,7 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/luzrain/phpstreamserver-doc/tree/master/',
+          editUrl: 'https://github.com/phpstreamserver/docs/tree/main/',
         },
         // blog: {
         //   showReadingTime: true,
@@ -73,7 +73,7 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'docs',
             position: 'left',
             label: 'Docs',
           },
@@ -92,7 +92,7 @@ const config = {
             items: [
               {
                 label: 'PHPStreamServer docs',
-                to: '/docs/intro',
+                to: '/docs/general/',
               },
             ],
           },

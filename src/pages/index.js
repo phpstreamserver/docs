@@ -19,10 +19,10 @@ function HomepageHeader() {
         <Logo alt="PHPStreamServer" className="hero__title" className={styles.logo} />
         <p className="hero__subtitle">High-performance PHP application server and process manager written in PHP.</p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/docs/intro">
+          <Link className="button button--secondary button--lg" to="/docs/general/">
               Get started
           </Link>
-          <Link className="button button--secondary button--lg" href="https://github.com/luzrain/phpstreamserver">
+          <Link className="button button--secondary button--lg" href="https://github.com/phpstreamserver/phpstreamserver">
               <GithubImg alt="" /> GitHub
           </Link>
         </div>
