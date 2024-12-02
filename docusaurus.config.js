@@ -78,7 +78,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://github.com/luzrain/phpstreamserver',
+            href: 'https://github.com/phpstreamserver/phpstreamserver',
             label: 'GitHub',
             position: 'right',
           },
@@ -101,7 +101,7 @@ const config = {
             items: [
               {
                 label: 'PHPStreamServer',
-                href: 'https://github.com/luzrain/phpstreamserver',
+                href: 'https://github.com/phpstreamserver/phpstreamserver',
               },
               {
                 label: 'PHPStreamServer runtime for symfony applications',

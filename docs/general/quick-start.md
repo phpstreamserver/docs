@@ -15,9 +15,7 @@ $ composer require phpstreamserver/core phpstreamserver/http-server
 
 ### Configure a simple server
 
-```php
-// server.php
-
+```php title="server.php"
 use Amp\Http\Server\HttpErrorException;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;

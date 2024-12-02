@@ -28,6 +28,7 @@ const sidebars = {
           'general/configuration',
       ],
       collapsible: false,
+      collapsed: false,
     },
     {
       type: 'category',
@@ -40,7 +41,7 @@ const sidebars = {
           'plugins/file-monitor',
           'plugins/metrics',
       ],
-      collapsible: true,
+      collapsible: false,
       collapsed: false,
     },
   ],

@@ -57,12 +57,12 @@ function Feature({icon, title, description}) {
         <div className={clsx('col col--4')}>
             <div className="padding-horiz--md">
                 <Heading as="h3" className={styles.featureTitle}>
-              <span className={styles.featureSvg}>
-                  {icon}
-              </span>
-                    <span>
-                  {title}
-              </span>
+                    <span className={styles.featureSvg}>
+                        {icon}
+                    </span>
+                        <span>
+                        {title}
+                    </span>
                 </Heading>
           <p>{description}</p>
       </div>
