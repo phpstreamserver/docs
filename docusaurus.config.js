@@ -88,24 +88,49 @@ const config = {
         style: 'light',
         links: [
           {
-            title: 'Documentation',
+            title: 'Guide',
             items: [
               {
-                label: 'PHPStreamServer docs',
+                label: 'What is PHPStreamServer?',
                 to: '/docs/general/',
+              },
+              {
+                label: 'Quick Start',
+                to: '/docs/general/quick-start',
               },
             ],
           },
           {
-            title: 'Github',
+            title: 'Plugins',
             items: [
               {
-                label: 'PHPStreamServer',
-                href: 'https://github.com/phpstreamserver/phpstreamserver',
+                label: 'Http Server',
+                to: '/docs/plugins/http-server',
               },
               {
-                label: 'PHPStreamServer runtime for symfony applications',
-                href: 'https://github.com/luzrain/phpstreamserver-bundle',
+                label: 'Scheduler',
+                to: '/docs/plugins/scheduler',
+              },
+              {
+                label: 'Logger',
+                to: '/docs/plugins/logger',
+              },
+              {
+                label: 'File Monitor',
+                to: '/docs/plugins/file-monitor',
+              },
+              {
+                label: 'Metrics',
+                to: '/docs/plugins/metrics',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/phpstreamserver/phpstreamserver',
               },
             ],
           },
