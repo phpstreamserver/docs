@@ -7,6 +7,14 @@ title: File Monitor
 The File Monitor Plugin is designed to monitor specified directories for file changes.
 It automatically reloads workers whenever a file within those directories is modified.
 
+## Installation
+
+```bash
+$ composer require phpstreamserver/file-monitor
+```
+
+## Example of usage
+
 ```php title="server.php"
 use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
@@ -32,6 +40,8 @@ $server->addWorker(
 
 exit($server->run());
 ```
+
+## Configuration
 
 ### 🔌 FileMonitorPlugin
 

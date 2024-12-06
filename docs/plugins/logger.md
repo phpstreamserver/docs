@@ -7,6 +7,14 @@ title: Logger
 The Logger Plugin provides configurable logging capabilities for your application.
 It allows you to route logs to multiple destinations, including files, stdout, syslog, and external services like Graylog.
 
+## Installation
+
+```bash
+$ composer require phpstreamserver/logger
+```
+
+## Example of usage
+
 ```php title="server.php"
 use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
@@ -32,6 +40,8 @@ $server->addWorker(
 
 exit($server->run());
 ```
+
+## Configuration
 
 ### 🔌 LoggerPlugin
 

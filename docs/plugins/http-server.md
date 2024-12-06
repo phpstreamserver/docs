@@ -6,6 +6,14 @@ title: Http Server
 
 The HTTP Server Plugin provides an asynchronous HTTP server and includes additional reload strategies.
 
+## Installation
+
+```bash
+$ composer require phpstreamserver/http-server
+```
+
+## Example of usage
+
 ```php title="server.php"
 use Amp\Http\Server\HttpErrorException;
 use Amp\Http\Server\Request;
@@ -44,6 +52,8 @@ $server->addWorker(
 
 exit($server->run());
 ```
+
+## Configuration
 
 ### 🔌 HttpServerPlugin
 

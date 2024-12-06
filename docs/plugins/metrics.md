@@ -9,6 +9,14 @@ It offers several built-in metrics for tracking server performance and activity,
 designed for their application needs.  
 The plugin supports Counter, Gauge, Histogram, and Summary metric types.
 
+## Installation
+
+```bash
+$ composer require phpstreamserver/metrics
+```
+
+## Example of usage
+
 ```php title="server.php"
 use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
@@ -45,6 +53,8 @@ $server->addWorker(
 
 exit($server->run());
 ```
+
+## Configuration
 
 ### 🔌 MetricsPlugin
 
