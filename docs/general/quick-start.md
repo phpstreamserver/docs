@@ -19,8 +19,8 @@ $ composer require phpstreamserver/core phpstreamserver/http-server
 use Amp\Http\Server\HttpErrorException;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
-use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
+use PHPStreamServer\Core\WorkerProcess;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
 use PHPStreamServer\Plugin\HttpServer\HttpServerProcess;
 

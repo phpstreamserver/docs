@@ -16,8 +16,8 @@ $ composer require phpstreamserver/file-monitor
 ## Example of usage
 
 ```php title="server.php"
-use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
+use PHPStreamServer\Core\WorkerProcess;
 use PHPStreamServer\Plugin\FileMonitor\FileMonitorPlugin;
 use PHPStreamServer\Plugin\FileMonitor\WatchDir;
 
@@ -43,13 +43,9 @@ exit($server->run());
 
 ## Configuration
 
-### 🔌 FileMonitorPlugin
+### 🔵 [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchDir.php)
 
-| Option  | Type                     | Default         | Description                                                            |
-|---------|--------------------------|-----------------|------------------------------------------------------------------------|
-| `watch` | ...[WatchDir](#watchdir) | *not&nbsp;set*  | List of WatchDir objects that define the files to monitor for changes. |
-
-### 🔵 WatchDir
+WatchDir specifies the directory and file patterns to monitor.
 
 | Option              | Type     | Default        | Description                                                                 |
 |---------------------|----------|----------------|-----------------------------------------------------------------------------|

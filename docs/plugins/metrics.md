@@ -18,8 +18,8 @@ $ composer require phpstreamserver/metrics
 ## Example of usage
 
 ```php title="server.php"
-use PHPStreamServer\Core\Plugin\Supervisor\WorkerProcess;
 use PHPStreamServer\Core\Server;
+use PHPStreamServer\Core\WorkerProcess;
 use PHPStreamServer\Plugin\Metrics\MetricsPlugin;
 use PHPStreamServer\Plugin\Metrics\RegistryInterface;
 use Revolt\EventLoop;
@@ -53,11 +53,3 @@ $server->addWorker(
 
 exit($server->run());
 ```
-
-## Configuration
-
-### 🔌 MetricsPlugin
-
-| Option   | Type           | Default        | Description                                           |
-|----------|----------------|----------------|-------------------------------------------------------|
-| `listen` | string\|Listen | *not&nbsp;set* | The address at which the metrics server is listening. |
