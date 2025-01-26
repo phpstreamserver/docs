@@ -126,6 +126,15 @@ const config = {
             ],
           },
           {
+            title: 'Integrations',
+            items: [
+              {
+                label: 'Symfony',
+                href: '/docs/integrations/symfony',
+              },
+            ],
+          },
+          {
             title: 'Community',
             items: [
               {

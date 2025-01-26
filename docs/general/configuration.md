@@ -170,4 +170,58 @@ The `schedule` option can be specified in one of the following formats:
 | `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
 | `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
 | `onStart`  | Closure | *not&nbsp;set* | Optional. A callback function executed when the worker stops.               |
- 
+
+### ⚙️[🔌](/docs/integrations/symfony) [SymfonyHttpServerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerProcess.php)
+
+This is the part of [Symfony bundle](/docs/integrations/symfony)
+
+This worker type is designed to run symfony application webserver.
+
+| Option                 | Type                                                                                                                                                                           | Default        | Description                                                              |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------------------------------------------------------------------|
+| `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                            |
+| `count`                | int                                                                                                                                                                            | 1              | Optional. The number of processes to start.                              |
+| `reloadable`           | bool                                                                                                                                                                           | true           | Optional. Whether the worker can be reloaded with the reload command.    |
+| `user`                 | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                 |
+| `group`                | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix group of process. Current group by default.               |
+| `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                               | *not&nbsp;set* | Optional. A list of middlewares for processing HTTP requests.            |
+| `reloadStrategies`     | [ReloadStrategy[]](/docs/general/reload-strategies)                                                                                                                            | *not&nbsp;set* | Optional. The strategies used to reload the worker.                      |
+| `accessLog`            | bool                                                                                                                                                                           | true           | Optional. Whether to log incoming HTTP requests.                         |
+| `gzip`                 | bool                                                                                                                                                                           | false          | Optional. Enables gzip compression.                                      |
+| `connectionLimit`      | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections per worker.                  |
+| `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.              |
+| `concurrencyLimit`     | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of concurrent HTTP requests per worker.     |
+
+### ⚙️[🔌](/docs/integrations/symfony) [SymfonyPeriodicProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyPeriodicProcess.php)
+
+This is the part of [Symfony bundle](/docs/integrations/symfony)
+
+This worker type is designed to run symfony console commands periodically.
+The `schedule` option can be specified in one of the following formats:
+- Number of seconds (e.g. `60`)
+- An ISO8601 datetime format (e.g. `2025-01-01 00:00:00`)
+- An ISO8601 duration format (e.g. `PT1M`)
+- A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g. `1 minute`)
+- A cron expression (e.g. `*/1 * * * *`)
+
+| Option     | Type    | Default        | Description                                                                 |
+|------------|---------|----------------|-----------------------------------------------------------------------------|
+| `command`  | string  | *not&nbsp;set* | Symfony console command name.                                               |
+| `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |
+| `jitter`   | int     | 0              | Optional. Jitter in seconds that adds a random time offset to the schedule. |
+| `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
+| `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
+
+### ⚙️[🔌](/docs/integrations/symfony) [SymfonyWorkerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyWorkerProcess.php)
+
+This is the part of [Symfony bundle](/docs/integrations/symfony)
+
+This worker type is designed for running long-running symfony console commands.
+
+| Option             | Type                                                | Default        | Description                                                           |
+|--------------------|-----------------------------------------------------|----------------|-----------------------------------------------------------------------|
+| `command`          | string                                              | *not&nbsp;set* | Symfony console command name.                                         |
+| `count`            | int                                                 | 1              | Optional. The number of processes to start.                           |
+| `reloadable`       | bool                                                | true           | Optional. Whether the worker can be reloaded with the reload command. |
+| `user`             | string                                              | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
+| `group`            | string                                              | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
