@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PHPStreamServer',
+  title: 'PHPStreamServer: asynchronous application server for php',
   tagline: 'PHP Application Server',
   favicon: 'img/phpss-icon.png',
 

@@ -42,15 +42,17 @@ const Index = () => {
             </header>
 
             <div className={styles.featuresSection}>
-                <h2>Features</h2>
-                <div className={styles.featuresGrid}>
-                    {features.map((feature, index) => (
-                        <div key={index} className={styles.featureCard}>
-                            <div className={styles.featureIcon}>{feature.icon}</div>
-                            <h3 className={styles.featureTitle}>{feature.title}</h3>
-                            <p>{feature.description}</p>
-                        </div>
-                    ))}
+                <div className="container">
+                    <h2>Features</h2>
+                    <div className={styles.featuresGrid}>
+                        {features.map((feature, index) => (
+                            <div key={index} className={styles.featureCard}>
+                                <div className={styles.featureIcon}>{feature.icon}</div>
+                                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                                <p>{feature.description}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
