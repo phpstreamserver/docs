@@ -10,7 +10,7 @@ It is recommended to use named parameters when defining configuration options.
 
 ```php
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\WorkerProcess;
+use PHPStreamServer\Core\Worker\WorkerProcess;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
 
 $server = new Server(
@@ -94,7 +94,7 @@ Worker-level configuration applies to individual workers, allowing you to contro
 PHPStreamServer provides several built-in worker types out of the box. Additionally, plugins can add new worker types, enhancing functionality.  
 Worker can be added to the server using the `Server::addWorker()` method.
 
-### ⚙️ [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/WorkerProcess.php)
+### ⚙️ [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerProcess.php)
 
 This worker type is designed for running long-running PHP code.
 
@@ -110,7 +110,7 @@ This worker type is designed for running long-running PHP code.
 | `onReload`         | Closure                                             | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.       |
 | `reloadStrategies` | [ReloadStrategy[]](/docs/general/reload-strategies) | *not&nbsp;set* | Optional. The strategies used to reload the worker.                   |
 
-### ⚙️ [ExternalProcess](https://github.com/phpstreamserver/core/blob/main/src/ExternalProcess.php)
+### ⚙️ [ExternalProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExternalProcess.php)
 
 This worker type is designed for running external programs or scripts, enabling PHPStreamServer to manage external processes outside of PHP.
 
@@ -123,7 +123,7 @@ This worker type is designed for running external programs or scripts, enabling 
 | `group`            | string | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
 | `command`          | string | *not&nbsp;set* | The external command or script to execute.                            |
 
-### ⚙️[🔌](/docs/plugins/http-server) [HttpServerProcess](https://github.com/phpstreamserver/http-server/blob/main/src/HttpServerProcess.php)
+### ⚙️[🔌](/docs/plugins/http-server) [HttpServerProcess](https://github.com/phpstreamserver/http-server/blob/main/src/Worker/HttpServerProcess.php)
 
 This is the part of [Http Server Plugin](/docs/plugins/http-server)
 
@@ -150,7 +150,7 @@ This worker type is designed to handle incoming HTTP requests asynchronously.
 | `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.              |
 | `concurrencyLimit`     | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of concurrent HTTP requests per worker.     |
 
-### ⚙️[🔌](/docs/plugins/scheduler) [PeriodicProcess](https://github.com/phpstreamserver/scheduler/blob/main/src/PeriodicProcess.php)
+### ⚙️[🔌](/docs/plugins/scheduler) [PeriodicProcess](https://github.com/phpstreamserver/scheduler/blob/main/src/Worker/PeriodicProcess.php)
 
 This is the part of [Scheduler Plugin](/docs/plugins/scheduler)
 

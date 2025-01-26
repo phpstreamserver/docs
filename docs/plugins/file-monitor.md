@@ -17,7 +17,7 @@ $ composer require phpstreamserver/file-monitor
 
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\WorkerProcess;
+use PHPStreamServer\Core\Worker\WorkerProcess;
 use PHPStreamServer\Plugin\FileMonitor\FileMonitorPlugin;
 use PHPStreamServer\Plugin\FileMonitor\WatchDir;
 

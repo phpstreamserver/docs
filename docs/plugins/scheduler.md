@@ -16,8 +16,8 @@ $ composer require phpstreamserver/scheduler
 
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Plugin\Scheduler\PeriodicProcess;
 use PHPStreamServer\Plugin\Scheduler\SchedulerPlugin;
+use PHPStreamServer\Plugin\Scheduler\Worker\PeriodicProcess;
 
 $server = new Server();
 

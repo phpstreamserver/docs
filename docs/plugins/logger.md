@@ -17,7 +17,7 @@ $ composer require phpstreamserver/logger
 
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\WorkerProcess;
+use PHPStreamServer\Core\Worker\WorkerProcess;
 use PHPStreamServer\Plugin\Logger\Handler\ConsoleHandler;
 use PHPStreamServer\Plugin\Logger\LoggerPlugin;
 

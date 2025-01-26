@@ -20,8 +20,8 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
-use PHPStreamServer\Plugin\HttpServer\HttpServerProcess;
 use PHPStreamServer\Plugin\HttpServer\ReloadStrategy\MaxRequestsReloadStrategy;
+use PHPStreamServer\Plugin\HttpServer\Worker\HttpServerProcess;
 
 $server = new Server();
 

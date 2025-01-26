@@ -19,7 +19,7 @@ $ composer require phpstreamserver/metrics
 
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\WorkerProcess;
+use PHPStreamServer\Core\Worker\WorkerProcess;
 use PHPStreamServer\Plugin\Metrics\MetricsPlugin;
 use PHPStreamServer\Plugin\Metrics\RegistryInterface;
 use Revolt\EventLoop;
