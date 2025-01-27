@@ -24,7 +24,7 @@ return [
 ];
 ```
 
-### Create phpss.config.php in the root directory
+### Create phpss.config.php file in the root directory
 ```php title="phpss.config.php"
 <?php
 
@@ -45,15 +45,15 @@ return static function (Server $server): void {
 
 You can register additional plugins and workers in this file.
 
-### Create phpss file in bin directory
+### Create phpss file in the bin directory
 ```php title="bin/phpss"
 #!/usr/bin/env php
 <?php
 
 use App\Kernel;
-use PHPStreamServer\Symfony\Runtime;
+use PHPStreamServer\Symfony\PHPStreamServerRuntime;
 
-$_SERVER['APP_RUNTIME'] = Runtime::class;
+$_SERVER['APP_RUNTIME'] = PHPStreamServerRuntime::class;
 
 require_once \dirname(__DIR__).'/vendor/autoload_runtime.php';
 
