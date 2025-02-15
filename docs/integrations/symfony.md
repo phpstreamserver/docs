@@ -73,6 +73,25 @@ $ bin/phpss start
 
 This bundle adds new Symfony-specific options to the start command: `--env`, `--no-debug`. For more details, refer to the help output.
 
+## Resolvable arguments in phpss.config.php
+The closure returned from the phpss.config.php may have zero or more arguments:
+```php
+return static function (Server $server): void {
+    // ...
+};
+```
+The following arguments are supported:  
+🔵 `Server $server`  
+Server instance to register plugins and workers  
+🔵 `array $context`  
+This is the same as $_SERVER + $_ENV  
+🔵 `string projectDir`  
+Project root directory  
+🔵 `string $env`  
+Current environment  
+🔵`bool $debug`  
+Is in debug mode  
+
 ## Intergation with Monolog
 If you use Monolog as your main logging system in Symfony, you can route all logs to the PHPStreamServer logger. This bundle provides a special Monolog handler for seamless integration, which can be configured in the `monolog.yaml` file.
 
