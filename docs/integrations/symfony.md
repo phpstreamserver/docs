@@ -85,7 +85,7 @@ The following arguments are supported:
 Server instance to register plugins and workers  
 🔵 `array $context`  
 This is the same as $_SERVER + $_ENV  
-🔵 `string projectDir`  
+🔵 `string $projectDir`  
 Project root directory  
 🔵 `string $env`  
 Current environment  
