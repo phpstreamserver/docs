@@ -51,4 +51,5 @@ WatchDir specifies the directory and file patterns to monitor.
 |---------------------|----------|----------------|-----------------------------------------------------------------------------|
 | `sourceDir`         | string   | *not&nbsp;set* | The directory to monitor for file changes.                                  |
 | `filePattern`       | string[] | \['\*'\]       | Optional. A pattern that specifies which files to watch (e.g., *.php).      |
+| `recursive`         | bool     | false          | Optional. Monitor files recursively down to the folder tree.                |
 | `invalidateOpcache` | bool     | false          | Optional. Whether to invalidate the OPCache when a file change is detected. |
