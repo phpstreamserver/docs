@@ -25,7 +25,7 @@ $server = new Server();
 
 $server->addPlugin(
     new FileMonitorPlugin(
-        new WatchDir(sourceDir: __DIR__, filePattern: ['*'], invalidateOpcache: true),
+        new WatchDir(sourceDir: __DIR__, filePattern: ['*'], recursive: true, invalidateOpcache: true),
     ),
 );
 
