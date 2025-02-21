@@ -10,7 +10,7 @@ title: What is PHPStreamServer?
 
 PHPStreamServer is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.  
 Built on top of the [AMPHP](https://amphp.org/) ecosystem and powered by the [Revolt](https://revolt.run/) event loop,
-PHPStreamServer delivers asynchronous capabilities that empower the development of efficient and scalable PHP applications.
+PHPStreamServer brings asynchronous capabilities that empower the development of efficient and scalable PHP applications.
 PHPStreamServer ships with a collection of plugins, making it highly extensible.
 With the power of plugins, PHPStreamServer can replace traditional setups such as nginx, php-fpm, cron, and supervisor.
 By centralizing these functionalities into a single application server, it reduces complexity and simplifies application deployment.
