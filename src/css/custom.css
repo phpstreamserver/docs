@@ -9,6 +9,11 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 @custom-variant dark (&:where(html[data-theme="dark"] *));
 
+@theme {
+  --breakpoint-xl: var(--ifm-container-width-xl);
+  --breakpoint-2xl: var(--ifm-container-width-xl);
+}
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #0969da;
