@@ -25,11 +25,11 @@ const Index = () => {
         <Layout title={`${siteConfig.title}`} description="High-performance PHP application server and process manager written in PHP">
             <header className={styles.heroBanner}>
                 <div className="container">
-                    <LogoImg alt="PHPStreamServer" className="w-auto h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
-                    <div className="mb-5 text-xl lg:text-2xl font-semibold dark:text-gray-200">
+                    <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
+                    <div className="mb-5 text-md md:text-xl lg:text-2xl font-semibold dark:text-gray-200">
                         High-performance PHP application server and process manager written in PHP
                     </div>
-                    <div className="dark:text-gray-200">
+                    <div className="text-base dark:text-gray-200">
                         PHPStreamServer is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
                         Powered by the  <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to your applications.<br/>
                         PHPStreamServer is highly extensible with its plugin system, allowing it to replace traditional setups like Nginx, PHP-FPM, Cron, and Supervisor.
@@ -43,15 +43,15 @@ const Index = () => {
                                 <GithubImg alt="" fill="currentColor" className="w-[1.25em] h-[1.25em] me-1"/> <span>GitHub</span>
                             </div>
                         </Link>
-                        <img className="invisible lg:visible h-[1.5em]" src="https://img.shields.io/github/stars/phpstreamserver/phpstreamserver" alt="Stars"/>
+                        <img className="hidden md:block h-[1.5em]" src="https://img.shields.io/github/stars/phpstreamserver/phpstreamserver" alt="Stars"/>
                     </div>
                 </div>
             </header>
 
-            <div className={styles.featuresSection}>
+            <div className="px-3 py-8 lg:px-4">
                 <div className="container">
                     <h2 className={styles.subtitle}>Features</h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                         {features.map((feature, index) => (
                             <div key={index} className={styles.featureCard}>
                                 <div className="flex items-center">
@@ -59,8 +59,8 @@ const Index = () => {
                                 </div>
                                 <div className="flex items-center">
                                    <div>
-                                       <div className="text-xl font-semibold mb-2 w-full">{feature.title}</div>
-                                       <div>{feature.description}</div>
+                                       <div className="text-lg font-semibold mb-2 w-full">{feature.title}</div>
+                                       <div className="text-sm">{feature.description}</div>
                                    </div>
                                 </div>
                             </div>

@@ -2,12 +2,10 @@
 @custom-variant dark (&:where(html[data-theme="dark"] *));
 
 .heroBanner {
-    padding: 2rem;
-    @apply px-4 py-[3em] lg:py-[6em];
+    @apply px-3 py-[3em] lg:py-[6em];
     text-align: left;
     position: relative;
     overflow: hidden;
-    color: var(--ifm-color-gray-1000);
     background: linear-gradient(135deg, color-mix(in srgb, var(--ifm-hero-background-color), transparent 95%) 50%, color-mix(in srgb, var(--ifm-hero-background-color), transparent 98%) 25%, transparent 50%);
 }
 
@@ -18,15 +16,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--ifm-hero-background-color), transparent 92%), transparent 40%);
+    background: radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--ifm-hero-background-color), transparent 92%), transparent 60%);
     pointer-events: none;
 }
 
 .subtitle {
-    font-weight: 700;
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-    position: relative;
+    @apply relative font-bold pb-3 mb-6 text-center text-3xl;
 }
 
 .subtitle::after {
@@ -42,37 +37,15 @@
     margin: auto;
 }
 
-
-.about1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-    font-weight: 600;
-    line-height: 1;
-}
-
-.featuresSection {
-    padding: 2rem 1rem;
-}
-
 .featuresSection h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
 }
 
-.featuresGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
 .featureCard {
-    font-size: 0.9em;
-    border-radius: 0.5em;
-    padding: 1em;
-    gap: 1em;
     transition: all .2s ease-out;
-    display: flex;
+    @apply flex gap-3;
 }
 
 .featureCard:hover {
@@ -81,8 +54,8 @@
 
 .featureIcon {
     font-size: 1.5em;
-    width: 3em;
-    height: 3em;
+    width: 2.8em;
+    height: 2.8em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,30 +68,29 @@
     gap: 1.5em;
     align-items: center;
     margin-top: 3rem;
+    @apply justify-center sm:justify-start;
 }
 
 .button {
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 1.2em;
     @apply
     text-white
+    font-semibold
+    text-xl
     dark:text-gray-800
     bg-[#27272a]
     dark:bg-neutral-200
     whitespace-nowrap
-    px-5
-    py-1.5
+    px-4
+    py-2
+    md:px-6
     lg:px-7
-    lg:py-2
+    lg:py-2.5
+    rounded-full
     ;
 }
 
 .button:hover {
-    text-decoration: none;
-    color: inherit;
-    @apply text-white dark:text-gray-800;
+    @apply text-white dark:text-gray-800 no-underline;
 }
 
 .githubButtonGroup {
