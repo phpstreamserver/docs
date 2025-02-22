@@ -9,9 +9,8 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 @custom-variant dark (&:where(html[data-theme="dark"] *));
 
-@theme {
-  --breakpoint-xl: var(--ifm-container-width-xl);
-  --breakpoint-2xl: var(--ifm-container-width-xl);
+@utility container {
+  max-width: var(--ifm-container-width-xl) !important;
 }
 
 /* You can override the default Infima variables here. */
