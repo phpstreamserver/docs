@@ -207,6 +207,7 @@ The `schedule` option can be specified in one of the following formats:
 | Option     | Type    | Default        | Description                                                                 |
 |------------|---------|----------------|-----------------------------------------------------------------------------|
 | `command`  | string  | *not&nbsp;set* | Symfony console command name.                                               |
+| `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
 | `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |
 | `jitter`   | int     | 0              | Optional. Jitter in seconds that adds a random time offset to the schedule. |
 | `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
@@ -218,10 +219,11 @@ This is the part of [Symfony bundle](/docs/integrations/symfony)
 
 This worker type is designed for running long-running symfony console commands.
 
-| Option             | Type                                                | Default        | Description                                                           |
-|--------------------|-----------------------------------------------------|----------------|-----------------------------------------------------------------------|
-| `command`          | string                                              | *not&nbsp;set* | Symfony console command name.                                         |
-| `count`            | int                                                 | 1              | Optional. The number of processes to start.                           |
-| `reloadable`       | bool                                                | true           | Optional. Whether the worker can be reloaded with the reload command. |
-| `user`             | string                                              | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
-| `group`            | string                                              | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
+| Option       | Type      | Default        | Description                                                           |
+|--------------|-----------|----------------|-----------------------------------------------------------------------|
+| `command`    | string    | *not&nbsp;set* | Symfony console command name.                                         |
+| `name`       | string    | *not&nbsp;set* | Optional. The name associated with the worker process.                |
+| `count`      | int       | 1              | Optional. The number of processes to start.                           |
+| `reloadable` | bool      | true           | Optional. Whether the worker can be reloaded with the reload command. |
+| `user`       | string    | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
+| `group`      | string    | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
