@@ -59,7 +59,7 @@ const Index = () => {
                                 </div>
                                 <div className="flex items-center">
                                    <div>
-                                       <div className="text-lg font-semibold mb-2 w-full">{feature.title}</div>
+                                       <div className="text-lg font-semibold mb-1 w-full">{feature.title}</div>
                                        <div className="text-sm">{feature.description}</div>
                                    </div>
                                 </div>
