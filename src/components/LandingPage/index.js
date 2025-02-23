@@ -26,7 +26,7 @@ const Index = () => {
             <header className={styles.heroBanner}>
                 <div className="container">
                     <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
-                    <h1 className="mb-5! text-lg! md:text-xl! lg:text-2xl! font-semibold! dark:text-gray-200">
+                    <h1>
                         High-performance PHP application server and process manager written in PHP
                     </h1>
                     <div className="text-base dark:text-gray-200">

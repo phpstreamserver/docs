@@ -20,13 +20,12 @@
     pointer-events: none;
 }
 
-h1, h2, h3 {
-    font: inherit;
-    @apply leading-none;
+.heroBanner h1 {
+    @apply mb-5 text-lg md:text-xl lg:text-2xl font-semibold dark:text-gray-200 leading-none;
 }
 
 .subtitle {
-    @apply relative font-bold pb-3 mb-6 text-center text-3xl;
+    @apply relative font-bold pb-3 mb-6 text-center text-3xl leading-none;
 }
 
 .subtitle::after {
