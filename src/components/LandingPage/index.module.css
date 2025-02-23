@@ -20,6 +20,11 @@
     pointer-events: none;
 }
 
+h1, h2, h3 {
+    font: inherit;
+    @apply leading-none;
+}
+
 .subtitle {
     @apply relative font-bold pb-3 mb-6 text-center text-3xl;
 }

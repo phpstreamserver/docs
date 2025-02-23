@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PHPStreamServer: asynchronous application server for php',
+  title: 'PHPStreamServer: Asynchronous application server for php',
   tagline: 'PHP Application Server',
   favicon: 'img/phpss-icon.png',
 
@@ -61,8 +61,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {name: 'description', content: 'High-performance PHP application server and process manager written in PHP'},
+        {name: 'og:description', content: 'High-performance PHP application server and process manager written in PHP'},
+      ],
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/ograph.png',
       navbar: {
         //title: 'My Site',
         logo: {
