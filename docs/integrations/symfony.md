@@ -24,7 +24,22 @@ return [
 ];
 ```
 
-### Create phpss.config.php file in the config directory
+### Set PHPStreamServerRuntime as the application runtime
+Use the `APP_RUNTIME` environment variable or by specifying the `extra.runtime.class` in `composer.json` to change the Runtime class to `PHPStreamServer\Symfony\PHPStreamServerRuntime`.
+```json title="composer.json"
+{
+  "require": {
+    "...": "..."
+  },
+  "extra": {
+    "runtime": {
+      "class": "PHPStreamServer\\Symfony\\PHPStreamServerRuntime"
+    }
+  }
+}
+```
+
+### Create config/phpss.config.php file
 ```php title="config/phpss.config.php"
 <?php
 
@@ -49,22 +64,37 @@ This bundle adds new Symfony-specific workers:
 - ⚙️ [SymfonyPeriodicProcess](/docs/general/configuration#%EF%B8%8F-symfonyperiodicprocess)
 - ⚙️ [SymfonyWorkerProcess](/docs/general/configuration#%EF%B8%8F-symfonyworkerprocess)
 
-### Create phpss file in the bin directory
+### Create bin/phpss file
 ```php title="bin/phpss"
 #!/usr/bin/env php
 <?php
 
 use App\Kernel;
-use PHPStreamServer\Symfony\PHPStreamServerRuntime;
+use PHPStreamServer\Symfony\ServerApplication;
 
-$_SERVER['APP_RUNTIME'] = PHPStreamServerRuntime::class;
+require_once \dirname(__DIR__) . '/vendor/autoload_runtime.php';
 
-require_once \dirname(__DIR__).'/vendor/autoload_runtime.php';
-
-return static function (array $context) {
+return new ServerApplication(static function (array $context) {
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
-};
+});
 ```
+
+### Create bin/console file
+```php title="bin/console"
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+use PHPStreamServer\Symfony\ConsoleApplication;
+
+require_once \dirname(__DIR__) . '/vendor/autoload_runtime.php';
+
+return new ConsoleApplication(static function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+});
+```
+
+\* Modifying the `bin/console` file is essential to integrate console commands with PHPStreamServer—do not skip this step.
 
 ### Start the server
 ```bash
@@ -74,7 +104,7 @@ $ bin/phpss start
 This bundle adds new Symfony-specific options to the start command: `--env`, `--no-debug`. For more details, refer to the help output.
 
 ## Resolvable arguments in phpss.config.php
-The closure returned from the phpss.config.php may have zero or more arguments:
+The closure returned from the `config/phpss.config.php` may have zero or more arguments:
 ```php
 return static function (Server $server): void {
     // ...
