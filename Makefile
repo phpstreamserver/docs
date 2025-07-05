@@ -20,3 +20,9 @@ upgrade: node_modules ## Yarn upgrade
 .PHONY: build
 build: node_modules ## Yarn build
 	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:23 bash -c "yarn build"
+
+.PHONY: clean
+clean: ## Remove files
+	@rm -rf node_modules
+	@rm -rf build
+	@rm -rf .docusaurus
