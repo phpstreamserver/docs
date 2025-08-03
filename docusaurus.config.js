@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PHPStreamServer: Asynchronous application server for PHP',
+  title: 'PHPStreamServer: Application server and process manager for modern PHP applications',
   tagline: 'PHP Application Server',
   favicon: 'img/phpss-icon.png',
 
@@ -78,8 +78,9 @@ const config = {
           {
             type: 'docSidebar',
             sidebarId: 'docs',
-            position: 'left',
             label: 'Docs',
+            position: 'right',
+            activeClassName: '',
           },
           {
             href: 'https://github.com/phpstreamserver/phpstreamserver',
@@ -135,15 +136,6 @@ const config = {
               {
                 label: 'Symfony',
                 href: '/docs/integrations/symfony',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/phpstreamserver/phpstreamserver',
               },
             ],
           },

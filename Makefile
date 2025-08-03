@@ -21,6 +21,10 @@ upgrade: node_modules ## Yarn upgrade
 build: node_modules ## Yarn build
 	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:23 bash -c "yarn build"
 
+.PHONY: bash
+bash: node_modules ## Go to bash console
+	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:23 bash
+
 .PHONY: clean
 clean: ## Remove files
 	@rm -rf node_modules

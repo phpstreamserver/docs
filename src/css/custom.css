@@ -41,7 +41,8 @@
   --ifm-color-primary-lightest: #84b4fa;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-hero-background-color: #0078ff;
-  --header-gradient: #d5d5d5
+  --header-gradient: #d5d5d5;
+
 }
 
 .markdown {
@@ -71,5 +72,16 @@ article h1 a, article h2 a, article h3 a, article h4 a, article h1 a:hover, arti
 }
 
 .footer {
-  @apply bg-stone-100 dark:bg-stone-800;
+  @apply bg-(--ifm-background-color) border-t-1 border-[var(--ifm-toc-border-color)];
+}
+
+.footer .footer__links .footer__col{
+  margin-bottom: 1.5rem;
+}
+
+.footer .footer__links .footer__col:last-child {
+  margin-bottom: 0;
+}
+.footer .footer__links .footer__link-item {
+  text-decoration-line: none;
 }

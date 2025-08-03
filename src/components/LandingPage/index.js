@@ -4,30 +4,44 @@ import Layout from '@theme/Layout/Provider';
 import Footer from '@theme/Footer';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import LogoImg from '@site/static/img/phpss-banner.svg';
-import GithubImg from '@site/static/img/GitHub.svg';
+import GithubImg from '@site/static/img/github.svg';
+import CodeBlock from '@theme/CodeBlock';
+import Navbar from '@theme/Navbar';
+
+import Icon1 from '@site/static/icons/icon1.svg';
+import Icon2 from '@site/static/icons/icon2.svg';
+import Icon3 from '@site/static/icons/icon3.svg';
+import Icon4 from '@site/static/icons/icon4.svg';
+import Icon5 from '@site/static/icons/icon5.svg';
+import Icon6 from '@site/static/icons/icon6.svg';
+import Icon7 from '@site/static/icons/icon7.svg';
+import Icon8 from '@site/static/icons/icon8.svg';
+import Icon9 from '@site/static/icons/icon9.svg';
+import Icon10 from '@site/static/icons/icon10.svg';
 
 const features = [
-    { icon: "🐘", title: "Runs on PHP", description: "No additional software is required—PHPStreamServer runs entirely on PHP. Just install via Composer and get started!" },
-    { icon: "⚡", title: "Always-in-memory", description: "Keeps applications loaded in memory for enhanced performance and faster response times." },
-    { icon: "🌐", title: "Asynchronous HTTP Server", description: "Built-in HTTP server with support for HTTP/2, HTTPS, GZIP, static file serving, and middleware." },
-    { icon: "⚙️", title: "Advanced Worker Management", description: "Includes worker reload strategies based on TTL, memory usage, or exceptions." },
-    { icon: "🕒", title: "Flexible Scheduler", description: "Schedule tasks like Cron jobs with customizable intervals." },
-    { icon: "📦", title: "Support for External Programs", description: "Manage non-PHP applications alongside PHP workers seamlessly." },
-    { icon: "📝", title: "Powerful Logging System", description: "Log to files, Stdout/Stderr, Syslog, or Graylog with advanced log routing." },
-    { icon: "📊", title: "Prometheus Metrics Support", description: "Exposes a metrics endpoint for monitoring server performance and tracking custom application metrics." },
-    { icon: "📂", title: "File Monitoring for Development", description: "Automatically reloads workers when file changes are detected, perfect for development experience." },
-    { icon: "🔌", title: "Plugin System", description: "Extend functionality with built-in plugins or create custom plugins to fit your needs." },
+    { icon: Icon1, iconColor: 'hsl(283 89% 26%)', title: "Runs on PHP", description: "No additional software is required—PHPStreamServer runs entirely on PHP. Just install via Composer and get started!" },
+    { icon: Icon2, iconColor: 'hsl(51 95% 53%)', title: "Always-in-memory", description: "Keeps applications loaded in memory for enhanced performance and faster response times." },
+    { icon: Icon3, iconColor: 'hsl(217 91% 60%)', title: "Asynchronous HTTP Server", description: "Built-in HTTP server with support for HTTP/2, HTTPS, GZIP, static file serving, and middleware." },
+    { icon: Icon4, iconColor: 'hsl(217 91% 60%)', title: "Advanced Worker Management", description: "Includes worker reload strategies based on TTL, memory usage, or exceptions." },
+    { icon: Icon5, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Flexible Scheduler", description: "Schedule tasks like Cron jobs with customizable intervals." },
+    { icon: Icon6, iconColor: 'hsl(25 95% 53%)', title: "Support for External Programs", description: "Manage non-PHP applications alongside PHP workers seamlessly." },
+    { icon: Icon7, iconColor: 'hsl(51 95% 53%)', title: "Powerful Logging System", description: "Log to files, Stdout/Stderr, Syslog, or Graylog with advanced log routing." },
+    { icon: Icon8, iconColor: 'hsl(217 91% 60%)', title: "Prometheus Metrics Support", description: "Exposes a metrics endpoint for monitoring server performance and tracking custom application metrics." },
+    { icon: Icon9, iconColor: 'hsl(51 95% 53%)', title: "File Monitoring for Development", description: "Automatically reloads workers when file changes are detected, perfect for development experience." },
+    { icon: Icon10, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Plugin System", description: "Extend functionality with built-in plugins or create custom plugins to fit your needs." },
 ];
 
 const Index = () => {
     const {siteConfig} = useDocusaurusContext();
     return (
-        <Layout title={`${siteConfig.title}`} description="High-performance PHP application server and process manager written in PHP">
+        <Layout title={`${siteConfig.title}`} description="Application server and process manager for modern PHP applications.">
+            <Navbar />
             <header className={styles.heroBanner}>
                 <div className="container">
                     <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
                     <h1>
-                        High-performance PHP application server and process manager written in PHP
+                        Application server and process manager for modern PHP applications.
                     </h1>
                     <div className="text-base dark:text-gray-200">
                         PHPStreamServer is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
@@ -40,7 +54,7 @@ const Index = () => {
                         </Link>
                         <Link className={styles.button} href="https://github.com/phpstreamserver/phpstreamserver">
                             <div className={styles.githubButtonGroup}>
-                                <GithubImg alt="" fill="currentColor" className="w-[1.25em] h-[1.25em] me-1"/> <span>GitHub</span>
+                                <GithubImg alt="" className="w-[1.25em] h-[1.25em] me-1"/> <span>GitHub</span>
                             </div>
                         </Link>
                         <img className="hidden md:block h-[1.5em]" src="https://img.shields.io/github/stars/phpstreamserver/phpstreamserver" alt="Stars"/>
@@ -54,17 +68,64 @@ const Index = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                         {features.map((feature, index) => (
                             <div key={index} className={styles.featureCard}>
-                                <div className="flex items-center">
-                                    <div className={styles.featureIcon}>{feature.icon}</div>
+                                <div className="flex items-top">
+                                    <div className={styles.featureIcon}><feature.icon style={{ color: feature.iconColor }} /></div>
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-top">
                                    <div>
-                                       <div className="text-lg font-semibold mb-1 w-full">{feature.title}</div>
+                                       <div className="text-xl font-semibold mb-1 w-full">{feature.title}</div>
                                        <div className="text-sm">{feature.description}</div>
                                    </div>
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="px-3 py-8 lg:px-4">
+                <div className="container">
+                    <h2 className={styles.subtitle}>Quick start</h2>
+                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
+                        <div className="flex flex-col flex-1 gap-4">
+                            <div className="text-lg">Get up and running with PHPStreamServer in just a few lines of code. Here's a simple HTTP server example to get you started.</div>
+                            <div className="font-semibold">Install via composer</div>
+                            <CodeBlock language="bash">{`$ composer require phpstreamserver/http-server`}</CodeBlock>
+                            <div className="font-semibold">Run your server</div>
+                            <CodeBlock language="bash">{`$ php server.php start`}</CodeBlock>
+                            <Link className={styles.button} to="/docs/general/">View Full Documentation</Link>
+                        </div>
+                        <div className="flex-1">
+                            <CodeBlock language="php" title="server.php">
+{`use Amp\\Http\\Server\\HttpErrorException;
+use Amp\\Http\\Server\\Request;
+use Amp\\Http\\Server\\Response;
+use PHPStreamServer\\Core\\Server;
+use PHPStreamServer\\Plugin\\HttpServer\\HttpServerPlugin;
+use PHPStreamServer\\Plugin\\HttpServer\\Worker\\HttpServerProcess;
+
+$server = new Server();
+
+$server->addPlugin(
+    new HttpServerPlugin(),
+);
+
+$server->addWorker(
+    new HttpServerProcess(
+        listen: '0.0.0.0:8080',
+        onRequest: function (Request $request): Response {
+            return match ($request->getUri()->getPath()) {
+                '/' => new Response(body: 'Hello world'),
+                '/ping' => new Response(body: 'pong'),
+                default => throw new HttpErrorException(404),
+            };
+        }
+    ),
+);
+
+exit($server->run());`}
+                            </CodeBlock>
+                        </div>
                     </div>
                 </div>
             </div>
