@@ -23,9 +23,9 @@ export default function LayoutWrapper(props) {
                           <Link className="footer__link-item" href="https://github.com/phpstreamserver/phpstreamserver">
                               <GithubImg alt="GitHub" className="w-[1.2rem] h-[1.2rem]"/>
                           </Link>
-                          <Link className="footer__link-item" href="#">
-                              <TwitterImg alt="Twitter" className="w-[1.2rem] h-[1.2rem]"/>
-                          </Link>
+                          {/*<Link className="footer__link-item" href="#">*/}
+                          {/*    <TwitterImg alt="Twitter" className="w-[1.2rem] h-[1.2rem]"/>*/}
+                          {/*</Link>*/}
                           <Link className="footer__link-item" href="mailto:anton.z@live.com">
                               <EmailImg alt="Email" className="w-[1.2rem] h-[1.2rem]"/>
                           </Link>

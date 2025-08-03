@@ -113,6 +113,7 @@ $server->addPlugin(
 $server->addWorker(
     new HttpServerProcess(
         listen: '0.0.0.0:8080',
+        count: 2,
         onRequest: function (Request $request): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),
