@@ -94,7 +94,7 @@ return new ConsoleApplication(static function (array $context) {
 });
 ```
 
-\* Modifying the `bin/console` file is essential to integrate console commands with PHPStreamServer—do not skip this step.
+⚠️ Modifying the `bin/console` file is essential to integrate console commands with PHPStreamServer—do not skip this step.
 
 ### Start the server
 ```bash
@@ -111,16 +111,11 @@ return static function (Server $server): void {
 };
 ```
 The following arguments are supported:  
-🔵 `Server $server`  
-Server instance to register plugins and workers  
-🔵 `array $context`  
-This is the same as $_SERVER + $_ENV  
-🔵 `string $projectDir`  
-Project root directory  
-🔵 `string $env`  
-Current environment  
-🔵`bool $debug`  
-Is in debug mode  
+- `Server $server` Server instance to register plugins and workers  
+- `array $context` This is the same as $_SERVER + $_ENV  
+- `string $projectDir` Project root directory  
+- `string $env` Current environment  
+- `bool $debug` Is in debug mode  
 
 ## Intergation with Monolog
 If you use Monolog as your main logging system in Symfony, you can route all logs to the PHPStreamServer logger. This bundle provides a special Monolog handler for seamless integration, which can be configured in the `monolog.yaml` file.
@@ -161,3 +156,18 @@ when@prod:
                 channels: ["!event", "!doctrine"]
 
 ```
+
+## Symfony Events
+During the workers' lifecycle, they [dispatch events](https://symfony.com/doc/current/event_dispatcher.html) which you can use to get to know what happens with workers.
+
+#### ProcessStartEvent
+Event Class: [ProcessStartEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessStartEvent.php)  
+Triggered when a worker process starts.
+
+#### ProcessStopEvent
+Event Class: [ProcessStopEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessStopEvent.php)  
+Triggered when a worker process stops.
+
+#### ProcessReloadEvent
+Event Class: [ProcessReloadEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessReloadEvent.php)  
+Triggered when a worker process is reloaded.
