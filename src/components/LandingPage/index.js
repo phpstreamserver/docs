@@ -23,13 +23,13 @@ const features = [
     { icon: Icon1, iconColor: 'hsl(283 89% 26%)', title: "Runs on PHP", description: "No additional software is required—PHPStreamServer runs entirely on PHP. Just install via Composer and get started!" },
     { icon: Icon2, iconColor: 'hsl(51 95% 53%)', title: "Always-in-memory", description: "Keeps applications loaded in memory for enhanced performance and faster response times." },
     { icon: Icon3, iconColor: 'hsl(217 91% 60%)', title: "Asynchronous HTTP Server", description: "Built-in HTTP server with support for HTTP/2, HTTPS, GZIP, static file serving, and middleware." },
-    { icon: Icon4, iconColor: 'hsl(217 91% 60%)', title: "Advanced Worker Management", description: "Includes worker reload strategies based on TTL, memory usage, or exceptions." },
+    { icon: Icon4, iconColor: 'hsl(217 91% 60%)', title: "Advanced Worker Management", description: "Includes worker reload strategies triggered by TTL, memory usage, or exceptions." },
     { icon: Icon5, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Flexible Scheduler", description: "Schedule tasks like Cron jobs with customizable intervals." },
     { icon: Icon6, iconColor: 'hsl(25 95% 53%)', title: "Support for External Programs", description: "Manage non-PHP applications alongside PHP workers seamlessly." },
-    { icon: Icon7, iconColor: 'hsl(51 95% 53%)', title: "Powerful Logging System", description: "Log to files, Stdout/Stderr, Syslog, or Graylog with advanced log routing." },
+    { icon: Icon7, iconColor: 'hsl(51 95% 53%)', title: "Powerful Logging System", description: "Log to files, stdout/stderr, syslog, or Graylog with advanced log routing." },
     { icon: Icon8, iconColor: 'hsl(217 91% 60%)', title: "Prometheus Metrics Support", description: "Exposes a metrics endpoint for monitoring server performance and tracking custom application metrics." },
-    { icon: Icon9, iconColor: 'hsl(51 95% 53%)', title: "File Monitoring for Development", description: "Automatically reloads workers when file changes are detected, perfect for development experience." },
-    { icon: Icon10, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Plugin System", description: "Extend functionality with built-in plugins or create custom plugins to fit your needs." },
+    { icon: Icon9, iconColor: 'hsl(51 95% 53%)', title: "File Monitoring for Development", description: "Automatically reloads workers when file changes are detected, making it ideal for development." },
+    { icon: Icon10, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Plugin System", description: "Extend functionality with built-in plugins, or create custom ones to fit your needs." },
 ];
 
 const Index = () => {
@@ -44,9 +44,9 @@ const Index = () => {
                         Application server and process manager for modern PHP applications.
                     </h1>
                     <div className="text-base dark:text-gray-200">
-                        PHPStreamServer is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
-                        Powered by the  <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to your applications.<br/>
-                        PHPStreamServer is highly extensible with its plugin system, allowing it to replace traditional setups like Nginx, PHP-FPM, Cron, and Supervisor.
+                        <strong>PHPStreamServer</strong> is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
+                        Powered by the <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to PHP applications.<br/>
+                        With its extensible plugin system, PHPStreamServer can replace traditional stacks such as Nginx, PHP-FPM, Cron, and Supervisor.
                     </div>
                     <div className={styles.buttons}>
                         <Link className={styles.button} to="/docs/general/">
