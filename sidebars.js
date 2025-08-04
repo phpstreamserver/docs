@@ -26,7 +26,6 @@ const sidebars = {
         'general/quick-start',
         'general/installation',
         'general/configuration',
-        'general/reload-strategies',
       ],
       collapsible: false,
       collapsed: false,

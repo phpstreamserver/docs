@@ -50,7 +50,7 @@ const Index = () => {
                     </div>
                     <div className={styles.buttons}>
                         <Link className={styles.button} to="/docs/general/">
-                            Get started
+                            Get Started
                         </Link>
                         <Link className={styles.button} href="https://github.com/phpstreamserver/phpstreamserver">
                             <div className={styles.githubButtonGroup}>

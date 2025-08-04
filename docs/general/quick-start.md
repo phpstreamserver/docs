@@ -4,16 +4,16 @@ title: Quick Start
 
 # Quick Start
 
-Follow these steps to get started with PHPStreamServer and run your first application on it!
-In this example, we'll run a basic HTTP server and general purpose worker.
+Follow these steps to get started with PHPStreamServer and run your first application.
+In this example, you will set up a basic HTTP server and a general-purpose worker.
 
-### Install composer packages
+### Install Composer Packages
 
 ```bash
 $ composer require phpstreamserver/core phpstreamserver/http-server
 ```
 
-### Configure a simple server
+### Configure a Simple Server
 
 ```php title="server.php"
 use Amp\Http\Server\HttpErrorException;
@@ -55,13 +55,13 @@ $server->addWorker(
 exit($server->run());
 ```
 
-### Run server
+### Run Server
 
 ```bash
 $ php server.php start
 ```
 
-The output will appear in the console like this:
+The output will appear in the console as follows:
 ![Image](/img/phpss-start-output.png)
 
-Now, open your web browser and go to http://127.0.0.1:8080/
+Now open your web browser and navigate to http://127.0.0.1:8080/

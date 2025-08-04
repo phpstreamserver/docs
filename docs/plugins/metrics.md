@@ -1,22 +1,17 @@
 ---
-title: Metrics
+title: Metrics Plugin
 ---
 
 # Metrics Plugin
-
-The Metrics Plugin provides a Prometheus metrics endpoint, enabling easy integration with monitoring and observability tools.
-It offers several built-in metrics for tracking server performance and activity, and also allows developers to define custom metrics
-designed for their application needs.  
-The plugin supports Counter, Gauge, Histogram, and Summary metric types.
+Prometheus-compatible metrics endpoint for monitoring server performance and tracking custom application metrics.
+The plugin supports **Counter**, **Gauge**, **Histogram**, and **Summary** metric types.
 
 ## Installation
-
 ```bash
 $ composer require phpstreamserver/metrics
 ```
 
-## Example of usage
-
+## Example of Usage
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\WorkerProcess;
@@ -53,3 +48,12 @@ $server->addWorker(
 
 exit($server->run());
 ```
+
+## Plugin Configuration
+
+### 🧩 MetricsPlugin
+Plugin class: [MetricsPlugin](https://github.com/phpstreamserver/metrics/blob/main/src/MetricsPlugin.php)
+
+| Option   | Type                                                                                      | Default        | Description                                           |
+|----------|-------------------------------------------------------------------------------------------|----------------|-------------------------------------------------------|
+| `listen` | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address on which the metrics server is listening. |

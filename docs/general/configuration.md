@@ -3,10 +3,9 @@ title: Configuration
 ---
 
 # Configuration
-
-PHPStreamServer allows you to define settings at different levels of the application.  
-Configurations can be applied in the **Server** constructor, **Plugin** constructor, and **Worker** constructor.  
-It is recommended to use named parameters when defining configuration options.
+PHPStreamServer allows you to define settings at various levels of the application.  
+Configurations can be applied in the **Server**, **Plugin**, or **Worker** constructors.  
+It is recommended to use named parameters when specifying configuration options.
 
 ```php
 use PHPStreamServer\Core\Server;
@@ -31,8 +30,7 @@ $server->addWorker(
 ```
 
 ## Server configuration
-
-Server-level configuration defines global settings that apply to the entire application and affect all workers.
+Server-level configuration defines global settings that apply to the entire application and impact all workers.
 
 | Option         | Type   | Default        | Description                                                                           |
 |----------------|--------|----------------|---------------------------------------------------------------------------------------|
@@ -42,77 +40,34 @@ Server-level configuration defines global settings that apply to the entire appl
 | `restartDelay` | float  | 0.25           | Optional. Delay between worker restarts.                                              |
 
 ## Plugin configuration
-
-### [🔌](/docs/plugins/http-server) [HttpServerPlugin](https://github.com/phpstreamserver/http-server/blob/main/src/HttpServerPlugin.php)
-
-This is the part of [Http Server Plugin](/docs/plugins/http-server)
-
-| Option                  | Type   | Default | Description                                                                        |
-|-------------------------|--------|---------|------------------------------------------------------------------------------------|
-| `http2Enable`           | bool   | true    | Optional. Enables support for HTTP/2 protocol.                                     |
-| `httpConnectionTimeout` | int    | 60      | Optional. Timeout duration for idle HTTP connections.                              |
-| `httpHeaderSizeLimit`   | int    | 32768   | Optional. Maximum allowed size for HTTP headers.                                   |
-| `httpBodySizeLimit`     | int    | 131072  | Optional. Maximum allowed size for the HTTP request body.                          |
-| `gzipMinLength`         | int    | 860     | Optional. Minimum response size required to enable gzip compression.               |
-| `gzipTypesRegex`        | string | *       | Optional. Regular expression to match content types eligible for gzip compression. |
-
-\* `#^(?:text/.*+|[^/]*+/xml|[^+]*\+xml|application/(?:json|(?:x-)?javascript))$#i`
-
-### [🔌](/docs/plugins/scheduler) [SchedulerPlugin](https://github.com/phpstreamserver/scheduler/blob/main/src/SchedulerPlugin.php)
-
-This is the part of [Scheduler Plugin](/docs/plugins/scheduler)
-
-This plugin does not have any specific configurable options.
-
-### [🔌](/docs/plugins/logger) [LoggerPlugin](https://github.com/phpstreamserver/logger/blob/main/src/LoggerPlugin.php)
-
-This is the part of [Logger Plugin](/docs/plugins/logger)
-
-| Option     | Type                                             | Default         | Description                                                          |
-|------------|--------------------------------------------------|-----------------|----------------------------------------------------------------------|
-| `handlers` | ...[Handler](/docs/plugins/logger#configuration) | *not&nbsp;set*  | A list of logger handlers that define the destinations for the logs. |
-
-### [🔌](/docs/plugins/file-monitor) [FileMonitorPlugin](https://github.com/phpstreamserver/file-monitor/blob/main/src/FileMonitorPlugin.php)
-
-This is the part of [File Monitor Plugin](/docs/plugins/file-monitor)
-
-| Option  | Type                                                | Default         | Description                                                            |
-|---------|-----------------------------------------------------|-----------------|------------------------------------------------------------------------|
-| `watch` | ...[WatchDir](/docs/plugins/file-monitor#-watchdir) | *not&nbsp;set*  | List of WatchDir objects that define the files to monitor for changes. |
-
-### [🔌](/docs/plugins/metrics) [MetricsPlugin](https://github.com/phpstreamserver/metrics/blob/main/src/MetricsPlugin.php)
-
-This is the part of [Metrics Plugin](/docs/plugins/metrics)
-
-| Option   | Type                                                                                      | Default        | Description                                           |
-|----------|-------------------------------------------------------------------------------------------|----------------|-------------------------------------------------------|
-| `listen` | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the metrics server is listening. |
+Plugin-level configuration defines settings specific to individual plugins.
+See the plugins documentation for detailed options and examples.  
+[Read more →](/docs/plugins/)
 
 ## Worker configuration
-
 Worker-level configuration applies to individual workers, allowing you to control their specific behavior.
-PHPStreamServer provides several built-in worker types out of the box. Additionally, plugins can add new worker types, enhancing functionality.  
-Worker can be added to the server using the `Server::addWorker()` method.
+PHPStreamServer includes several built-in worker types, and plugins can add additional worker types to extend functionality.
+Workers can be added to the server using the `Server::addWorker()` method.
 
-### ⚙️ [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerProcess.php)
+### ⚙️ WorkerProcess
+Worker class: [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerProcess.php)  
+This worker type is designed to run long-running PHP code.
 
-This worker type is designed for running long-running PHP code.
+| Option             | Type                 | Default        | Description                                                           |
+|--------------------|----------------------|----------------|-----------------------------------------------------------------------|
+| `name`             | string               | *not&nbsp;set* | Optional. The name associated with the worker process.                |
+| `count`            | int                  | 1              | Optional. The number of processes to start.                           |
+| `reloadable`       | bool                 | true           | Optional. Whether the worker can be reloaded with the reload command. |
+| `user`             | string               | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
+| `group`            | string               | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
+| `onStart`          | Closure              | *not&nbsp;set* | Optional. A callback function executed when the worker starts.        |
+| `onStop`           | Closure              | *not&nbsp;set* | Optional. A callback function executed when the worker stops.         |
+| `onReload`         | Closure              | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.       |
+| `reloadStrategies` | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php) | *not&nbsp;set* | Optional. The strategies used to reload the worker.                   |
 
-| Option             | Type                                                | Default        | Description                                                           |
-|--------------------|-----------------------------------------------------|----------------|-----------------------------------------------------------------------|
-| `name`             | string                                              | *not&nbsp;set* | Optional. The name associated with the worker process.                |
-| `count`            | int                                                 | 1              | Optional. The number of processes to start.                           |
-| `reloadable`       | bool                                                | true           | Optional. Whether the worker can be reloaded with the reload command. |
-| `user`             | string                                              | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
-| `group`            | string                                              | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
-| `onStart`          | Closure                                             | *not&nbsp;set* | Optional. A callback function executed when the worker starts.        |
-| `onStop`           | Closure                                             | *not&nbsp;set* | Optional. A callback function executed when the worker stops.         |
-| `onReload`         | Closure                                             | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.       |
-| `reloadStrategies` | [ReloadStrategy[]](/docs/general/reload-strategies) | *not&nbsp;set* | Optional. The strategies used to reload the worker.                   |
-
-### ⚙️ [ExternalProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExternalProcess.php)
-
-This worker type is designed for running external programs or scripts, enabling PHPStreamServer to manage external processes outside of PHP.
+### ⚙️ ExternalProcess
+Worker class: [ExternalProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExternalProcess.php)  
+This worker type is designed to run external processes, allowing PHPStreamServer to manage and supervise programs or scripts outside of PHP.
 
 | Option             | Type   | Default        | Description                                                           |
 |--------------------|--------|----------------|-----------------------------------------------------------------------|
@@ -123,107 +78,33 @@ This worker type is designed for running external programs or scripts, enabling 
 | `group`            | string | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
 | `command`          | string | *not&nbsp;set* | The external command or script to execute.                            |
 
-### ⚙️[🔌](/docs/plugins/http-server) [HttpServerProcess](https://github.com/phpstreamserver/http-server/blob/main/src/Worker/HttpServerProcess.php)
+## Reload Strategies
+Reload strategies in PHPStreamServer define the rules that determine when workers should be restarted.
+PHPStreamServer provides several built-in reload strategies out of the box, and plugins can add new ones.
 
-This is the part of [Http Server Plugin](/docs/plugins/http-server)
+### 🔄️ TTLReloadStrategy
+Reload strategy class: [TTLReloadStrategy](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/TTLReloadStrategy.php)  
+Reloads a worker after a specified time-to-live (TTL) interval.
+This periodic restart helps prevent potential issues caused by long-running processes.
 
-This worker type is designed to handle incoming HTTP requests asynchronously.
+| Option | Type | Default        | Description                       |
+|--------|------|----------------|-----------------------------------|
+| `ttl`  | int  | *not&nbsp;set* | Time-to-live interval in seconds. |
 
-| Option                 | Type                                                                                                                                                                           | Default        | Description                                                              |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------------------------------------------------------------------|
-| `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                            |
-| `name`                 | string                                                                                                                                                                         | "HTTP Server"  | Optional. The name associated with the worker process.                   |
-| `count`                | int                                                                                                                                                                            | 1              | Optional. The number of processes to start.                              |
-| `reloadable`           | bool                                                                                                                                                                           | true           | Optional. Whether the worker can be reloaded with the reload command.    |
-| `user`                 | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                 |
-| `group`                | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix group of process. Current group by default.               |
-| `onStart`              | Closure                                                                                                                                                                        | *not&nbsp;set* | Optional. A callback function executed when the worker starts.           |
-| `onRequest`            | Closure                                                                                                                                                                        | *not&nbsp;set* | Optional. A callback function executed when an HTTP request is received. |
-| `onStop`               | Closure                                                                                                                                                                        | *not&nbsp;set* | Optional. A callback function executed when the worker stops.            |
-| `onReload`             | Closure                                                                                                                                                                        | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.          |
-| `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                               | *not&nbsp;set* | Optional. A list of middlewares for processing HTTP requests.            |
-| `reloadStrategies`     | [ReloadStrategy[]](/docs/general/reload-strategies)                                                                                                                            | *not&nbsp;set* | Optional. The strategies used to reload the worker.                      |
-| `serverDir`            | string                                                                                                                                                                         | *not&nbsp;set* | Optional. The directory to serve static files from.                      |
-| `accessLog`            | bool                                                                                                                                                                           | true           | Optional. Whether to log incoming HTTP requests.                         |
-| `gzip`                 | bool                                                                                                                                                                           | false          | Optional. Enables gzip compression.                                      |
-| `connectionLimit`      | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections per worker.                  |
-| `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.              |
-| `concurrencyLimit`     | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of concurrent HTTP requests per worker.     |
+### 🔄️ MaxMemoryReloadStrategy
+Reload strategy class: [MaxMemoryReloadStrategy](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/MaxMemoryReloadStrategy.php)  
+Reloads a worker when its memory usage exceeds a specified threshold.
+This helps control memory leaks and prevents excessive memory consumption.
 
-### ⚙️[🔌](/docs/plugins/scheduler) [PeriodicProcess](https://github.com/phpstreamserver/scheduler/blob/main/src/Worker/PeriodicProcess.php)
+| Option      | Type   | Default        | Description                            |
+|-------------|--------|----------------|----------------------------------------|
+| `maxMemory` | int    | *not&nbsp;set* | Memory consumption threshold in bytes. |
 
-This is the part of [Scheduler Plugin](/docs/plugins/scheduler)
+### 🔄️ ExceptionReloadStrategy
+Reload strategy class: [ExceptionReloadStrategy](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ExceptionReloadStrategy.php)  
+Reloads a worker when an exception is thrown, except for those explicitly excluded from triggering a reload.
+This ensures that workers do not remain in an unexpected state after encountering an error.
 
-This worker type is designed to execute tasks periodically.  
-The `schedule` option can be specified in one of the following formats:
-- Number of seconds (e.g. `60`)
-- An ISO8601 datetime format (e.g. `2025-01-01 00:00:00`)
-- An ISO8601 duration format (e.g. `PT1M`)
-- A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g. `1 minute`)
-- A cron expression (e.g. `*/1 * * * *`)
-
-| Option     | Type    | Default        | Description                                                                 |
-|------------|---------|----------------|-----------------------------------------------------------------------------|
-| `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
-| `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |
-| `jitter`   | int     | 0              | Optional. Jitter in seconds that adds a random time offset to the schedule. |
-| `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
-| `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
-| `onStart`  | Closure | *not&nbsp;set* | Optional. A callback function executed when the worker stops.               |
-
-### ⚙️[🔌](/docs/integrations/symfony) [SymfonyHttpServerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerProcess.php)
-
-This is the part of [Symfony bundle](/docs/integrations/symfony)
-
-This worker type is designed to run symfony application webserver.
-
-| Option                 | Type                                                                                                                                                                           | Default        | Description                                                              |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------------------------------------------------------------------|
-| `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                            |
-| `count`                | int                                                                                                                                                                            | 1              | Optional. The number of processes to start.                              |
-| `reloadable`           | bool                                                                                                                                                                           | true           | Optional. Whether the worker can be reloaded with the reload command.    |
-| `user`                 | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                 |
-| `group`                | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix group of process. Current group by default.               |
-| `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                               | *not&nbsp;set* | Optional. A list of middlewares for processing HTTP requests.            |
-| `reloadStrategies`     | [ReloadStrategy[]](/docs/general/reload-strategies)                                                                                                                            | *not&nbsp;set* | Optional. The strategies used to reload the worker.                      |
-| `accessLog`            | bool                                                                                                                                                                           | true           | Optional. Whether to log incoming HTTP requests.                         |
-| `gzip`                 | bool                                                                                                                                                                           | false          | Optional. Enables gzip compression.                                      |
-| `connectionLimit`      | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections per worker.                  |
-| `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.              |
-| `concurrencyLimit`     | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of concurrent HTTP requests per worker.     |
-
-### ⚙️[🔌](/docs/integrations/symfony) [SymfonyPeriodicProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyPeriodicProcess.php)
-
-This is the part of [Symfony bundle](/docs/integrations/symfony)
-
-This worker type is designed to run symfony console commands periodically.
-The `schedule` option can be specified in one of the following formats:
-- Number of seconds (e.g. `60`)
-- An ISO8601 datetime format (e.g. `2025-01-01 00:00:00`)
-- An ISO8601 duration format (e.g. `PT1M`)
-- A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g. `1 minute`)
-- A cron expression (e.g. `*/1 * * * *`)
-
-| Option     | Type    | Default        | Description                                                                 |
-|------------|---------|----------------|-----------------------------------------------------------------------------|
-| `command`  | string  | *not&nbsp;set* | Symfony console command name.                                               |
-| `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
-| `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |
-| `jitter`   | int     | 0              | Optional. Jitter in seconds that adds a random time offset to the schedule. |
-| `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
-| `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
-
-### ⚙️[🔌](/docs/integrations/symfony) [SymfonyWorkerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyWorkerProcess.php)
-
-This is the part of [Symfony bundle](/docs/integrations/symfony)
-
-This worker type is designed for running long-running symfony console commands.
-
-| Option       | Type      | Default        | Description                                                           |
-|--------------|-----------|----------------|-----------------------------------------------------------------------|
-| `command`    | string    | *not&nbsp;set* | Symfony console command name.                                         |
-| `name`       | string    | *not&nbsp;set* | Optional. The name associated with the worker process.                |
-| `count`      | int       | 1              | Optional. The number of processes to start.                           |
-| `reloadable` | bool      | true           | Optional. Whether the worker can be reloaded with the reload command. |
-| `user`       | string    | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
-| `group`      | string    | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
+| Option              | Type           | Default        | Description                                                               |
+|---------------------|----------------|----------------|---------------------------------------------------------------------------|
+| `allowedExceptions` | class-string[] | *not&nbsp;set* | Optional. A list of exception class names that will not trigger a reload. |

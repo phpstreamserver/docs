@@ -1,20 +1,16 @@
 ---
-title: File Monitor
+title: File Monitor Plugin
 ---
 
 # File Monitor Plugin
-
-The File Monitor Plugin is designed to monitor specified directories for file changes.
-It automatically reloads workers whenever a file within those directories is modified.
+A directory watcher that automatically reloads workers when files are modified.
 
 ## Installation
-
 ```bash
 $ composer require phpstreamserver/file-monitor
 ```
 
-## Example of usage
-
+## Example of Usage
 ```php title="server.php"
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\WorkerProcess;
@@ -41,11 +37,20 @@ $server->addWorker(
 exit($server->run());
 ```
 
-## Configuration
+## Plugin Configuration
 
-### 🔵 [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchDir.php)
+### 🧩 FileMonitorPlugin
+Plugin class: [FileMonitorPlugin](https://github.com/phpstreamserver/file-monitor/blob/main/src/FileMonitorPlugin.php)
 
-WatchDir specifies the directory and file patterns to monitor.
+| Option  | Type                                                            | Default         | Description                                                            |
+|---------|-----------------------------------------------------------------|-----------------|------------------------------------------------------------------------|
+| `watch` | [WatchDir[]](/docs/plugins/file-monitor#watchdir-configuration) | *not&nbsp;set*  | List of WatchDir objects that define the files to monitor for changes. |
+
+## WatchDir Configuration
+WatchDir Specifies the directory and file patterns to monitor.
+
+### 📂 WatchDir
+Class: [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchDir.php)
 
 | Option              | Type     | Default        | Description                                                                 |
 |---------------------|----------|----------------|-----------------------------------------------------------------------------|
