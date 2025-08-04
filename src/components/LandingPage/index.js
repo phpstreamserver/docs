@@ -85,7 +85,7 @@ const Index = () => {
 
             <div className="px-3 py-8 lg:px-4">
                 <div className="container">
-                    <h2 className={styles.subtitle}>Quick start</h2>
+                    <h2 className={styles.subtitle}>Quick Start</h2>
                     <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
                         <div className="flex flex-col flex-1 gap-4">
                             <div className="text-lg">Get up and running with PHPStreamServer in just a few lines of code. Here's a simple HTTP server example to get you started.</div>
