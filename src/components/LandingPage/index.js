@@ -107,13 +107,13 @@ use PHPStreamServer\\Plugin\\HttpServer\\Worker\\HttpServerProcess;
 $server = new Server();
 
 $server->addPlugin(
-    new HttpServerPlugin(),
+    new HttpServerPlugin(), // Register the HTTP server plugin
 );
 
 $server->addWorker(
     new HttpServerProcess(
-        listen: '0.0.0.0:8080',
-        count: 2,
+        listen: '0.0.0.0:8080', // Address to listen on
+        count: 2, // Number of worker processes
         onRequest: function (Request $request): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),

@@ -3,7 +3,7 @@ title: Metrics Plugin
 ---
 
 # Metrics Plugin
-Prometheus-compatible metrics endpoint for monitoring server performance and tracking custom application metrics.
+Prometheus-compatible metrics exporter for monitoring server performance and tracking custom application metrics.
 The plugin supports **Counter**, **Gauge**, **Histogram**, and **Summary** metric types.
 
 ## Installation
