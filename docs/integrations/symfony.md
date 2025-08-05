@@ -106,7 +106,7 @@ $ bin/phpss start
 
 This bundle adds new Symfony-specific options to the start command: (`--env`, `--no-debug`). For more details, refer to the start command help output.
 
-## Worker configuration
+## Worker Configuration
 
 ### ⚙️ SymfonyHttpServerProcess
 Worker class: [SymfonyHttpServerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerProcess.php)  

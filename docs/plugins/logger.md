@@ -46,7 +46,7 @@ Plugin class: [LoggerPlugin](https://github.com/phpstreamserver/logger/blob/main
 |------------|-------------------------------------------------|-----------------|-------------------------------------------------------------------|
 | `handlers` | [Handler[]](/docs/plugins/logger#handler-configuration) | *not&nbsp;set*  | A list of logger handlers that specify the destinations for logs. |
 
-## Handler configuration
+## Handler Configuration
 The Logger plugin provides various handlers for routing logs to different destinations.
 
 ### 📝 ConsoleHandler

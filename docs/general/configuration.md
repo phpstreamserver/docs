@@ -29,7 +29,7 @@ $server->addWorker(
 );
 ```
 
-## Server configuration
+## Server Configuration
 Server-level configuration defines global settings that apply to the entire application and impact all workers.
 
 | Option         | Type   | Default        | Description                                                                           |
@@ -39,12 +39,12 @@ Server-level configuration defines global settings that apply to the entire appl
 | `stopTimeout`  | int    | 10             | Optional. Maximum time to wait before forcefully terminating workers during shutdown. |
 | `restartDelay` | float  | 0.25           | Optional. Delay between worker restarts.                                              |
 
-## Plugin configuration
+## Plugin Configuration
 Plugin-level configuration defines settings specific to individual plugins.
 See the plugins documentation for detailed options and examples.  
 [Read more →](/docs/plugins/)
 
-## Worker configuration
+## Worker Configuration
 Worker-level configuration applies to individual workers, allowing you to control their specific behavior.
 PHPStreamServer includes several built-in worker types, and plugins can add additional worker types to extend functionality.
 Workers can be added to the server using the `Server::addWorker()` method.
