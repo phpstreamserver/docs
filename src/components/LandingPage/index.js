@@ -7,6 +7,7 @@ import LogoImg from '@site/static/img/phpss-banner.svg';
 import GithubImg from '@site/static/img/github.svg';
 import CodeBlock from '@theme/CodeBlock';
 import Navbar from '@theme/Navbar';
+import CodeExample from './CodeExample';
 
 import Icon1 from '@site/static/icons/icon1.svg';
 import Icon2 from '@site/static/icons/icon2.svg';
@@ -96,36 +97,7 @@ const Index = () => {
                             <Link className={styles.button} to="/docs/general/">View Full Documentation</Link>
                         </div>
                         <div className="flex-1">
-                            <CodeBlock language="php" title="server.php">
-{`use Amp\\Http\\Server\\HttpErrorException;
-use Amp\\Http\\Server\\Request;
-use Amp\\Http\\Server\\Response;
-use PHPStreamServer\\Core\\Server;
-use PHPStreamServer\\Plugin\\HttpServer\\HttpServerPlugin;
-use PHPStreamServer\\Plugin\\HttpServer\\Worker\\HttpServerProcess;
-
-$server = new Server();
-
-$server->addPlugin(
-    new HttpServerPlugin(), // Register the HTTP server plugin
-);
-
-$server->addWorker(
-    new HttpServerProcess(
-        listen: '0.0.0.0:8080', // Address to listen on
-        count: 2, // Number of worker processes
-        onRequest: function (Request $request): Response {
-            return match ($request->getUri()->getPath()) {
-                '/' => new Response(body: 'Hello world'),
-                '/ping' => new Response(body: 'pong'),
-                default => throw new HttpErrorException(404),
-            };
-        }
-    ),
-);
-
-exit($server->run());`}
-                            </CodeBlock>
+                            <CodeBlock language="php" title="server.php">{CodeExample.trim()}</CodeBlock>
                         </div>
                     </div>
                 </div>

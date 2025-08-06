@@ -34,7 +34,7 @@ $server->addWorker(
     new WorkerProcess(
         name: 'Worker',
         count: 1,
-        onStart: function (WorkerProcess $worker): void {
+        onStart: static function (WorkerProcess $worker): void {
             $worker->logger->notice("Hello from worker!");
         }
     ),
@@ -42,7 +42,7 @@ $server->addWorker(
         name: 'Web Server',
         count: 2,
         listen: '0.0.0.0:8080',
-        onRequest: function (Request $request, HttpServerProcess $worker): Response {
+        onRequest: static function (Request $request, HttpServerProcess $worker): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),
                 '/ping' => new Response(body: 'pong'),
