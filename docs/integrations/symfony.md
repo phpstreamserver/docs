@@ -10,7 +10,7 @@ This bundle integrates PHPStreamServer with the Symfony framework.
 $ composer require phpstreamserver/symfony
 ```
 
-## Bundle Configuration
+## Runtime Configuration
 
 #### Enable the Bundle
 ```php title="config/bundles.php"
@@ -64,7 +64,6 @@ The following arguments are supported:
 - `string $env` Current environment
 - `bool $debug` Is in debug mode
 
-
 #### Create bin/phpss File
 ```php title="bin/phpss"
 #!/usr/bin/env php
@@ -75,29 +74,10 @@ use PHPStreamServer\Symfony\ServerApplication;
 
 require_once \dirname(__DIR__) . '/vendor/autoload_runtime.php';
 
-return new ServerApplication(static function (array $context) {
+return new ServerApplication(static function (array $context): Kernel {
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
 });
 ```
-
-#### Create bin/console File
-```php title="bin/console"
-#!/usr/bin/env php
-<?php
-
-use App\Kernel;
-use PHPStreamServer\Symfony\ConsoleApplication;
-
-require_once \dirname(__DIR__) . '/vendor/autoload_runtime.php';
-
-return new ConsoleApplication(static function (array $context) {
-    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
-});
-```
-
-:::info
-Modifying the `bin/console` file is essential to integrate console commands with PHPStreamServer—do not skip this step.
-:::
 
 #### Start the Server
 ```bash
