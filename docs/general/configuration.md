@@ -32,12 +32,12 @@ $server->addWorker(
 ## Server Configuration
 Server-level configuration defines global settings that apply to the entire application and impact all workers.
 
-| Option         | Type   | Default        | Description                                                                           |
-|----------------|--------|----------------|---------------------------------------------------------------------------------------|
-| `pidFile`      | string | *not&nbsp;set* | Optional. Path to the pid file.                                                       |
-| `socketFile`   | string | *not&nbsp;set* | Optional. Path to the Unix socket file used for inter-process communication.          |
-| `stopTimeout`  | int    | 10             | Optional. Maximum time to wait before forcefully terminating workers during shutdown. |
-| `restartDelay` | float  | 0.25           | Optional. Delay between worker restarts.                                              |
+| Option         | Type   | Default        | Description                                                                                        |
+|----------------|--------|----------------|----------------------------------------------------------------------------------------------------|
+| `pidFile`      | string | *not&nbsp;set* | Optional. Path to the pid file.                                                                    |
+| `socketFile`   | string | *not&nbsp;set* | Optional. Path to the Unix socket file used for inter-process communication.                       |
+| `stopTimeout`  | int    | 10             | Optional. Maximum time to wait (in seconds) before forcefully terminating workers during shutdown. |
+| `restartDelay` | float  | 0.25           | Optional. Delay between worker restarts.                                                           |
 
 ## Plugin Configuration
 Plugin-level configuration defines settings specific to individual plugins.
