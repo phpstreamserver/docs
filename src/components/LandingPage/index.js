@@ -8,6 +8,7 @@ import GithubImg from '@site/static/img/github.svg';
 import CodeBlock from '@theme/CodeBlock';
 import Navbar from '@theme/Navbar';
 import CodeExample from './CodeExample';
+import ParticlesBackground from './ParticlesBackground';
 
 import Icon1 from '@site/static/icons/icon1.svg';
 import Icon2 from '@site/static/icons/icon2.svg';
@@ -40,10 +41,11 @@ const Index = () => {
             <Navbar />
             <header className={styles.heroBanner}>
                 <div className="container">
+                    <div className="absolute inset-0 z-[-1]">
+                        <ParticlesBackground brandColor={'#3c83f6'} linkColor={'#65758b'} count={90} />
+                    </div>
                     <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
-                    <h1>
-                        Application server and process manager for modern PHP applications.
-                    </h1>
+                    <h1>Application server and process manager for modern PHP applications.</h1>
                     <div className="text-base dark:text-gray-200">
                         <strong>PHPStreamServer</strong> is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
                         Powered by the <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to PHP applications.<br/>
