@@ -42,7 +42,7 @@ const Index = () => {
             <header className={styles.heroBanner}>
                 <div className="container">
                     <div className="absolute inset-0 z-[-1]">
-                        <ParticlesBackground brandColor={'#3c83f6'} linkColor={'#65758b'} count={90} />
+                        <ParticlesBackground brandColor={'#3c83f6'} linkColor={'#65758b'} count={80} />
                     </div>
                     <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
                     <h1>Application server and process manager for modern PHP applications.</h1>
