@@ -24,16 +24,16 @@ $server = new Server();
 
 $server->addPlugin(
     new HttpServerPlugin(
-        // HttpServerPlugin configuration
+        // Optional. HttpServerPlugin configuration
     ),
 );
 
 $server->addWorker(
     new HttpServerProcess(
         // HttpServerProcess configuration
-        name: 'Web Server',
-        count: 2,
-        listen: '0.0.0.0:8080',
+        name: 'Web Server', // Worker name
+        listen: '0.0.0.0:8080', // Address to listen on
+        count: 2, // Number of worker processes
         onRequest: function (Request $request, HttpServerProcess $worker): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),

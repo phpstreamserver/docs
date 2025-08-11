@@ -16,6 +16,7 @@ use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\WorkerProcess;
 use PHPStreamServer\Plugin\Logger\Handler\ConsoleHandler;
 use PHPStreamServer\Plugin\Logger\LoggerPlugin;
+use Psr\Log\LoggerInterface;
 
 $server = new Server();
 
@@ -29,7 +30,11 @@ $server->addWorker(
     new WorkerProcess(
         name: 'Worker process',
         onStart: function (WorkerProcess $worker): void {
-            $worker->logger->info('Hello from worker', ['pid' => \posix_getpid()]);
+            $logger = $worker->container->getService(LoggerInterface::class);
+            $logger->info('Hello from worker', ['pid' => \posix_getpid()]);
+
+            // You can also use the logger like this:
+            // $worker->logger->info('Hello from worker', ['pid' => \posix_getpid()]);
         },
     ),
 );
