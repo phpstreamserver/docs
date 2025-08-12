@@ -46,8 +46,9 @@ See the plugins documentation for detailed options and examples.
 
 ## Worker Configuration
 Worker-level configuration applies to individual workers, allowing you to control their specific behavior.
-PHPStreamServer includes several built-in worker types, and plugins can add additional worker types to extend functionality.
-Workers can be added to the server using the `Server::addWorker()` method.
+PHPStreamServer includes several built-in worker types, and plugins can add additional worker types to extend functionality.  
+Additional worker types are available through plugins.  
+[Read more →](/docs/plugins/)
 
 ### ⚙️ WorkerProcess
 Worker class: [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerProcess.php)  
@@ -80,7 +81,9 @@ This worker type is designed to run external processes, allowing PHPStreamServer
 
 ## Reload Strategies
 Reload strategies in PHPStreamServer define the rules that determine when workers should be restarted.
-PHPStreamServer provides several built-in reload strategies out of the box, and plugins can add new ones.
+PHPStreamServer provides several built-in reload strategies out of the box, and plugins can add new ones.  
+Additional reload strategies are available through plugins.  
+[Read more →](/docs/plugins/)
 
 ### 🔄️ TTLReloadStrategy
 Reload strategy class: [TTLReloadStrategy](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/TTLReloadStrategy.php)  
