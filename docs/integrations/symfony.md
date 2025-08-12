@@ -3,7 +3,7 @@ title: Symfony
 ---
 
 # Symfony Intergation
-This bundle integrates PHPStreamServer with the Symfony framework.
+This bundle integrates PHPStreamServer Runtime with the Symfony framework.
 
 ## Installation
 ```bash
