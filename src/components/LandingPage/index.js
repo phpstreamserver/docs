@@ -51,6 +51,9 @@ const Index = () => {
                         Powered by the <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to PHP applications.<br/>
                         With its extensible plugin system, PHPStreamServer can replace traditional stacks such as Nginx, PHP-FPM, Cron, and Supervisor.
                     </div>
+                    <div className="p-2 my-4 text-sm max-w-4xl border border-gray-200 dark:border-gray-700 text-gray-800 rounded-(--ifm-code-border-radius) bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
+                        ⚠️ PHPStreamServer is still under active development and not yet considered production-ready. While it already works, it should be treated as experimental when used in live environments.
+                    </div>
                     <div className={styles.buttons}>
                         <Link className={styles.button} to="/docs/general/">
                             Get Started
