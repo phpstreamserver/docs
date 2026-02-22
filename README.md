@@ -5,11 +5,13 @@ PHPStreamServer documentation website [phpstreamserver.dev](https://phpstreamser
 ### Local Development
 
 ```
-$ make start
+$ make dev
 ```
+Serve: http://127.0.0.1:3000
 
-### Build
+### Production Run
 
 ```
-$ make build
+$ docker compose up -d --build
 ```
+Serve: http://127.0.0.1:9080

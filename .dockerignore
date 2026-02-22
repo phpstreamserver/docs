@@ -1,0 +1,12 @@
+/.git
+/.github
+.gitignore
+.dockerignore
+Makefile
+compose*.yaml
+README.md
+/node_modules
+/build
+/.docusaurus
+yarn-debug.log*
+yarn-error.log*

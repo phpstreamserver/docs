@@ -9,20 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build
-        run: |
-          yarn install
-          yarn build
+        uses: actions/checkout@v6
 
       - name: Upload files
-        uses: easingthemes/ssh-deploy@v2
-        env:
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
           SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          SOURCE: build/
-          ARGS: "-rtzv --delete"
+          ARGS: "-rzv --delete --exclude='.git/' --exclude='.github/'"
+          SCRIPT_AFTER: |
+            sudo docker compose -f ${{ secrets.REMOTE_TARGET }}/compose.yaml up -d --build
