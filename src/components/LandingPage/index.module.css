@@ -177,7 +177,7 @@
 
 .primaryButton,
 .secondaryButton,
-.readFullDocButton {
+.readDocButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +191,12 @@
         border-color 120ms ease-out,
         color 120ms ease-out,
         box-shadow 140ms ease-out;
-    @apply rounded-xl px-6 md:px-8 py-3 gap-3 shadow hover:shadow-md;
+    @apply py-3 gap-3;
+}
+
+.primaryButton,
+.secondaryButton {
+    @apply rounded-xl px-6 md:px-8 shadow hover:shadow-md;
 }
 
 .primaryButton {
@@ -207,19 +212,20 @@
     text-decoration: none;
 }
 
-.readFullDocButton {
-    @apply px-0 shadow-none hover:shadow-none hover:no-underline;
+.readDocButton {
+    @apply shadow-none hover:shadow-none hover:no-underline;
+    padding-inline: 0;
     font-size: 1.05em;
 }
 
-.readFullDocButton svg {
+.readDocButton svg {
     display: block;
     position: relative;
     top: 1px;
     transition: transform 160ms ease-out;
 }
 
-.readFullDocButton:hover svg {
+.readDocButton:hover svg {
     transform: translateX(3px);
 }
 

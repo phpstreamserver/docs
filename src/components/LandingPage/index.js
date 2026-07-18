@@ -160,7 +160,7 @@ export default function LandingPage() {
                                     <CodeBlock language="bash">{`php server.php start`}</CodeBlock>
                                 </div>
 
-                                <Link className={styles.readFullDocButton} to="/docs/general/">
+                                <Link className={styles.readDocButton} to="/docs/general/">
                                     View Documentation
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M3 10h13" />
