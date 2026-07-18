@@ -7,23 +7,15 @@ help: ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z1-9_\-\/\.]+:.*?## / {printf "  \033[32m%-24s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 node_modules:
-	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:25 bash -c "yarn install"
+	npm install
 
-.PHONY: dev
-dev: node_modules ## Start in dev mode
-	@docker run -p 3000:3000 -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:25 bash -c "yarn start -h 0.0.0.0"
-	@echo "➡️ Serve: http://127.0.0.1:3000/"
-
-.PHONY: upgrade
-upgrade: node_modules ## Yarn upgrade
-	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:25 bash -c "yarn upgrade"
-
-.PHONY: bash
-bash: node_modules ## Go to bash console
-	@docker run -it --rm --user=${USER_ID}:${GROUP_ID} -v ./:/app/ -w /app/ node:25 bash
+.PHONY: start
+start: node_modules ## Start in dev mode
+	npm run start -- --port 8081
+	@echo "➡️ Serve: http://127.0.0.1:8081/"
 
 .PHONY: clean
 clean: ## Remove files
-	@rm -rf node_modules
-	@rm -rf build
-	@rm -rf .docusaurus
+	rm -rf node_modules
+	rm -rf build
+	rm -rf .docusaurus
