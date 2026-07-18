@@ -24,10 +24,6 @@
     --page-accent-dark: #2993ff;
 }
 
-.page :global .container {
-    @apply px-4 md:px-6;
-}
-
 .heroBanner {
     position: relative;
     z-index: 0;

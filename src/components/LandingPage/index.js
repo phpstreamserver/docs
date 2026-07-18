@@ -108,7 +108,7 @@ export default function LandingPage() {
 
                             </div>
 
-                            <div className="hidden xl:block xl:col-span-5">
+                            <div className="hidden xl:block xl:col-span-5 pt-2">
                                 <Terminal/>
                             </div>
                         </div>

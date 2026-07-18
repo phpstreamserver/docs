@@ -20,11 +20,16 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'phpstreamserver/phpstreamserver', // Usually your GitHub org/user name.
+  projectName: 'phpstreamserver', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -62,8 +67,8 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        {name: 'description', content: 'High-performance PHP application server and process manager written in PHP'},
-        {name: 'og:description', content: 'High-performance PHP application server and process manager written in PHP'},
+        {name: 'description', content: 'Application server and process manager for modern PHP applications'},
+        {name: 'og:description', content: 'Application server and process manager for modern PHP applications'},
       ],
       // Replace with your project's social card
       image: 'img/ograph.png',
@@ -91,58 +96,6 @@ const config = {
             href: 'https://github.com/phpstreamserver/phpstreamserver',
             label: 'GitHub',
             position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'light',
-        links: [
-          {
-            title: 'Guide',
-            items: [
-              {
-                label: 'What is PHPStreamServer?',
-                to: '/docs/general/',
-              },
-              {
-                label: 'Quick Start',
-                to: '/docs/general/quick-start',
-              },
-            ],
-          },
-          {
-            title: 'Plugins',
-            items: [
-              {
-                label: 'HTTP Server',
-                to: '/docs/plugins/http-server',
-              },
-              {
-                label: 'Scheduler',
-                to: '/docs/plugins/scheduler',
-              },
-              {
-                label: 'Logger',
-                to: '/docs/plugins/logger',
-              },
-              {
-                label: 'File Monitor',
-                to: '/docs/plugins/file-monitor',
-              },
-              {
-                label: 'Metrics',
-                to: '/docs/plugins/metrics',
-              },
-            ],
-          },
-          {
-            title: 'Integrations',
-            items: [
-              {
-                label: 'Symfony',
-                href: '/docs/integrations/symfony',
-              },
-            ],
           },
         ],
       },
