@@ -1,6 +1,17 @@
+import {useEffect, useState} from 'react';
 import styles from './Terminal.module.css';
 
+const getCurrentTimestamp = () => {
+    return `${new Date().toISOString().slice(0, 19)}+00:00`;
+}
+
 export default function Terminal() {
+    const [timestamp, setTimestamp] = useState('');
+
+    useEffect(() => {
+        setTimestamp(getCurrentTimestamp());
+    }, []);
+
     return (
         <div className={styles.terminal} role="region" aria-label="PHPStreamServer startup output">
             <div className={styles.controls} aria-hidden="true">
@@ -38,22 +49,22 @@ export default function Terminal() {
 
                 <div>
                     <div>
-                        <span>[2026-07-16T16:52:31+00:00]</span>{' '}
+                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
                         <span className={styles.green}>server</span>.<span className={styles.cyan}>INFO</span>{' '}
                         <span>PHPStreamServer has started</span>
                     </div>
                     <div>
-                        <span>[2026-07-16T16:52:31+00:00]</span>{' '}
+                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
                         <span className={styles.green}>http</span>.<span className={styles.debug}>DEBUG</span>{' '}
                         <span>Starting server</span>
                     </div>
                     <div>
-                        <span>[2026-07-16T16:52:31+00:00]</span>{' '}
+                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
                         <span className={styles.green}>http</span>.<span className={styles.cyan}>INFO</span>{' '}
                         <span>Started server</span>
                     </div>
                     <div>
-                        <span>[2026-07-16T16:52:31+00:00]</span>{' '}
+                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
                         <span className={styles.green}>http</span>.<span className={styles.cyan}>INFO</span>{' '}
                         <span>Listening on http://0.0.0.0:8080/</span>
                     </div>
