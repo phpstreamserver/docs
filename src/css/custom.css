@@ -26,7 +26,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-hero-background-color: #0d83fd;
   --ifm-leading-desktop: 0.9;
+  --ifm-footer-link-color: var(--ifm-color-secondary-contrast-foreground);
   --header-gradient: #fff;
+  --phpss-announcement-background: #f1f5f9;
+  --phpss-announcement-text: #475569;
+  --phpss-announcement-link: #0969da;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -41,7 +45,39 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-hero-background-color: #0078ff;
   --header-gradient: #d5d5d5;
+  --phpss-announcement-background: #111b29;
+  --phpss-announcement-text: #aebdce;
+  --phpss-announcement-link: #73b7ff;
+}
 
+div.theme-announcement-bar {
+  color: var(--phpss-announcement-text);
+  background-color: var(--phpss-announcement-background);
+}
+
+div.theme-announcement-bar a {
+  color: var(--phpss-announcement-link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+div.theme-announcement-bar a:hover {
+  text-decoration: underline;
+}
+
+div.theme-announcement-bar .close {
+  color: var(--phpss-announcement-text);
+  opacity: 0.60;
+  transition: opacity var(--ifm-transition-fast);
+}
+
+div.theme-announcement-bar .close svg {
+  transform: scale(0.8);
+  stroke: currentColor;
+}
+
+div.theme-announcement-bar .close:hover, div.theme-announcement-bar .close:focus-visible {
+  opacity: 1;
 }
 
 .markdown {
@@ -83,4 +119,10 @@ article h1 a, article h2 a, article h3 a, article h4 a, article h1 a:hover, arti
 }
 .footer .footer__links .footer__link-item {
   text-decoration-line: none;
+}
+
+.footer .footer__title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
 }

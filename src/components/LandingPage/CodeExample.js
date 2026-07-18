@@ -1,4 +1,6 @@
 const ExampleCode = `
+<?php
+
 use Amp\\Http\\Server\\HttpErrorException;
 use Amp\\Http\\Server\\Request;
 use Amp\\Http\\Server\\Response;

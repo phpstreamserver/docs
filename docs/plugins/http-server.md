@@ -1,8 +1,8 @@
 ---
-title: Http Server Plugin
+title: HTTP server plugin
 ---
 
-# Http Server Plugin
+# HTTP server plugin
 Asynchronous HTTP server with support for HTTP/2, HTTPS, static file serving, and Gzip compression.
 
 ## Installation

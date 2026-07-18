@@ -9,7 +9,7 @@ Additionally, developers can create custom plugins to extend the server and cust
 
 ### Official Plugins
 
-#### 🧩 Http Server Plugin
+#### 🧩 HTTP server plugin
 Asynchronous HTTP server with support for HTTP/2, HTTPS, static file serving, and Gzip compression.  
 [Read more →](/docs/plugins/http-server)
 

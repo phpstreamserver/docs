@@ -1,100 +1,475 @@
-@import "tailwindcss/theme.css" layer(theme);
-@custom-variant dark (&:where(html[data-theme="dark"] *));
+@reference "../../css/custom.css";
 
-.heroBanner {
-    @apply px-3 py-[3em] lg:py-[5em];
-    text-align: left;
-    position: relative;
+.page {
+    --page-background: #f7f9fc;
+    --page-surface: #ffffff;
+    --page-surface-muted: #eef3f8;
+    --page-border: #dfe6ee;
+    --page-muted: #667085;
+    --page-accent: #1685f8;
+    --page-accent-dark: #0969da;
+
+    background: var(--page-background);
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow: hidden;
-    --color-left: color-mix(in srgb, var(--ifm-hero-background-color), transparent 95%);
-    --color-right: color-mix(in srgb, var(--ifm-hero-background-color), transparent 92%);
-    background: linear-gradient(135deg, var(--color-left) 50%, transparent 50%);
 }
 
-.heroBanner:before {
-    content: "";
+:global([data-theme='dark']) .page {
+    --page-background: #0c121d;
+    --page-surface: #111a28;
+    --page-surface-muted: #0f1825;
+    --page-border: #273346;
+    --page-muted: #8d9bad;
+    --page-accent: #47a3ff;
+    --page-accent-dark: #2993ff;
+}
+
+.page :global .container {
+    @apply px-4 md:px-6;
+}
+
+.heroBanner {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    color: #101828;
+    background:
+            radial-gradient(circle at 75% 32%, rgba(22, 133, 248, 0.2), transparent 31rem),
+            linear-gradient(135deg, #ffffff 0%, #f6f9fd 52%, #eef5fc 100%);
+    border-bottom: 1px solid #dfe7f0;
+    overflow: hidden;
+}
+
+:global([data-theme='dark']) .heroBanner {
+    color: #f8fbff;
+    background:
+            radial-gradient(circle at 75% 32%, rgba(25, 133, 248, 0.3), transparent 29rem),
+            linear-gradient(135deg, #07101c 0%, #0a1422 50%, #08111e 100%);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.heroBanner::after {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 90% 10%, var(--color-right), transparent 50%);
+    z-index: -1;
+    width: 34rem;
+    height: 34rem;
+    right: -17rem;
+    bottom: -23rem;
+    content: '';
+    border: 1px solid rgba(22, 133, 248, 0.13);
+    border-radius: 50%;
+    box-shadow:
+            0 0 0 6rem rgba(71, 163, 255, 0.025),
+            0 0 0 12rem rgba(71, 163, 255, 0.018);
     pointer-events: none;
 }
 
-.heroBanner h1 {
-    @apply mb-5 text-lg md:text-xl lg:text-2xl font-semibold dark:text-gray-200 leading-none;
-}
-
-.subtitle {
-    @apply relative font-bold pb-3 mb-6 text-center text-3xl leading-none;
-}
-
-.subtitle::after {
-    content: "";
+.heroGrid {
     position: absolute;
-    display: block;
-    width: 1.6em;
-    height: 3px;
-    background: #0d83fd;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.5;
+    background-image:
+            linear-gradient(rgba(24, 50, 79, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(24, 50, 79, 0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to right, black, transparent 50%, black);
+    pointer-events: none;
 }
 
-.featuresSection h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
+:global([data-theme='dark']) .heroGrid {
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+}
+
+.heroLayout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(31rem, 1.05fr);
+    gap: clamp(2.5rem, 4vw, 4.5rem);
+    align-items: center;
+    min-height: 650px;
+    padding-block: 5rem;
+}
+
+.heroContent {
+    max-width: 900px;
+}
+
+.heroLogo {
+    display: block;
+    width: min(100%, 480px);
+    height: auto;
+    color: #0b0c0e;
+}
+
+:global([data-theme='dark']) .heroLogo {
+    color: #f8fbff;
+}
+
+.heroContent h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+}
+
+:global([data-theme='dark']) .heroContent h1 {
+    color: #ffffff;
+}
+
+.heroDescription {
+    color: #526174;
+    text-wrap: pretty;
+    letter-spacing: -0.01em;
+    @apply space-y-1!;
+}
+
+.heroDescription strong {
+    color: #172033;
+}
+
+.heroDescription p {
+    margin: 0;
+}
+
+.heroDescription a {
+    color: #0969da;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.heroDescription a:hover {
+    color: #0757b8;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+:global([data-theme='dark']) .heroDescription {
+    color: #aebdce;
+}
+
+:global([data-theme='dark']) .heroDescription strong {
+    color: #f8fbff;
+}
+
+:global([data-theme='dark']) .heroDescription a {
+    color: #73b7ff;
+}
+
+:global([data-theme='dark']) .heroDescription a:hover {
+    color: #a8d2ff;
+}
+
+.warning {
+    max-width: 700px;
+    color: #684f17;
+    background: rgba(245, 158, 11, 0.07);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    @apply rounded-xl flex items-center gap-3 px-3 py-2;
+}
+
+:global([data-theme='dark']) .warning {
+    color: #d5dde7;
+    background: rgba(251, 191, 36, 0.07);
+    border-color: rgba(251, 191, 36, 0.2);
+}
+
+.primaryButton,
+.secondaryButton,
+.readFullDocButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        background-color 120ms ease-out,
+        border-color 120ms ease-out,
+        color 120ms ease-out,
+        box-shadow 140ms ease-out;
+    @apply rounded-xl px-6 md:px-8 py-3 gap-3 shadow hover:shadow-md;
+}
+
+.primaryButton {
+    color: #ffffff;
+    background: #111827;
+    border: 1px solid #111827;
+}
+
+.primaryButton:hover {
+    color: #ffffff;
+    background: #1f2937;
+    border-color: #1f2937;
+    text-decoration: none;
+}
+
+.readFullDocButton {
+    @apply px-0 shadow-none hover:shadow-none hover:no-underline;
+    font-size: 1.05em;
+}
+
+.readFullDocButton svg {
+    display: block;
+    position: relative;
+    top: 1px;
+    transition: transform 160ms ease-out;
+}
+
+.readFullDocButton:hover svg {
+    transform: translateX(3px);
+}
+
+:global([data-theme='dark']) .primaryButton {
+    color: #f1f5f9;
+    background: #26364a;
+    border-color: #3b4d65;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+:global([data-theme='dark']) .primaryButton:hover {
+    color: #ffffff;
+    background: #32465f;
+    border-color: #526b89;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
+
+.secondaryButton {
+    color: #344054;
+    background: rgba(255, 255, 255, 0.68);
+    border: 1px solid #cbd5e1;
+}
+
+.secondaryButton svg {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.secondaryButton:hover {
+    color: #1d2939;
+    background: #f8fafc;
+    text-decoration: none;
+}
+
+:global([data-theme='dark']) .secondaryButton {
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.28);
+    border-color: rgba(148, 163, 184, 0.24);
+}
+
+:global([data-theme='dark']) .secondaryButton:hover {
+    color: #f1f5f9;
+    background: rgba(148, 163, 184, 0.1);
+    border-color: rgba(148, 163, 184, 0.44);
+}
+
+.featuresSection {
+    background: var(--page-background);
+}
+
+.quickStartSection {
+    position: relative;
+    background:
+            radial-gradient(circle at 12% 88%, color-mix(in srgb, var(--page-accent), transparent 94%), transparent 23rem),
+            linear-gradient(180deg, var(--page-surface-muted), var(--page-background));
+    border-top: 1px solid var(--page-border);
+}
+
+.sectionHeading {
+    position: relative;
+}
+
+.sectionHeading h2 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: clamp(2rem, 3.3vw, 2.5rem);
+    font-weight: 720;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.sectionHeading span {
+    z-index: 0;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    bottom: 1px;
+    background: linear-gradient(
+            90deg,
+            color-mix(in srgb, var(--page-accent), var(--page-border) 72%) 0,
+            var(--page-border) 42%,
+            transparent 100%
+    );
 }
 
 .featureCard {
-    transition: all .2s ease-out;
-    @apply flex gap-3;
+    --feature-accent: #1685f8;
+    display: grid;
+    position: relative;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    background: linear-gradient(125deg, color-mix(in srgb, var(--feature-accent), transparent 95%), transparent 42%), var(--page-surface);
+    border: 1px solid var(--page-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.02);
+    overflow: hidden;
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.featureCard:nth-child(4n + 1) {
+    --feature-accent: #7357d9;
+}
+
+.featureCard:nth-child(4n + 2) {
+    --feature-accent: #d78217;
+}
+
+.featureCard:nth-child(4n + 3) {
+    --feature-accent: #1685f8;
+}
+
+.featureCard:nth-child(4n + 4) {
+    --feature-accent: #15939f;
 }
 
 .featureCard:hover {
-    transform: scale(1.04);
+    border-color: color-mix(in srgb, var(--feature-accent), var(--page-border) 50%);
+    box-shadow: 0 14px 30px rgba(16, 24, 40, 0.07);
+    transform: translateY(-2px);
+}
+
+:global([data-theme='dark']) .featureCard:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
 }
 
 .featureIcon {
-    padding-top: 0.1em;
+    display: grid;
+    place-items: center;
+    width: 2.5em;
+    height: 2.5em;
+    color: var(--feature-accent);
+    background: color-mix(in srgb, var(--feature-accent), transparent 92%);
+    border: 1px solid color-mix(in srgb, var(--feature-accent), transparent 80%);
+    border-radius: 9px;
 }
 
-.buttons {
+:global([data-theme='dark']) .featureIcon {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.featureIcon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.featureWatermark {
+    position: absolute;
+    right: -0.7rem;
+    bottom: -1.1rem;
+    width: 92px;
+    height: 92px;
+    color: var(--feature-accent);
+    opacity: 0.05;
+    pointer-events: none;
+    stroke-width: 1.15;
+    transform: rotate(-8deg);
+    transition: opacity 180ms ease, transform 240ms ease;
+}
+
+.featureCard:hover .featureWatermark {
+    opacity: 0.09;
+    transform: rotate(-3deg) scale(1.05);
+}
+
+.featureContent h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.featureContent p {
+    margin: 0;
+    color: var(--page-muted);
+    font-size: 0.86rem;
+    line-height: 1.5;
+}
+
+.commandStep :global(.theme-code-block) {
+    margin: 0;
+}
+
+.commandStep :global(.theme-code-block) pre {
+    background: var(--page-surface) !important;
+    font-size: 0.85rem;
+}
+
+.codeExample {
     display: flex;
-    gap: 1.5em;
+    flex-direction: column;
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--page-surface);
+    @apply rounded-xl shadow-xl;
+}
+
+.codeExample :global(.theme-code-block) {
+    margin: 0;
+    border-radius: 0;
+}
+
+.editorHeader {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    margin-top: 2rem;
-    @apply justify-center sm:justify-start;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    color: var(--page-muted);
+    background: rgb(246, 248, 250);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
 }
 
-.button {
-    @apply
-    text-white
-    font-semibold
-    text-xl
-    dark:text-gray-800
-    bg-[#27272a]
-    dark:bg-neutral-200
-    whitespace-nowrap
-    px-4
-    py-2
-    md:px-6
-    lg:px-7
-    lg:py-2.5
-    rounded-(--ifm-code-border-radius)
-    max-w-max
-    ;
+:global([data-theme='dark']) .editorHeader {
+    background: rgb(40, 42, 54);;
 }
 
-.button:hover {
-    @apply text-white dark:text-gray-800 no-underline;
-}
-
-.githubButtonGroup {
+.controls {
     display: flex;
-    align-items: center;
-    gap: 0.3em;
+    gap: 0.38rem;
+}
+
+.controls span {
+    width: 8px;
+    height: 8px;
+    background: #ff5f57;
+    border-radius: 50%;
+}
+
+.controls span:nth-child(2) {
+    background: #febc2e;
+}
+
+.controls span:nth-child(3) {
+    background: #28c840;
+}
+
+.editorFile {
+    font-weight: 650;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .primaryButton,
+    .secondaryButton,
+    .secondaryButton svg {
+        transition: none;
+    }
 }

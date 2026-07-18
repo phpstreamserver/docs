@@ -20,11 +20,11 @@
     "@tailwindcss/postcss": "^4.0.7",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.0.0",
+    "lucide-react": "^1.25.0",
     "postcss": "^8.5.3",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-tsparticles": "^2.12.2",
     "tailwindcss": "^4.0.7",
     "tsparticles-slim": "^2.12.0"
   },

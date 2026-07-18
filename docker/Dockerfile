@@ -1,10 +1,10 @@
-FROM node:25-alpine AS node
+FROM node:26-alpine AS node
 COPY ./ /app/
 WORKDIR /app/
 
-RUN yarn install && yarn build
+RUN npm install && npm run build
 
-FROM nginx:1.29
+FROM nginx:1.31
 
 RUN rm -rf /etc/nginx/conf.d/*
 COPY --chown=root:root ./docker/app.conf /etc/nginx/conf.d/

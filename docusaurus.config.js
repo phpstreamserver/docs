@@ -67,6 +67,11 @@ const config = {
       ],
       // Replace with your project's social card
       image: 'img/ograph.png',
+      announcementBar: {
+        id: 'github-star',
+        content: 'PHPStreamServer is open source. If you find it useful, consider <a href="https://github.com/phpstreamserver/phpstreamserver" target="_blank" rel="noopener noreferrer">giving us a star on GitHub</a>.',
+        isCloseable: true,
+      },
       navbar: {
         //title: 'My Site',
         logo: {
@@ -109,7 +114,7 @@ const config = {
             title: 'Plugins',
             items: [
               {
-                label: 'Http Server',
+                label: 'HTTP Server',
                 to: '/docs/plugins/http-server',
               },
               {

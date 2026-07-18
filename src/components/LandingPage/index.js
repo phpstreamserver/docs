@@ -1,116 +1,189 @@
-import styles from "./index.module.css";
-import Link from "@docusaurus/Link";
-import Layout from '@theme/Layout/Provider';
-import Footer from '@theme/Footer';
+import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import LogoImg from '@site/static/img/phpss-banner.svg';
-import GithubImg from '@site/static/img/github.svg';
 import CodeBlock from '@theme/CodeBlock';
-import Navbar from '@theme/Navbar';
+import Layout from '@theme/Layout';
+import GithubImg from '@site/static/img/github.svg';
+import LogoImg from '@site/static/img/phpss-banner.svg';
 import CodeExample from './CodeExample';
-import ParticlesBackground from './ParticlesBackground';
-
-import Icon1 from '@site/static/icons/icon1.svg';
-import Icon2 from '@site/static/icons/icon2.svg';
-import Icon3 from '@site/static/icons/icon3.svg';
-import Icon4 from '@site/static/icons/icon4.svg';
-import Icon5 from '@site/static/icons/icon5.svg';
-import Icon6 from '@site/static/icons/icon6.svg';
-import Icon7 from '@site/static/icons/icon7.svg';
-import Icon8 from '@site/static/icons/icon8.svg';
-import Icon9 from '@site/static/icons/icon9.svg';
-import Icon10 from '@site/static/icons/icon10.svg';
+import Terminal from './Terminal';
+import styles from './index.module.css';
+import { Code, Cpu, Globe, RefreshCw, CalendarClock, SquareTerminal, Logs, ChartNoAxesCombined, FolderSync, Puzzle, TriangleAlert } from 'lucide-react';
 
 const features = [
-    { icon: Icon1, iconColor: 'hsl(283 89% 26%)', title: "Runs on PHP", description: "No additional software is required—PHPStreamServer runs entirely on PHP. Just install via Composer and get started!" },
-    { icon: Icon2, iconColor: 'hsl(51 95% 53%)', title: "Always-in-memory", description: "Keeps applications loaded in memory for enhanced performance and faster response times." },
-    { icon: Icon3, iconColor: 'hsl(217 91% 60%)', title: "Asynchronous HTTP Server", description: "Built-in HTTP server with support for HTTP/2, HTTPS, GZIP, static file serving, and middleware." },
-    { icon: Icon4, iconColor: 'hsl(217 91% 60%)', title: "Advanced Worker Management", description: "Includes worker reload strategies triggered by TTL, memory usage, or exceptions." },
-    { icon: Icon5, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Flexible Scheduler", description: "Schedule tasks like Cron jobs with customizable intervals." },
-    { icon: Icon6, iconColor: 'hsl(25 95% 53%)', title: "Support for External Programs", description: "Manage non-PHP applications alongside PHP workers seamlessly." },
-    { icon: Icon7, iconColor: 'hsl(51 95% 53%)', title: "Powerful Logging System", description: "Log to files, stdout/stderr, syslog, or Graylog with advanced log routing." },
-    { icon: Icon8, iconColor: 'hsl(217 91% 60%)', title: "Prometheus Metrics Support", description: "Exposes a metrics endpoint for monitoring server performance and tracking custom application metrics." },
-    { icon: Icon9, iconColor: 'hsl(51 95% 53%)', title: "File Monitoring for Development", description: "Automatically reloads workers when file changes are detected, making it ideal for development." },
-    { icon: Icon10, iconColor: 'hsl(215.4 16.3% 46.9%)', title: "Plugin System", description: "Extend functionality with built-in plugins, or create custom ones to fit your needs." },
+    {
+        icon: Code,
+        title: 'Built Entirely in PHP',
+        description: 'No separate web server, process manager, or scheduler is required. Install it with Composer and run it with PHP.',
+    },
+    {
+        icon: Cpu,
+        title: 'Always in Memory',
+        description: 'Keeps your application loaded between requests, reducing startup overhead and improving response times.',
+    },
+    {
+        icon: Globe,
+        title: 'Asynchronous HTTP Server',
+        description: 'Serve applications directly with built-in support for HTTP/2, HTTPS, gzip compression, static files, and middleware.',
+    },
+    {
+        icon: RefreshCw,
+        title: 'Worker Lifecycle Management',
+        description: 'Automatically restart workers based on memory usage, maximum lifetime, request count, or unhandled exceptions.',
+    },
+    {
+        icon: CalendarClock,
+        title: 'Flexible Task Scheduler',
+        description: 'Run recurring tasks using cron expressions, fixed intervals, or specific date and time schedules.',
+    },
+    {
+        icon: SquareTerminal,
+        title: 'External Process Supervision',
+        description: 'Run and supervise non-PHP programs alongside PHP workers from the same unified runtime.',
+    },
+    {
+        icon: Logs,
+        title: 'Configurable Log Routing',
+        description: 'Route logs by channel and severity to files, stdout and stderr, syslog, or Graylog.',
+    },
+    {
+        icon: ChartNoAxesCombined,
+        title: 'Prometheus Metrics',
+        description: 'Expose server performance metrics and register custom metrics for application-specific monitoring.',
+    },
+    {
+        icon: FolderSync,
+        title: 'Development File Monitoring',
+        description: 'Automatically reloads workers when monitored files change, so code updates take effect immediately during development.',
+    },
+    {
+        icon: Puzzle,
+        title: 'Extensible Plugin System',
+        description: 'Enable built-in plugins or create custom ones to add project-specific functionality.',
+    },
 ];
 
-const Index = () => {
+export default function LandingPage() {
     const {siteConfig} = useDocusaurusContext();
+
     return (
-        <Layout title={`${siteConfig.title}`} description="Application server and process manager for modern PHP applications.">
-            <Navbar />
-            <header className={styles.heroBanner}>
-                <div className="container">
-                    <div className="absolute inset-0 z-[-1]">
-                        <ParticlesBackground brandColor={'#3c83f6'} linkColor={'#65758b'} count={80} />
-                    </div>
-                    <LogoImg alt="PHPStreamServer" className="w-auto max-w-full h-[2.5em] lg:h-[3.5em] lg:w-auto mb-5 text-black dark:text-gray-200"/>
-                    <h1>Application server and process manager for modern PHP applications.</h1>
-                    <div className="text-base dark:text-gray-200">
-                        <strong>PHPStreamServer</strong> is a high-performance, event-loop-based application server and supervisor for PHP, written in PHP.<br/>
-                        Powered by the <Link href="https://revolt.run/">Revolt</Link> event loop and built on the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it brings true asynchronous capabilities to PHP applications.<br/>
-                        With its extensible plugin system, PHPStreamServer can replace traditional stacks such as Nginx, PHP-FPM, Cron, and Supervisor.
-                    </div>
-                    <div className="p-2 my-4 text-sm max-w-4xl border border-gray-200 dark:border-gray-700 text-gray-800 rounded-(--ifm-code-border-radius) bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
-                        ⚠️ PHPStreamServer is still under active development and not yet considered production-ready. While it already works, it should be treated as experimental when used in live environments.
-                    </div>
-                    <div className={styles.buttons}>
-                        <Link className={styles.button} to="/docs/general/">
-                            Get Started
-                        </Link>
-                        <Link className={styles.button} href="https://github.com/phpstreamserver/phpstreamserver">
-                            <div className={styles.githubButtonGroup}>
-                                <GithubImg alt="" className="w-[1.25em] h-[1.25em] me-1"/> <span>GitHub</span>
-                            </div>
-                        </Link>
-                        <img className="hidden md:block h-[1.5em]" src="https://img.shields.io/github/stars/phpstreamserver/phpstreamserver" alt="Stars"/>
-                    </div>
-                </div>
-            </header>
+        <Layout title={siteConfig.title}>
+            <main className={styles.page}>
+                <header className={`${styles.heroBanner} py-12 lg:py-22`}>
+                    <div className={styles.heroGrid} aria-hidden="true" />
+                    <div className="container">
+                        <LogoImg alt="PHPStreamServer" className={`${styles.heroLogo} mb-6`} />
+                        <div className="grid grid-cols-1 xl:grid-cols-12 gap-9">
+                            <div className={`${styles.heroContent} xl:col-span-7`}>
+                                <h1>Application server and process manager for modern PHP applications.</h1>
 
-            <div className="px-3 py-8 lg:px-4">
-                <div className="container">
-                    <h2 className={styles.subtitle}>Features</h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                        {features.map((feature, index) => (
-                            <div key={index} className={styles.featureCard}>
-                                <div className="flex items-top">
-                                    <div className={styles.featureIcon}><feature.icon style={{ color: feature.iconColor }} /></div>
+                                <div className={`${styles.heroDescription} my-6`}>
+                                    <p>
+                                        <strong>PHPStreamServer</strong> is an event-loop-based application server and process supervisor built entirely <span className="whitespace-nowrap">in PHP.</span>
+                                    </p>
+                                    <p>
+                                        Its extensible plugin system provides HTTP application serving, task scheduling, and process supervision within a unified runtime, without requiring Nginx, PHP-FPM, Cron, or Supervisor.
+                                    </p>
+                                    <p>
+                                        Powered by the <Link href="https://revolt.run/">Revolt</Link> event loop and the <Link href="https://amphp.org/">AMPHP</Link> ecosystem, it enables asynchronous, concurrent execution in PHP applications.
+                                    </p>
                                 </div>
-                                <div className="flex items-top">
-                                   <div>
-                                       <div className="text-xl font-semibold mb-1 w-full">{feature.title}</div>
-                                       <div className="text-sm">{feature.description}</div>
-                                   </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
-            <div className="px-3 py-8 lg:px-4">
-                <div className="container">
-                    <h2 className={styles.subtitle}>Quick Start</h2>
-                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
-                        <div className="flex flex-col flex-1 gap-4">
-                            <div className="text-lg">Get up and running with PHPStreamServer in just a few lines of code. Here's a simple HTTP server example to get you started.</div>
-                            <div className="font-semibold">Install via composer</div>
-                            <CodeBlock language="bash">{`$ composer require phpstreamserver/http-server`}</CodeBlock>
-                            <div className="font-semibold">Run your server</div>
-                            <CodeBlock language="bash">{`$ php server.php start`}</CodeBlock>
-                            <Link className={styles.button} to="/docs/general/">View Full Documentation</Link>
-                        </div>
-                        <div className="flex-1">
-                            <CodeBlock language="php" title="server.php">{CodeExample.trim()}</CodeBlock>
+                                <div className={`${styles.warning} my-6`}>
+                                    <TriangleAlert/>
+                                    <div>
+                                        <b>Preview:</b> PHPStreamServer is under active development and is not yet production-ready.
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4 my-6">
+                                    <Link className={styles.primaryButton} to="/docs/general/">
+                                        Get Started
+                                    </Link>
+                                    <Link className={styles.secondaryButton} href="https://github.com/phpstreamserver/phpstreamserver">
+                                        <GithubImg aria-hidden="true" />
+                                        <span>GitHub</span>
+                                    </Link>
+                                </div>
+
+
+                            </div>
+
+                            <div className="hidden xl:block xl:col-span-5">
+                                <Terminal/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <Footer></Footer>
+
+                </header>
+
+                <section className={`${styles.featuresSection} py-8 lg:py-12`}>
+                    <div className="container">
+                        <div className={`${styles.sectionHeading} mb-6 lg:mb-10`}>
+                            <h2>Features</h2>
+                            <span/>
+                        </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                            {features.map((feature) => (
+                                <div key={feature.title} className={`${styles.featureCard} p-3 lg:p-4`}>
+                                    <div className={`${styles.featureIcon}`}>
+                                        <feature.icon aria-hidden="true" />
+                                    </div>
+                                    <div className={styles.featureContent}>
+                                        <h3>{feature.title}</h3>
+                                        <p>{feature.description}</p>
+                                    </div>
+                                    <feature.icon className={styles.featureWatermark} aria-hidden="true" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className={`${styles.quickStartSection} py-8 lg:py-12`}>
+                    <div className="container">
+                        <div className={`${styles.sectionHeading} mb-6 lg:mb-10`}>
+                            <h2>Quick Start</h2>
+                            <span/>
+                        </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+                            <div className="col-span-4">
+                                <div className="mb-6">Install PHPStreamServer and start a simple HTTP server with the following minimal configuration.</div>
+
+                                <div className={`${styles.commandStep} mb-6`}>
+                                <div className="font-semibold leading-none mb-2">Install via Composer</div>
+                                    <CodeBlock language="bash">{`composer require phpstreamserver/http-server`}</CodeBlock>
+                                </div>
+
+                                <div className={`${styles.commandStep} mb-6`}>
+                                    <div className="font-semibold leading-none mb-2">Start the server</div>
+                                    <CodeBlock language="bash">{`php server.php start`}</CodeBlock>
+                                </div>
+
+                                <Link className={styles.readFullDocButton} to="/docs/general/">
+                                    View Documentation
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M3 10h13" />
+                                    <path d="M11 5l5 5-5 5" />
+                                </svg>
+                                </Link>
+                            </div>
+
+                            <div className={`${styles.codeExample} col-span-6`}>
+                                <div className={styles.editorHeader}>
+                                    <div className={styles.controls} aria-hidden="true">
+                                        <span />
+                                        <span />
+                                        <span />
+                                    </div>
+                                    <span className={styles.editorFile}>server.php</span>
+                                </div>
+                                <CodeBlock language="php">{CodeExample.trim()}</CodeBlock>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
         </Layout>
     );
-};
-
-export default Index;
+}
