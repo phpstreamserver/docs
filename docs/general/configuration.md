@@ -113,3 +113,52 @@ This ensures that workers do not remain in an unexpected state after encounterin
 | Option              | Type           | Default        | Description                                                               |
 |---------------------|----------------|----------------|---------------------------------------------------------------------------|
 | `allowedExceptions` | class-string[] | *not&nbsp;set* | Optional. A list of exception class names that will not trigger a reload. |
+
+## Commands
+Commands allow you to communicate with the master process and manage the server.
+Additional command implementations are available through plugins.
+[Read more →](/docs/plugins/)
+
+### ▶️  GetWorkersCommand
+Command class: [GetWorkersCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/GetWorkersCommand.php)  
+Retrieves metadata for workers registered with the supervisor.
+
+### ▶️  GetProcessesCommand
+Command class: [GetProcessesCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/GetProcessesCommand.php)  
+Retrieves metadata for processes managed by the supervisor.
+
+### ▶️  GetNetworkInfoCommand
+Command class: [GetNetworkInfoCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/GetNetworkInfoCommand.php)  
+Retrieves network traffic and active connection information for worker processes.
+
+### ▶️  GetServerStatusCommand
+Command class: [GetServerStatusCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/GetServerStatusCommand.php)  
+Retrieves runtime information about the running server.
+
+### ▶️  RegisterWorkerCommand
+Command class: [RegisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/RegisterWorkerCommand.php)  
+Registers a worker and returns its assigned ID.
+
+| Option             | Type                | Default        | Description                 |
+|--------------------|---------------------|----------------|-----------------------------|
+| `worker` | [WorkerInterface](https://github.com/phpstreamserver/core/blob/main/src/Core/src/WorkerInterface.php) | *not&nbsp;set* | Configured worker instance. |
+
+### ▶️  UnregisterWorkerCommand
+Command class: [UnregisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/UnregisterWorkerCommand.php)  
+Unregisters a worker using its assigned ID.
+
+| Option            | Type | Default        | Description        |
+|-------------------|------|----------------|--------------------|
+| `workerId` | int  | *not&nbsp;set* | Worker ID to unregister.  |
+
+### ▶️  ReloadServerCommand
+Command class: [ReloadServerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/ReloadServerCommand.php)  
+Requests a server reload.
+
+### ▶️  StopServerCommand
+Command class: [StopServerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StopServerCommand.php)  
+Requests a graceful server shutdown.
+
+| Option            | Type | Default | Description               |
+|-------------------|------|---------|---------------------------|
+| `code` | int  | 0       | Server process exit code. |

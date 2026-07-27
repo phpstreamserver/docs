@@ -63,3 +63,9 @@ The `schedule` option can be specified in one of the following formats:
 | `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
 | `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
 | `onStart`  | Closure | *not&nbsp;set* | Optional. A callback function executed when the worker starts.              |
+
+## Commands
+
+### ▶️  GetWorkersCommand
+Command class: [GetWorkersCommand](https://github.com/phpstreamserver/scheduler/blob/main/src/Command/GetWorkersCommand.php)  
+Retrieves metadata for workers registered with the scheduler.
