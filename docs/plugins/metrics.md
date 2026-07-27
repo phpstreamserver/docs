@@ -56,6 +56,6 @@ exit($server->run());
 ### 🧩 MetricsPlugin
 Plugin class: [MetricsPlugin](https://github.com/phpstreamserver/metrics/blob/main/src/MetricsPlugin.php)
 
-| Option   | Type                                                                                      | Default        | Description                                           |
+| Parameter | Type                                                                                      | Default        | Description                                           |
 |----------|-------------------------------------------------------------------------------------------|----------------|-------------------------------------------------------|
 | `listen` | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address on which the metrics server is listening. |

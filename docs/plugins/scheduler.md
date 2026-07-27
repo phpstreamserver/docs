@@ -55,7 +55,7 @@ The `schedule` option can be specified in one of the following formats:
 - A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g., `1 minute`)
 - A cron expression (e.g., `*/1 * * * *`)
 
-| Option     | Type    | Default        | Description                                                                 |
+| Parameter  | Type    | Default        | Description                                                                 |
 |------------|---------|----------------|-----------------------------------------------------------------------------|
 | `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
 | `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |

@@ -49,7 +49,7 @@ exit($server->run());
 ### 🧩LoggerPlugin
 Plugin class: [LoggerPlugin](https://github.com/phpstreamserver/logger/blob/main/src/LoggerPlugin.php)
 
-| Option     | Type                                            | Default         | Description                                                       |
+| Parameter  | Type                                            | Default         | Description                                                       |
 |------------|-------------------------------------------------|-----------------|-------------------------------------------------------------------|
 | `handlers` | [Handler[]](/docs/plugins/logger#handler-configuration) | *not&nbsp;set*  | A list of logger handlers that specify the destinations for logs. |
 
@@ -60,7 +60,7 @@ The Logger plugin provides various handlers for routing logs to different destin
 Handler class: [ConsoleHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/ConsoleHandler.php)  
 Sends log messages directly to the console (stdout or stderr).
 
-| Option      | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
+| Parameter   | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
 |-------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | `output`    | int                                                                                | 2                                                                                                          | Optional. Specifies the output stream (1 for stdout, 2 for stderr).                                                        |
 | `level`     | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                            | Optional. Processes logs with severity equal to or greater than the specified level.                                       |
@@ -71,7 +71,7 @@ Sends log messages directly to the console (stdout or stderr).
 Handler class: [FileHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/FileHandler.php)  
 Sends log messages to a specified file, supporting daily rotation and gzip compression of archived logs.
 
-| Option       | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
+| Parameter    | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
 |--------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | `filename`   | string                                                                             | *not&nbsp;set*                                                                                             | Path to the file where logs will be saved.                                                                                 |
 | `rotate`     | bool                                                                               | false                                                                                                      | Optional. Rotate log files.                                                                                                |
@@ -86,7 +86,7 @@ Sends log messages to a specified file, supporting daily rotation and gzip compr
 Handler class: [SyslogHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/SyslogHandler.php)  
 Sends log messages to the system’s syslog service.
 
-| Option     | Type                                                                             | Default         | Description                                                                                                                                                                             |
+| Parameter  | Type                                                                             | Default         | Description                                                                                                                                                                             |
 |------------|----------------------------------------------------------------------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `prefix`   | string                                                                           | phpss           | Optional. The string prefix is added to each message.                                                                                                                                   |
 | `flags`    | int                                                                              | 0               | Optional. Bitmask. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details.                                             |
@@ -98,7 +98,7 @@ Sends log messages to the system’s syslog service.
 Handler class: [GelfHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/GelfHandler.php)  
 Sends log messages to a Graylog server in GELF format, supporting UDP, TCP, and HTTP transports.
 
-| Option               | Type                                                                             | Default         | Description                                                                                                                |
+| Parameter            | Type                                                                             | Default         | Description                                                                                                                |
 |----------------------|----------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------|
 | `address`            | string                                                                           | *not&nbsp;set*  | The Graylog server address. UDP, TCP, or HTTP endpoint.                                                                    |
 | `hostName`           | string                                                                           | *not&nbsp;set*  | Optional. The hostname to include in GELF messages. Current hostname by default.                                           |

@@ -44,7 +44,7 @@ exit($server->run());
 ### 🧩 FileMonitorPlugin
 Plugin class: [FileMonitorPlugin](https://github.com/phpstreamserver/file-monitor/blob/main/src/FileMonitorPlugin.php)
 
-| Option  | Type                                                            | Default         | Description                                                            |
+| Parameter | Type                                                            | Default         | Description                                                            |
 |---------|-----------------------------------------------------------------|-----------------|------------------------------------------------------------------------|
 | `watch` | [WatchDir[]](/docs/plugins/file-monitor#watchdir-configuration) | *not&nbsp;set*  | List of WatchDir objects that define the files to monitor for changes. |
 
@@ -54,7 +54,7 @@ WatchDir Specifies the directory and file patterns to monitor.
 ### 📂 WatchDir
 Class: [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchDir.php)
 
-| Option              | Type     | Default        | Description                                                                 |
+| Parameter           | Type     | Default        | Description                                                                 |
 |---------------------|----------|----------------|-----------------------------------------------------------------------------|
 | `sourceDir`         | string   | *not&nbsp;set* | The directory to monitor for file changes.                                  |
 | `filePatterns`      | string[] | \['\*'\]       | Optional. A pattern that specifies which files to watch (e.g., *.php).      |

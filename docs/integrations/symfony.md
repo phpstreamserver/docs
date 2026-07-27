@@ -92,7 +92,7 @@ This bundle adds new Symfony-specific options to the start command: (`--env`, `-
 Worker class: [SymfonyHttpServerWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerWorker.php)  
 This worker type is designed to run the Symfony application web server.
 
-| Option                 | Type                                                                                                                                                                           | Default        | Description                                                                                    |
+| Parameter              | Type                                                                                                                                                                           | Default        | Description                                                                                    |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|------------------------------------------------------------------------------------------------|
 | `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                                                  |
 | `count`                | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The number of processes to start. Defaults to number of CPUs.                        |
@@ -117,7 +117,7 @@ The `schedule` option can be specified in one of the following formats:
 - A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g., `1 minute`)
 - A cron expression (e.g., `*/1 * * * *`)
 
-| Option     | Type    | Default        | Description                                                                 |
+| Parameter  | Type    | Default        | Description                                                                 |
 |------------|---------|----------------|-----------------------------------------------------------------------------|
 | `command`  | string  | *not&nbsp;set* | Symfony console command name.                                               |
 | `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
@@ -130,7 +130,7 @@ The `schedule` option can be specified in one of the following formats:
 Worker class: [SymfonySupervisedCommandWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonySupervisedCommandWorker.php)  
 This worker type is designed to run long-running Symfony console commands.
 
-| Option       | Type      | Default        | Description                                                           |
+| Parameter    | Type      | Default        | Description                                                           |
 |--------------|-----------|----------------|-----------------------------------------------------------------------|
 | `command`    | string    | *not&nbsp;set* | Symfony console command name.                                         |
 | `name`       | string    | *not&nbsp;set* | Optional. The name associated with the worker process.                |

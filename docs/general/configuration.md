@@ -34,7 +34,7 @@ $server->addWorker(
 ## Server Configuration
 Server-level configuration defines global settings that apply to the entire application and impact all workers.
 
-| Option         | Type   | Default        | Description                                                                                |
+| Parameter      | Type   | Default        | Description                                                                                |
 |----------------|--------|----------------|--------------------------------------------------------------------------------------------|
 | `pidFile`      | string | *not&nbsp;set* | Optional. Path to the pid file.                                                            |
 | `socketFile`   | string | *not&nbsp;set* | Optional. Path to the Unix socket file used for inter-process communication.               |
@@ -56,7 +56,7 @@ Additional worker types are available through plugins.
 Worker class: [SupervisedWorker](https://github.com/phpstreamserver/core/blob/main/src/Worker/SupervisedWorker.php)  
 This worker type is designed to run long-running PHP code.
 
-| Option             | Type                 | Default        | Description                                                           |
+| Parameter          | Type                 | Default        | Description                                                           |
 |--------------------|----------------------|----------------|-----------------------------------------------------------------------|
 | `name`             | string               | *not&nbsp;set* | Optional. The name associated with the worker process.                |
 | `count`            | int                  | 1              | Optional. The number of processes to start.                           |
@@ -72,7 +72,7 @@ This worker type is designed to run long-running PHP code.
 Worker class: [ExecutableWorker](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExecutableWorker.php)  
 This worker type is designed to run external processes, allowing PHPStreamServer to manage and supervise programs or scripts outside of PHP.
 
-| Option             | Type   | Default        | Description                                                           |
+| Parameter          | Type   | Default        | Description                                                           |
 |--------------------|--------|----------------|-----------------------------------------------------------------------|
 | `name`             | string | *not&nbsp;set* | Optional. The name associated with the worker process.                |
 | `count`            | int    | 1              | Optional. The number of processes to start.                           |
@@ -92,7 +92,7 @@ Reload strategy class: [TTLReloadStrategy](https://github.com/phpstreamserver/co
 Reloads a worker after a specified time-to-live (TTL) interval.
 This periodic restart helps prevent potential issues caused by long-running processes.
 
-| Option | Type | Default        | Description                       |
+| Parameter | Type | Default        | Description                       |
 |--------|------|----------------|-----------------------------------|
 | `ttl`  | int  | *not&nbsp;set* | Time-to-live interval in seconds. |
 
@@ -101,7 +101,7 @@ Reload strategy class: [MaxMemoryReloadStrategy](https://github.com/phpstreamser
 Reloads a worker when its memory usage exceeds a specified threshold.
 This helps control memory leaks and prevents excessive memory consumption.
 
-| Option      | Type   | Default        | Description                            |
+| Parameter   | Type   | Default        | Description                            |
 |-------------|--------|----------------|----------------------------------------|
 | `maxMemory` | int    | *not&nbsp;set* | Memory consumption threshold in bytes. |
 
@@ -110,7 +110,7 @@ Reload strategy class: [ExceptionReloadStrategy](https://github.com/phpstreamser
 Reloads a worker when an exception is thrown, except for those explicitly excluded from triggering a reload.
 This ensures that workers do not remain in an unexpected state after encountering an error.
 
-| Option              | Type           | Default        | Description                                                               |
+| Parameter           | Type           | Default        | Description                                                               |
 |---------------------|----------------|----------------|---------------------------------------------------------------------------|
 | `allowedExceptions` | class-string[] | *not&nbsp;set* | Optional. A list of exception class names that will not trigger a reload. |
 
@@ -139,7 +139,7 @@ Retrieves runtime information about the running server.
 Command class: [RegisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/RegisterWorkerCommand.php)  
 Registers a worker and returns its assigned ID.
 
-| Option             | Type                | Default        | Description                 |
+| Parameter          | Type                | Default        | Description                 |
 |--------------------|---------------------|----------------|-----------------------------|
 | `worker` | [WorkerInterface](https://github.com/phpstreamserver/core/blob/main/src/Core/src/WorkerInterface.php) | *not&nbsp;set* | Configured worker instance. |
 
@@ -147,7 +147,7 @@ Registers a worker and returns its assigned ID.
 Command class: [UnregisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/UnregisterWorkerCommand.php)  
 Unregisters a worker using its assigned ID.
 
-| Option            | Type | Default        | Description        |
+| Parameter         | Type | Default        | Description        |
 |-------------------|------|----------------|--------------------|
 | `workerId` | int  | *not&nbsp;set* | Worker ID to unregister.  |
 
@@ -159,6 +159,6 @@ Requests a server reload.
 Command class: [StopServerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StopServerCommand.php)  
 Requests a graceful server shutdown.
 
-| Option            | Type | Default | Description               |
+| Parameter         | Type | Default | Description               |
 |-------------------|------|---------|---------------------------|
 | `code` | int  | 0       | Server process exit code. |

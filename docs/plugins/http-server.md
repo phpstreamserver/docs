@@ -57,7 +57,7 @@ exit($server->run());
 ### 🧩 HttpServerPlugin
 Plugin class: [HttpServerPlugin](https://github.com/phpstreamserver/http-server/blob/main/src/HttpServerPlugin.php)
 
-| Option                  | Type   | Default | Description                                                               |
+| Parameter               | Type   | Default | Description                                                               |
 |-------------------------|--------|---------|---------------------------------------------------------------------------|
 | `http2Enabled`          | bool   | true    | Optional. Enables support for HTTP/2 protocol.                            |
 | `httpConnectionTimeout` | int    | 60      | Optional. Timeout duration for idle HTTP connections.                     |
@@ -74,7 +74,7 @@ Plugin class: [HttpServerPlugin](https://github.com/phpstreamserver/http-server/
 Worker class: [HttpServerWorker](https://github.com/phpstreamserver/http-server/blob/main/src/Worker/HttpServerWorker.php)  
 This worker type handles incoming HTTP requests asynchronously.
 
-| Option                 | Type                                                                                                                                                                           | Default        | Description                                                               |
+| Parameter              | Type                                                                                                                                                                           | Default        | Description                                                               |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------------------------------|
 | `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                             |
 | `name`                 | string                                                                                                                                                                         | "HTTP Server"  | Optional. The name associated with the worker process.                    |
@@ -106,7 +106,7 @@ It does not have any specific configurable options.
 Reload strategy class: [MaxRequestsReloadStrategy](https://github.com/phpstreamserver/http-server/blob/main/src/ReloadStrategy/MaxRequestsReloadStrategy.php)  
 This strategy reloads the worker after it has handled a specified number of HTTP requests.
 
-| Option                 | Type | Default        | Description                                                               |
+| Parameter              | Type | Default        | Description                                                               |
 |------------------------|------|----------------|---------------------------------------------------------------------------|
 | `maxRequests`          | int  | *not&nbsp;set* | The maximum number of requests a worker can handle before being reloaded. |
 | `dispersionPercentage` | int  | 0              | Optional. Variability percantage to maxRequests. *                        |
