@@ -12,9 +12,11 @@ $ composer require phpstreamserver/scheduler
 
 ## Example of Usage
 ```php title="server.php"
+<?php
+
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Plugin\Scheduler\SchedulerPlugin;
-use PHPStreamServer\Plugin\Scheduler\Worker\PeriodicProcess;
+use PHPStreamServer\Plugin\Scheduler\Worker\ScheduledWorker;
 
 $server = new Server();
 
@@ -23,10 +25,10 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new PeriodicProcess(
-        name: 'Periodic process',
+    new ScheduledWorker(
+        name: 'Scheduled worker',
         schedule: '*/1 * * * *',
-        onStart: function (PeriodicProcess $worker): void {
+        onStart: function (ScheduledWorker $worker): void {
             // process
         },
     ),
@@ -43,12 +45,12 @@ This plugin does not have any specific configurable options.
 
 ## Worker Configuration
 
-### ⚙️ PeriodicProcess
-Worker class: [PeriodicProcess](https://github.com/phpstreamserver/scheduler/blob/main/src/Worker/PeriodicProcess.php)  
+### ⚙️ ScheduledWorker
+Worker class: [ScheduledWorker](https://github.com/phpstreamserver/scheduler/blob/main/src/Worker/ScheduledWorker.php)  
 This worker type is designed to execute tasks periodically.  
 The `schedule` option can be specified in one of the following formats:
 - Number of seconds (e.g., `60`)
-- An ISO8601 datetime format (e.g., `2025-01-01 00:00:00`)
+- An ISO8601 datetime format (e.g., `2026-01-01T00:00:00Z`)
 - An ISO8601 duration format (e.g., `PT1M`)
 - A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g., `1 minute`)
 - A cron expression (e.g., `*/1 * * * *`)

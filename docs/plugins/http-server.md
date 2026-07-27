@@ -12,13 +12,15 @@ $ composer require phpstreamserver/http-server
 
 ## Example of Usage
 ```php title="server.php"
+<?php
+
 use Amp\Http\Server\HttpErrorException;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
 use PHPStreamServer\Plugin\HttpServer\ReloadStrategy\MaxRequestsReloadStrategy;
-use PHPStreamServer\Plugin\HttpServer\Worker\HttpServerProcess;
+use PHPStreamServer\Plugin\HttpServer\Worker\HttpServerWorker;
 
 $server = new Server();
 
@@ -29,12 +31,12 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new HttpServerProcess(
-        // HttpServerProcess configuration
+    new HttpServerWorker(
+        // HttpServerWorker configuration
         name: 'Web Server', // Worker name
         listen: '0.0.0.0:8080', // Address to listen on
         count: 2, // Number of worker processes
-        onRequest: function (Request $request, HttpServerProcess $worker): Response {
+        onRequest: function (Request $request, HttpServerWorker $worker): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),
                 '/ping' => new Response(body: 'pong'),
@@ -57,7 +59,7 @@ Plugin class: [HttpServerPlugin](https://github.com/phpstreamserver/http-server/
 
 | Option                  | Type   | Default | Description                                                               |
 |-------------------------|--------|---------|---------------------------------------------------------------------------|
-| `http2Enable`           | bool   | true    | Optional. Enables support for HTTP/2 protocol.                            |
+| `http2Enabled`          | bool   | true    | Optional. Enables support for HTTP/2 protocol.                            |
 | `httpConnectionTimeout` | int    | 60      | Optional. Timeout duration for idle HTTP connections.                     |
 | `httpHeaderSizeLimit`   | int    | 32768   | Optional. Maximum allowed size for HTTP headers.                          |
 | `httpBodySizeLimit`     | int    | 131072  | Optional. Maximum allowed size for the HTTP request body.                 |
@@ -68,8 +70,8 @@ Plugin class: [HttpServerPlugin](https://github.com/phpstreamserver/http-server/
 
 ## Worker Configuration
 
-### ⚙️ HttpServerProcess
-Worker class: [HttpServerProcess](https://github.com/phpstreamserver/http-server/blob/main/src/Worker/HttpServerProcess.php)  
+### ⚙️ HttpServerWorker
+Worker class: [HttpServerWorker](https://github.com/phpstreamserver/http-server/blob/main/src/Worker/HttpServerWorker.php)  
 This worker type handles incoming HTTP requests asynchronously.
 
 | Option                 | Type                                                                                                                                                                           | Default        | Description                                                               |
@@ -86,7 +88,7 @@ This worker type handles incoming HTTP requests asynchronously.
 | `onReload`             | Closure                                                                                                                                                                        | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.           |
 | `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                               | *not&nbsp;set* | Optional. A list of middlewares for processing HTTP requests.             |
 | `reloadStrategies`     | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php)                                                                    | *not&nbsp;set* | Optional. The strategies used to reload the worker.                       |
-| `serverDir`            | string                                                                                                                                                                         | *not&nbsp;set* | Optional. The directory to serve static files from.                       |
+| `documentRoot`         | string                                                                                                                                                                         | *not&nbsp;set* | Optional. The directory to serve static files from.                       |
 | `accessLog`            | bool                                                                                                                                                                           | true           | Optional. Whether to log incoming HTTP requests.                          |
 | `gzip`                 | bool                                                                                                                                                                           | false          | Optional. Enables gzip compression.                                       |
 | `connectionLimit`      | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections per worker.                   |

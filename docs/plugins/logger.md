@@ -12,8 +12,10 @@ $ composer require phpstreamserver/logger
 
 ## Example of Usage
 ```php title="server.php"
+<?php
+
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\Worker\WorkerProcess;
+use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\Logger\Handler\ConsoleHandler;
 use PHPStreamServer\Plugin\Logger\LoggerPlugin;
 use Psr\Log\LoggerInterface;
@@ -27,9 +29,9 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new WorkerProcess(
-        name: 'Worker process',
-        onStart: function (WorkerProcess $worker): void {
+    new SupervisedWorker(
+        name: 'Worker',
+        onStart: function (SupervisedWorker $worker): void {
             $logger = $worker->container->getService(LoggerInterface::class);
             $logger->info('Hello from worker', ['pid' => \posix_getpid()]);
 

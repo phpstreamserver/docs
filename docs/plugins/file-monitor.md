@@ -12,8 +12,10 @@ $ composer require phpstreamserver/file-monitor
 
 ## Example of Usage
 ```php title="server.php"
+<?php
+
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\Worker\WorkerProcess;
+use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\FileMonitor\FileMonitorPlugin;
 use PHPStreamServer\Plugin\FileMonitor\WatchDir;
 
@@ -21,14 +23,14 @@ $server = new Server();
 
 $server->addPlugin(
     new FileMonitorPlugin(
-        new WatchDir(sourceDir: __DIR__, filePattern: ['*'], recursive: true, invalidateOpcache: true),
+        new WatchDir(sourceDir: __DIR__, filePatterns: ['*'], recursive: true, invalidateOpcache: true),
     ),
 );
 
 $server->addWorker(
-    new WorkerProcess(
+    new SupervisedWorker(
         name: 'Worker process',
-        onStart: function (WorkerProcess $worker): void {
+        onStart: function (SupervisedWorker $worker): void {
             $worker->logger->notice("Worker process has started");
         },
     ),
@@ -55,6 +57,6 @@ Class: [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/
 | Option              | Type     | Default        | Description                                                                 |
 |---------------------|----------|----------------|-----------------------------------------------------------------------------|
 | `sourceDir`         | string   | *not&nbsp;set* | The directory to monitor for file changes.                                  |
-| `filePattern`       | string[] | \['\*'\]       | Optional. A pattern that specifies which files to watch (e.g., *.php).      |
+| `filePatterns`      | string[] | \['\*'\]       | Optional. A pattern that specifies which files to watch (e.g., *.php).      |
 | `recursive`         | bool     | false          | Optional. Monitor files recursively down to the folder tree.                |
 | `invalidateOpcache` | bool     | false          | Optional. Whether to invalidate the OPCache when a file change is detected. |

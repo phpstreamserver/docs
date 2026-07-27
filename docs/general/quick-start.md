@@ -16,13 +16,15 @@ $ composer require phpstreamserver/core phpstreamserver/http-server
 ### Configure a Simple Server
 
 ```php title="server.php"
+<?php
+
 use Amp\Http\Server\HttpErrorException;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\Worker\WorkerProcess;
+use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
-use PHPStreamServer\Plugin\HttpServer\Worker\HttpServerProcess;
+use PHPStreamServer\Plugin\HttpServer\Worker\HttpServerWorker;
 
 $server = new Server();
 
@@ -31,18 +33,18 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new WorkerProcess(
+    new SupervisedWorker(
         name: 'Worker',
         count: 1,
-        onStart: static function (WorkerProcess $worker): void {
+        onStart: static function (SupervisedWorker $worker): void {
             $worker->logger->notice("Hello from worker!");
         }
     ),
-    new HttpServerProcess(
+    new HttpServerWorker(
         name: 'Web Server',
         count: 2,
         listen: '0.0.0.0:8080',
-        onRequest: static function (Request $request, HttpServerProcess $worker): Response {
+        onRequest: static function (Request $request, HttpServerWorker $worker): Response {
             return match ($request->getUri()->getPath()) {
                 '/' => new Response(body: 'Hello world'),
                 '/ping' => new Response(body: 'pong'),

@@ -8,8 +8,10 @@ Configurations can be applied in the **Server**, **Plugin**, or **Worker** const
 It is recommended to use named parameters when specifying configuration options.
 
 ```php
+<?php
+
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\Worker\WorkerProcess;
+use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
 
 $server = new Server(
@@ -23,7 +25,7 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new WorkerProcess(
+    new SupervisedWorker(
         // Worker configuration
     ),
 );
@@ -50,8 +52,8 @@ PHPStreamServer includes several built-in worker types, and plugins can add addi
 Additional worker types are available through plugins.  
 [Read more →](/docs/plugins/)
 
-### ⚙️ WorkerProcess
-Worker class: [WorkerProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerProcess.php)  
+### ⚙️ SupervisedWorker
+Worker class: [SupervisedWorker](https://github.com/phpstreamserver/core/blob/main/src/Worker/SupervisedWorker.php)  
 This worker type is designed to run long-running PHP code.
 
 | Option             | Type                 | Default        | Description                                                           |
@@ -66,8 +68,8 @@ This worker type is designed to run long-running PHP code.
 | `onReload`         | Closure              | *not&nbsp;set* | Optional. A callback function executed when the worker reloads.       |
 | `reloadStrategies` | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php) | *not&nbsp;set* | Optional. The strategies used to reload the worker.                   |
 
-### ⚙️ ExternalProcess
-Worker class: [ExternalProcess](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExternalProcess.php)  
+### ⚙️ ExecutableWorker
+Worker class: [ExecutableWorker](https://github.com/phpstreamserver/core/blob/main/src/Worker/ExecutableWorker.php)  
 This worker type is designed to run external processes, allowing PHPStreamServer to manage and supervise programs or scripts outside of PHP.
 
 | Option             | Type   | Default        | Description                                                           |

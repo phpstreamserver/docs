@@ -43,10 +43,10 @@ Use the `APP_RUNTIME` environment variable or by specifying the `extra.runtime.c
 
 use PHPStreamServer\Core\ReloadStrategy\ExceptionReloadStrategy;
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Symfony\Worker\SymfonyHttpServerProcess;
+use PHPStreamServer\Symfony\Worker\SymfonyHttpServerWorker;
 
 return static function (Server $server): void {
-    $server->addWorker(new SymfonyHttpServerProcess(
+    $server->addWorker(new SymfonyHttpServerWorker(
         listen: '0.0.0.0:80',
         count: 1,
         reloadStrategies: [
@@ -88,8 +88,8 @@ This bundle adds new Symfony-specific options to the start command: (`--env`, `-
 
 ## Worker Configuration
 
-### ⚙️ SymfonyHttpServerProcess
-Worker class: [SymfonyHttpServerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerProcess.php)  
+### ⚙️ SymfonyHttpServerWorker
+Worker class: [SymfonyHttpServerWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerWorker.php)  
 This worker type is designed to run the Symfony application web server.
 
 | Option                 | Type                                                                                                                                                                           | Default        | Description                                                                                    |
@@ -107,12 +107,12 @@ This worker type is designed to run the Symfony application web server.
 | `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.                                    |
 | `concurrencyLimit`     | int                                                                                                                                                                            | 1              | Optional. The maximum number of concurrent HTTP requests per worker. Set to null for no limit. |
 
-### ⚙️ SymfonyPeriodicProcess
-Worker class: [SymfonyPeriodicProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyPeriodicProcess.php)  
+### ⚙️ SymfonyScheduledCommandWorker
+Worker class: [SymfonyScheduledCommandWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyScheduledCommandWorker.php)  
 This worker type is designed to execute Symfony console commands periodically.
 The `schedule` option can be specified in one of the following formats:
 - Number of seconds (e.g., `60`)
-- An ISO8601 datetime format (e.g., `2025-01-01 00:00:00`)
+- An ISO8601 datetime format (e.g., `2026-01-01T00:00:00Z`)
 - An ISO8601 duration format (e.g., `PT1M`)
 - A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g., `1 minute`)
 - A cron expression (e.g., `*/1 * * * *`)
@@ -126,8 +126,8 @@ The `schedule` option can be specified in one of the following formats:
 | `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
 | `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
 
-### ⚙️ SymfonyWorkerProcess
-Worker class: [SymfonyWorkerProcess](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyWorkerProcess.php)  
+### ⚙️ SymfonySupervisedCommandWorker
+Worker class: [SymfonySupervisedCommandWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonySupervisedCommandWorker.php)  
 This worker type is designed to run long-running Symfony console commands.
 
 | Option       | Type      | Default        | Description                                                           |
@@ -183,14 +183,14 @@ when@prod:
 ## Symfony Events
 During the workers' lifecycle, they [dispatch events](https://symfony.com/doc/current/event_dispatcher.html) which you can use to get to know what happens with workers.
 
-### ⏺️ ProcessStartEvent
-Event Class: [ProcessStartEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessStartEvent.php)  
+### ⏺️ WorkerStartEvent
+Event Class: [WorkerStartEvent](https://github.com/phpstreamserver/symfony/blob/main/src/SymfonyEvent/WorkerStartEvent.php)  
 Triggered when a worker process starts.
 
-### ⏺️ ProcessStopEvent
-Event Class: [ProcessStopEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessStopEvent.php)  
+### ⏺️ WorkerStopEvent
+Event Class: [WorkerStopEvent](https://github.com/phpstreamserver/symfony/blob/main/src/SymfonyEvent/WorkerStopEvent.php)  
 Triggered when a worker process stops.
 
-### ⏺️ ProcessReloadEvent
-Event Class: [ProcessReloadEvent](https://github.com/phpstreamserver/symfony/blob/main/src/Event/ProcessReloadEvent.php)  
+### ⏺️ WorkerReloadEvent
+Event Class: [WorkerReloadEvent](https://github.com/phpstreamserver/symfony/blob/main/src/SymfonyEvent/WorkerReloadEvent.php)  
 Triggered when a worker process is reloaded.

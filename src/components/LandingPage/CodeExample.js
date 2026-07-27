@@ -6,7 +6,7 @@ use Amp\\Http\\Server\\Request;
 use Amp\\Http\\Server\\Response;
 use PHPStreamServer\\Core\\Server;
 use PHPStreamServer\\Plugin\\HttpServer\\HttpServerPlugin;
-use PHPStreamServer\\Plugin\\HttpServer\\Worker\\HttpServerProcess;
+use PHPStreamServer\\Plugin\\HttpServer\\Worker\\HttpServerWorker;
 
 $server = new Server();
 
@@ -15,7 +15,7 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new HttpServerProcess(
+    new HttpServerWorker(
         listen: '0.0.0.0:8080', // Address to listen on
         count: 2, // Number of worker processes
         onRequest: static function (Request $request): Response {

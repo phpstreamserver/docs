@@ -13,8 +13,10 @@ $ composer require phpstreamserver/metrics
 
 ## Example of Usage
 ```php title="server.php"
+<?php
+
 use PHPStreamServer\Core\Server;
-use PHPStreamServer\Core\Worker\WorkerProcess;
+use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\Metrics\MetricsPlugin;
 use PHPStreamServer\Plugin\Metrics\RegistryInterface;
 use Revolt\EventLoop;
@@ -26,10 +28,10 @@ $server->addPlugin(
 );
 
 $server->addWorker(
-    new WorkerProcess(
-        name: 'Worker process',
+    new SupervisedWorker(
+        name: 'Worker',
         count: 2,
-        onStart: function (WorkerProcess $worker): void {
+        onStart: function (SupervisedWorker $worker): void {
             $registry = $worker->container->getService(RegistryInterface::class);
 
             $counter = $registry->registerCounter(
