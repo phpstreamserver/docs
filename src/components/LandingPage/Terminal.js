@@ -29,7 +29,7 @@ export default function Terminal() {
                     <span>PHPStreamServer version:</span><span>0.8.2</span>
                     <span>PHP version:</span><span>8.5.4</span>
                     <span>Event loop driver:</span><span>UvDriver</span>
-                    <span>Workers count:</span><span>1</span>
+                    <span>Worker count:</span><span>1</span>
                 </div>
 
                 <div className={styles.sectionTitle}>

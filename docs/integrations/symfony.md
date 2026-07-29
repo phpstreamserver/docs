@@ -2,10 +2,12 @@
 title: Symfony
 ---
 
-# Symfony Intergation
-This bundle integrates PHPStreamServer Runtime with the Symfony framework.
+# Symfony Integration
+
+This bundle integrates PHPStreamServer with the Symfony Runtime component.
 
 ## Installation
+
 ```bash
 $ composer require phpstreamserver/symfony
 ```
@@ -13,6 +15,7 @@ $ composer require phpstreamserver/symfony
 ## Runtime Configuration
 
 #### Enable the Bundle
+
 ```php title="config/bundles.php"
 <?php
 
@@ -23,7 +26,9 @@ return [
 ```
 
 #### Set PHPStreamServerRuntime as the Application Runtime
-Use the `APP_RUNTIME` environment variable or by specifying the `extra.runtime.class` in `composer.json` to change the Runtime class to `PHPStreamServer\Symfony\PHPStreamServerRuntime`.
+
+Set the `APP_RUNTIME` environment variable to `PHPStreamServer\Symfony\PHPStreamServerRuntime`, or specify the class through `extra.runtime.class` in `composer.json`:
+
 ```json title="composer.json"
 {
   "require": {
@@ -37,7 +42,8 @@ Use the `APP_RUNTIME` environment variable or by specifying the `extra.runtime.c
 }
 ```
 
-#### Create config/phpss.config.php File
+#### Create `config/phpss.config.php`
+
 ```php title="config/phpss.config.php"
 <?php
 
@@ -58,13 +64,14 @@ return static function (Server $server): void {
 
 The closure returned from the `config/phpss.config.php` may have zero or more arguments.  
 The following arguments are supported:
-- `Server $server` Server instance to register plugins and workers
-- `array $context` This is the same as $_SERVER + $_ENV
-- `string $projectDir` Project root directory
-- `string $env` Current environment
-- `bool $debug` Is in debug mode
+- `Server $server`: server instance used to register plugins and workers
+- `array $context`: this is the same as $_SERVER + $_ENV
+- `string $projectDir`: project root directory
+- `string $env`: current environment
+- `bool $debug`: whether debug mode is enabled
 
-#### Create bin/phpss File
+#### Create `bin/phpss`
+
 ```php title="bin/phpss"
 #!/usr/bin/env php
 <?php
@@ -80,11 +87,12 @@ return new ServerApplication(static function (array $context): Kernel {
 ```
 
 #### Start the Server
+
 ```bash
 $ bin/phpss start
 ```
 
-This bundle adds new Symfony-specific options to the start command: (`--env`, `--no-debug`). For more details, refer to the start command help output.
+This bundle adds the Symfony-specific `--env` and `--no-debug` options to the `start` command. For details, see the command's help output.
 
 ## Worker Configuration
 
@@ -92,56 +100,78 @@ This bundle adds new Symfony-specific options to the start command: (`--env`, `-
 Worker class: [SymfonyHttpServerWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyHttpServerWorker.php)  
 This worker type is designed to run the Symfony application web server.
 
-| Parameter              | Type                                                                                                                                                                           | Default        | Description                                                                                    |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|------------------------------------------------------------------------------------------------|
-| `listen`               | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address at which the server is listening.                                                  |
-| `count`                | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The number of processes to start. Defaults to number of CPUs.                        |
-| `reloadable`           | bool                                                                                                                                                                           | true           | Optional. Whether the worker can be reloaded with the reload command.                          |
-| `user`                 | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                                       |
-| `group`                | string                                                                                                                                                                         | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                                     |
-| `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                               | *not&nbsp;set* | Optional. A list of middlewares for processing HTTP requests.                                  |
-| `reloadStrategies`     | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php)                                                                    | *not&nbsp;set* | Optional. The strategies used to reload the worker.                                            |
-| `accessLog`            | bool                                                                                                                                                                           | true           | Optional. Whether to log incoming HTTP requests.                                               |
-| `gzip`                 | bool                                                                                                                                                                           | false          | Optional. Enables gzip compression.                                                            |
-| `connectionLimit`      | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections per worker.                                        |
-| `connectionLimitPerIp` | int                                                                                                                                                                            | *not&nbsp;set* | Optional. The maximum number of connections allowed per IP.                                    |
-| `concurrencyLimit`     | int                                                                                                                                                                            | 1              | Optional. The maximum number of concurrent HTTP requests per worker. Set to null for no limit. |
+| Parameter              | Type                                                                                                                                                                                                                                                                                         | Default    | Description                                                                                                             |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-------------------------------------------------------------------------------------------------------------------------|
+| `listen`               | [string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|array](string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)\|string[]\|[Listen[]](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php)) | *required* | Address or addresses on which to listen.                                                                                |
+| `count`                | int\|null                                                                                                                                                                                                                                                                                    | null       | Optional. Number of worker processes. Must be between `1` and `1024`. Defaults to the detected CPU count.               |
+| `reloadable`           | bool                                                                                                                                                                                                                                                                                         | true       | Optional. Whether the worker can be reloaded.                                                                           |
+| `user`                 | string\|null                                                                                                                                                                                                                                                                                 | null       | Optional. Unix user name or user ID (UID).                                                                              |
+| `group`                | string\|null                                                                                                                                                                                                                                                                                 | null       | Optional. Unix group name or group ID (GID).                                                                            |
+| `middleware`           | [Middleware[]](https://github.com/amphp/http-server/blob/3.x/src/Middleware.php)                                                                                                                                                                                                             | []         | Optional. Additional HTTP middleware.                                                                                   |
+| `reloadStrategies`     | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php)                                                                                                                                                                                  | []         | Optional. Strategies for triggering automatic worker reloads.                                                           |
+| `accessLog`            | bool                                                                                                                                                                                                                                                                                         | true       | Optional. Whether to log incoming HTTP requests.                                                                        |
+| `gzip`                 | bool                                                                                                                                                                                                                                                                                         | false      | Optional. Enables response compression. Requires `ext-zlib`.                                                            |
+| `connectionLimit`      | int\|null                                                                                                                                                                                                                                                                                    | null       | Optional. Maximum number of simultaneous connections per worker. Disabled by default.                                   |
+| `connectionLimitPerIp` | int\|null                                                                                                                                                                                                                                                                                    | null       | Optional. Maximum number of simultaneous connections per IPv4 address or IPv6 /56 block. Loopback addresses are exempt. |
+| `concurrencyLimit`     | int\|null                                                                                                                                                                                                                                                                                    | 1          | Optional. Maximum number of concurrent requests per worker. Disabled by default.                                        |
 
 ### ⚙️ SymfonyScheduledCommandWorker
 Worker class: [SymfonyScheduledCommandWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonyScheduledCommandWorker.php)  
 This worker type is designed to execute Symfony console commands periodically.
-The `schedule` option can be specified in one of the following formats:
-- Number of seconds (e.g., `60`)
-- An ISO8601 datetime format (e.g., `2026-01-01T00:00:00Z`)
-- An ISO8601 duration format (e.g., `PT1M`)
-- A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (e.g., `1 minute`)
-- A cron expression (e.g., `*/1 * * * *`)
+The `schedule` parameter accepts:
+- A numeric string representing seconds (for example, `'60'`)
+- An ISO8601 datetime format (for example, `2026-01-01T00:00:00Z`)
+- An ISO8601 duration format (for example, `PT1M`)
+- A [relative date format](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative) (for example, `1 minute`)
+- A cron expression (for example, `*/1 * * * *`)
 
-| Parameter  | Type    | Default        | Description                                                                 |
-|------------|---------|----------------|-----------------------------------------------------------------------------|
-| `command`  | string  | *not&nbsp;set* | Symfony console command name.                                               |
-| `name`     | string  | *not&nbsp;set* | Optional. The name associated with the worker process.                      |
-| `schedule` | int     | "1 minute"     | Optional. Schedule in one of the formats described above.                   |
-| `jitter`   | int     | 0              | Optional. Jitter in seconds that adds a random time offset to the schedule. |
-| `user`     | int     | *not&nbsp;set* | Optional. Unix user of process. Current user by default.                    |
-| `group`    | int     | *not&nbsp;set* | Optional. Unix group of process. Current group by default.                  |
+| Parameter  | Type         | Default    | Description                                                                                   |
+|------------|--------------|------------|-----------------------------------------------------------------------------------------------|
+| `command`  | string       | *required* | Symfony console command name with optional arguments and options.                             |
+| `name`     | string\|null | null       | Optional. Worker name. Defaults to command name.                                              |
+| `schedule` | string       | `1 minute` | Optional. Schedule in one of the formats described above.                                     |
+| `jitter`   | int          | 0`         | Optional. Maximum random delay, in seconds, added to the scheduled time. Set to 0 to disable. |
+| `user`     | string\|null | null`      | Optional. Unix user name or user ID (UID).                                                    |
+| `group`    | string\|null | null`      | Optional. Unix group name or group ID (GID).                                                  |
+
+`SymfonyScheduledCommandWorker` additionally requires the [Scheduler](/docs/plugins/scheduler) plugin.
 
 ### ⚙️ SymfonySupervisedCommandWorker
 Worker class: [SymfonySupervisedCommandWorker](https://github.com/phpstreamserver/symfony/blob/main/src/Worker/SymfonySupervisedCommandWorker.php)  
 This worker type is designed to run long-running Symfony console commands.
 
-| Parameter    | Type      | Default        | Description                                                           |
-|--------------|-----------|----------------|-----------------------------------------------------------------------|
-| `command`    | string    | *not&nbsp;set* | Symfony console command name.                                         |
-| `name`       | string    | *not&nbsp;set* | Optional. The name associated with the worker process.                |
-| `count`      | int       | 1              | Optional. The number of processes to start.                           |
-| `reloadable` | bool      | true           | Optional. Whether the worker can be reloaded with the reload command. |
-| `user`       | string    | *not&nbsp;set* | Optional. Unix user of process. Current user by default.              |
-| `group`      | string    | *not&nbsp;set* | Optional. Unix group of process. Current group by default.            |
+| Parameter          | Type                                                                                                        | Default    | Description                                                                                               |
+|--------------------|-------------------------------------------------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------------------|
+| `command`          | string                                                                                                      | *required* | Symfony console command name with optional arguments and options.                                         |
+| `name`             | string\|null                                                                                                | null       | Optional. Worker name. Defaults to command name.                                                          |
+| `count`            | int                                                                                                         | 1          | Optional. Number of worker processes. Must be between `1` and `1024`. Defaults to the detected CPU count. |
+| `reloadable`       | bool                                                                                                        | true       | Optional. Whether the worker can be reloaded.                                                             |
+| `user`             | string\|null                                                                                                | null       | Optional. Unix user name or user ID (UID).                                                                |
+| `group`            | string\|null                                                                                                | null       | Optional. Unix group name or group ID (GID).                                                              |
+| `reloadStrategies` | [ReloadStrategy[]](https://github.com/phpstreamserver/core/blob/main/src/ReloadStrategy/ReloadStrategy.php) | []         | Optional. Strategies for triggering automatic worker reloads.                                             |
 
-## Intergation with Monolog
+## Integration with Monolog
 If you use Monolog as the main logging system in Symfony, you can route all logs to the PHPStreamServer logger.
 This bundle provides a Monolog handler for seamless integration, which can be configured in the `monolog.yaml` file.
+
+Install the Logger plugin and Monolog bundle:
+
+```bash
+$ composer require phpstreamserver/logger symfony/monolog-bundle
+```
+
+Register `LoggerPlugin` with the desired PHPStreamServer handlers in `config/phpss.config.php` before registering workers:
+
+```php
+use PHPStreamServer\Plugin\Logger\Handler\ConsoleHandler;
+use PHPStreamServer\Plugin\Logger\LoggerPlugin;
+
+$server->addPlugin(
+    new LoggerPlugin(
+        new ConsoleHandler(),
+    ),
+);
+```
 
 ```yaml title="config/packages/monolog.yaml"
 when@dev:
@@ -181,7 +211,7 @@ when@prod:
 ```
 
 ## Symfony Events
-During the workers' lifecycle, they [dispatch events](https://symfony.com/doc/current/event_dispatcher.html) which you can use to get to know what happens with workers.
+Symfony HTTP and command workers [dispatch events](https://symfony.com/doc/current/event_dispatcher.html) during their normal lifecycle.
 
 ### ⏺️ WorkerStartEvent
 Event Class: [WorkerStartEvent](https://github.com/phpstreamserver/symfony/blob/main/src/SymfonyEvent/WorkerStartEvent.php)  

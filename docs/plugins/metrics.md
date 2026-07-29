@@ -11,9 +11,11 @@ The plugin supports **Counter**, **Gauge**, **Histogram**, and **Summary** metri
 $ composer require phpstreamserver/metrics
 ```
 
-## Example of Usage
+## Usage Example
 ```php title="server.php"
 <?php
+
+require __DIR__ . '/vendor/autoload.php';
 
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\SupervisedWorker;
@@ -58,4 +60,4 @@ Plugin class: [MetricsPlugin](https://github.com/phpstreamserver/metrics/blob/ma
 
 | Parameter | Type                                                                                      | Default        | Description                                           |
 |----------|-------------------------------------------------------------------------------------------|----------------|-------------------------------------------------------|
-| `listen` | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *not&nbsp;set* | The address on which the metrics server is listening. |
+| `listen` | string\|[Listen](https://github.com/phpstreamserver/http-server/blob/main/src/Listen.php) | *required* | The address on which the metrics server listens. Metrics are exposed at `/metrics`. |

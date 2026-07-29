@@ -3,28 +3,27 @@ title: About Plugins
 ---
 
 # About Plugins
-PHPStreamServer features a plugin-based architecture that makes it extensible.
-It comes with a set of optional plugins that add capabilities such as HTTP server, scheduler, logger, and more.
-Additionally, developers can create custom plugins to extend the server and customize it to their specific requirements.
+PHPStreamServer has a plugin-based architecture. Optional plugins add capabilities such as an HTTP server, scheduling, and logging.
+You can also create custom plugins to meet application-specific requirements.
 
-### Official Plugins
+## Official Plugins
 
-#### 🧩 HTTP server plugin
-Asynchronous HTTP server with support for HTTP/2, HTTPS, static file serving, and Gzip compression.  
+### 🧩 HTTP Server Plugin
+Asynchronous HTTP server with support for HTTP/2, HTTPS, static file serving, and gzip compression.  
 [Read more →](/docs/plugins/http-server)
 
-#### 🧩 Scheduler Plugin
-Cron-like scheduler for executing tasks at specified intervals.  
+### 🧩 Scheduler Plugin
+Scheduler for running tasks at fixed intervals, at specific dates and times, or on a cron schedule.  
 [Read more →](/docs/plugins/scheduler)
 
-#### 🧩 Logger Plugin
+### 🧩 Logger Plugin
 Flexible logging system supporting multiple outputs, including files, stdout, syslog, and Graylog.  
 [Read more →](/docs/plugins/logger)
 
-#### 🧩 File Monitor Plugin
-Directory watcher that triggers automatic worker reloads when files are modified.  
+### 🧩 File Monitor Plugin
+Directory watcher that detects changes to monitored files and triggers reloads for reloadable workers.  
 [Read more →](/docs/plugins/file-monitor)
 
-#### 🧩 Metrics Plugin
+### 🧩 Metrics Plugin
 Prometheus-compatible metrics endpoint for monitoring server performance and tracking custom application metrics.  
 [Read more →](/docs/plugins/metrics)

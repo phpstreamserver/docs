@@ -3,16 +3,18 @@ title: Logger Plugin
 ---
 
 # Logger Plugin
-Flexible logging system supporting multiple outputs, including files, stdout, syslog, and graylog.
+Flexible logging system supporting multiple outputs, including files, stdout, syslog, and Graylog.
 
 ## Installation
 ```bash
 $ composer require phpstreamserver/logger
 ```
 
-## Example of Usage
+## Usage Example
 ```php title="server.php"
 <?php
+
+require __DIR__ . '/vendor/autoload.php';
 
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\SupervisedWorker;
@@ -46,12 +48,12 @@ exit($server->run());
 
 ## Plugin Configuration
 
-### 🧩LoggerPlugin
+### 🧩 LoggerPlugin
 Plugin class: [LoggerPlugin](https://github.com/phpstreamserver/logger/blob/main/src/LoggerPlugin.php)
 
-| Parameter  | Type                                            | Default         | Description                                                       |
-|------------|-------------------------------------------------|-----------------|-------------------------------------------------------------------|
-| `handlers` | [Handler[]](/docs/plugins/logger#handler-configuration) | *not&nbsp;set*  | A list of logger handlers that specify the destinations for logs. |
+| Parameter  | Type                                                                               | Default          | Description                                                 |
+|------------|------------------------------------------------------------------------------------|------------------|-------------------------------------------------------------|
+| `handlers` | [Handler](https://github.com/phpstreamserver/logger/blob/main/src/Handler.php) ... | *zero arguments* | Optional. Handlers that define where log messages are sent. |
 
 ## Handler Configuration
 The Logger plugin provides various handlers for routing logs to different destinations.
@@ -60,48 +62,48 @@ The Logger plugin provides various handlers for routing logs to different destin
 Handler class: [ConsoleHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/ConsoleHandler.php)  
 Sends log messages directly to the console (stdout or stderr).
 
-| Parameter   | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
-|-------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| `output`    | int                                                                                | 2                                                                                                          | Optional. Specifies the output stream (1 for stdout, 2 for stderr).                                                        |
-| `level`     | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                            | Optional. Processes logs with severity equal to or greater than the specified level.                                       |
-| `channels`  | string[]                                                                           | *not&nbsp;set*                                                                                             | Optional. Processes logs only from the specified channels. Prefixing channel with `!` to exclude. All channels by default. |
-| `formatter` | [Formatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter.php) | [ConsoleFormatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter/ConsoleFormatter.php) | Optional. A custom formatter for formatting log messages.                                                                  |
+| Parameter   | Type                                                                               | Default                                                                                                    | Description                                                                                                                            |
+|-------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `output`    | int                                                                                | 2                                                                                                          | Optional. Specifies the output stream (1 for stdout, 2 for stderr).                                                                    |
+| `level`     | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                            | Optional. Processes logs with severity equal to or greater than the specified level.                                                   |
+| `channels`  | array\<string\>                                                                    | []                                                                                                         | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels. |
+| `formatter` | [Formatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter.php) | [ConsoleFormatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter/ConsoleFormatter.php) | Optional. A custom formatter for formatting log messages.                                                                              |
 
 ### 📝 FileHandler
 Handler class: [FileHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/FileHandler.php)  
 Sends log messages to a specified file, supporting daily rotation and gzip compression of archived logs.
 
-| Parameter    | Type                                                                               | Default                                                                                                    | Description                                                                                                                |
-|--------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| `filename`   | string                                                                             | *not&nbsp;set*                                                                                             | Path to the file where logs will be saved.                                                                                 |
-| `rotate`     | bool                                                                               | false                                                                                                      | Optional. Rotate log files.                                                                                                |
-| `compress`   | bool                                                                               | false                                                                                                      | Optional. Compresses archived log files to save disk space.                                                                |
-| `maxFiles`   | int                                                                                | 0                                                                                                          | Optional. The maximum number of log files to keep. Set to 0 to keep all files.                                             |
-| `permission` | int                                                                                | 0644                                                                                                       | Optional. File permissions for the created log file.                                                                       |
-| `level`      | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                            | Optional. Processes logs with severity equal to or greater than the specified level.                                       |
-| `channels`   | string[]                                                                           | *not&nbsp;set*                                                                                             | Optional. Processes logs only from the specified channels. Prefixing channel with `!` to exclude. All channels by default. |
-| `formatter`  | [Formatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter.php) | [ConsoleFormatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter/ConsoleFormatter.php) | Optional. A custom formatter for formatting log messages.                                                                  |
+| Parameter    | Type                                                                               | Default                                                                                                  | Description                                                                                                                            |
+|--------------|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `filename`   | string                                                                             | *required*                                                                                               | Path to the file where logs will be saved.                                                                                             |
+| `rotate`     | bool                                                                               | false                                                                                                    | Optional. Enables daily log rotation.                                                                                                  |
+| `compress`   | bool                                                                               | false                                                                                                    | Optional. Gzip-compresses rotated logs. Requires `ext-zlib`.                                                                           |
+| `maxFiles`   | int                                                                                | 0                                                                                                        | Optional. Optional. Maximum number of archived log files to retain. Unlimited by default.                                              |
+| `permission` | int                                                                                | 0644                                                                                                     | Optional. File permissions for the created log file.                                                                                   |
+| `level`      | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                          | Optional. Processes logs with severity equal to or greater than the specified level.                                                   |
+| `channels`   | string[]                                                                           | []                                                                                                       | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels. |
+| `formatter`  | [Formatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter.php) | [StringFormatter](https://github.com/phpstreamserver/logger/blob/main/src/Formatter/StringFormatter.php) | Optional. Formatter used for file output.                                                                                              |
 
 ### 📝 SyslogHandler
 Handler class: [SyslogHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/SyslogHandler.php)  
 Sends log messages to the system’s syslog service.
 
-| Parameter  | Type                                                                             | Default         | Description                                                                                                                                                                             |
-|------------|----------------------------------------------------------------------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `prefix`   | string                                                                           | phpss           | Optional. The string prefix is added to each message.                                                                                                                                   |
-| `flags`    | int                                                                              | 0               | Optional. Bitmask. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details.                                             |
-| `facility` | int                                                                              | 8               | Optional. Specify what type of program is logging the message. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details. |
-| `level`    | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                                                                                    |
-| `channels` | string[]                                                                         | *not&nbsp;set*  | Optional. Processes logs only from the specified channels. Prefixing channel with `!` to exclude. All channels by default.                                                              |
+| Parameter  | Type                                                                             | Default         | Description                                                                                                                                                       |
+|------------|----------------------------------------------------------------------------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `prefix`   | string                                                                           | phpss           | Optional. The string prefix is added to each message.                                                                                                             |
+| `flags`    | int                                                                              | 0               | Optional. Bitmask. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details.                       |
+| `facility` | int                                                                              | 8               | Optional. Specifies the syslog facility. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details. |
+| `level`    | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                                                              |
+| `channels` | string[]                                                                         | `[]`            | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.                            |
 
 ### 📝 GelfHandler
 Handler class: [GelfHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/GelfHandler.php)  
-Sends log messages to a Graylog server in GELF format, supporting UDP, TCP, and HTTP transports.
+Sends GELF messages over UDP, TCP, HTTP, or HTTPS.  
 
-| Parameter            | Type                                                                             | Default         | Description                                                                                                                |
-|----------------------|----------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------|
-| `address`            | string                                                                           | *not&nbsp;set*  | The Graylog server address. UDP, TCP, or HTTP endpoint.                                                                    |
-| `hostName`           | string                                                                           | *not&nbsp;set*  | Optional. The hostname to include in GELF messages. Current hostname by default.                                           |
-| `includeStacktraces` | bool                                                                             | false           | Optional. Whether to include stack traces in error logs.                                                                   |
-| `level`              | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                       |
-| `channels`           | string[]                                                                         | *not&nbsp;set*  | Optional. Processes logs only from the specified channels. Prefixing channel with `!` to exclude. All channels by default. |
+| Parameter            | Type                                                                             | Default         | Description                                                                                                                                            |
+|----------------------|----------------------------------------------------------------------------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `address`            | string                                                                           | *required*      | URI beginning with `udp://`, `tcp://`, `http://`, or `https://`. UDP and TCP require an explicit port; HTTP and HTTPS default to ports `80` and `443`. |
+| `hostName`           | string\|null                                                                     | null            | Optional. Hostname included in GELF messages. Defaults to the current hostname.                                                                        |
+| `includeStacktraces` | bool                                                                             | false           | Optional. Includes stack traces for exceptions found in log context.                                                                                   |
+| `level`              | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                                                   |
+| `channels`           | string[]                                                                         | []              | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.                 |
