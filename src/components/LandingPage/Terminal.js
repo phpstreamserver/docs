@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react';
 import styles from './Terminal.module.css';
 
 const getCurrentTimestamp = () => {
-    return `${new Date().toISOString().slice(0, 19)}+00:00`;
-}
+    return new Date().toISOString().slice(0, 19).replace('T', ' ');
+};
 
 export default function Terminal() {
     const [timestamp, setTimestamp] = useState('');
@@ -22,14 +22,15 @@ export default function Terminal() {
             <div className={styles.output}>
                 <div className={styles.product}>
                     <span className={styles.prompt}>❯</span>
-                    <span>🌸 PHPStreamServer – PHP application server</span>
+                    <span>🌸</span>
+                    <span>PHPStreamServer</span>
                 </div>
 
                 <div className={styles.meta}>
-                    <span>PHPStreamServer version:</span><span>0.8.2</span>
-                    <span>PHP version:</span><span>8.5.4</span>
-                    <span>Event loop driver:</span><span>UvDriver</span>
-                    <span>Worker count:</span><span>1</span>
+                    <span>Version:</span><span>0.9</span>
+                    <span>PHP:</span><span>8.5.4</span>
+                    <span>Event loop:</span><span>UvDriver</span>
+                    <span>Workers:</span><span>1</span>
                 </div>
 
                 <div className={styles.sectionTitle}>
@@ -40,7 +41,7 @@ export default function Terminal() {
                     <span className={styles.green}>User</span>
                     <span className={styles.green}>Worker</span>
                     <span className={styles.green}>Count</span>
-                    <span>user</span>
+                    <span className={styles.user}>user</span>
                     <span>Web Server</span>
                     <span>1</span>
                 </div>
@@ -49,23 +50,27 @@ export default function Terminal() {
 
                 <div>
                     <div>
-                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
-                        <span className={styles.green}>server</span>.<span className={styles.cyan}>INFO</span>{' '}
-                        <span>PHPStreamServer has started</span>
+                        <span className={styles.timestamp}>{timestamp}</span>{' '}
+                        <span className={`${styles.logLevel} ${styles.logInfo}`}>INFO</span>{' '}
+                        <span className={styles.logChannel}>server</span>{' › '}
+                        <span>PHPStreamServer started</span>
                     </div>
                     <div>
-                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
-                        <span className={styles.green}>http</span>.<span className={styles.debug}>DEBUG</span>{' '}
+                        <span className={styles.timestamp}>{timestamp}</span>{' '}
+                        <span className={`${styles.logLevel} ${styles.debug}`}>DEBUG</span>{' '}
+                        <span className={styles.logChannel}>http</span>{' › '}
                         <span>Starting server</span>
                     </div>
                     <div>
-                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
-                        <span className={styles.green}>http</span>.<span className={styles.cyan}>INFO</span>{' '}
+                        <span className={styles.timestamp}>{timestamp}</span>{' '}
+                        <span className={`${styles.logLevel} ${styles.logInfo}`}>INFO</span>{' '}
+                        <span className={styles.logChannel}>http</span>{' › '}
                         <span>Started server</span>
                     </div>
                     <div>
-                        <span className={styles.timestamp}>[{timestamp}]</span>{' '}
-                        <span className={styles.green}>http</span>.<span className={styles.cyan}>INFO</span>{' '}
+                        <span className={styles.timestamp}>{timestamp}</span>{' '}
+                        <span className={`${styles.logLevel} ${styles.logInfo}`}>INFO</span>{' '}
+                        <span className={styles.logChannel}>http</span>{' › '}
                         <span>Listening on http://0.0.0.0:8080/</span>
                     </div>
                     <div><span className={styles.cursor} aria-hidden="true" /></div>

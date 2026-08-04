@@ -37,66 +37,79 @@
 }
 
 .output {
-    padding: 2.25rem 1rem 1rem 1rem;
+    padding: 2.25rem 1rem 1rem;
     width: max-content;
     min-width: 100%;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-variant-ligatures: none;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.48;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.2;
     white-space: nowrap;
 }
 
 .product {
     display: grid;
-    grid-template-columns: 2ch auto 1fr;
+    grid-template-columns: 2ch 3ch auto;
     align-items: baseline;
+    color: #eb679d;
+    font-weight: 700;
 }
 
 .sectionTitle {
     display: grid;
     grid-template-columns: 2ch auto;
     align-items: baseline;
+    color: #eb679d;
+    font-weight: 700;
 }
 
 .prompt {
-    color: #d8d8d8;
+    color: #eb679d;
     font-weight: 700;
 }
 
 .meta {
     display: grid;
-    grid-template-columns: 25ch auto;
+    grid-template-columns: 16ch auto;
     padding-left: 2ch;
-}
-
-.sectionTitle {
-    margin-top: 0.15em;
 }
 
 .workers {
     display: grid;
-    grid-template-columns: 8ch 13ch auto;
+    grid-template-columns: 7ch 13ch auto;
     padding-left: 2ch;
 }
 
 .green {
-    color: #00ae0b;
+    color: #5bc1c4;
 }
 
-.cyan {
-    color: #62cbd0;
+.user {
+    color: #9a999b;
+}
+
+.logChannel {
+    color: #5bc1c4;
+}
+
+.logLevel {
+    display: inline-block;
+    width: 6ch;
+}
+
+.logInfo {
+    color: #62e968;
 }
 
 .debug {
-    color: #f0f0f0;
+    color: #9a999b;
 }
 
 .cursor {
     display: inline-block;
-    width: 0.25ch;
+    width: 0.1ch;
     height: 1.05em;
     vertical-align: -0.16em;
     background: #d2d2d2;
