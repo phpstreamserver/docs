@@ -5,6 +5,14 @@ title: File Monitor Plugin
 # File Monitor Plugin
 A directory watcher that requests a server reload when matching files are created, modified, deleted, or moved into a watched directory.
 
+File Monitor selects the watcher for the current operating system automatically:
+
+| Platform        | Watcher                                                      |
+|-----------------|--------------------------------------------------------------|
+| Linux           | Native Inotify watcher, accessed through PHP FFI.            |
+| macOS           | Native FSEvents watcher, accessed through PHP FFI.           |
+| Other platforms | Polling watcher that rescans the matching files for changes. |
+
 ## Installation
 ```bash
 $ composer require phpstreamserver/file-monitor
@@ -19,13 +27,13 @@ require __DIR__ . '/vendor/autoload.php';
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\SupervisedWorker;
 use PHPStreamServer\Plugin\FileMonitor\FileMonitorPlugin;
-use PHPStreamServer\Plugin\FileMonitor\WatchDir;
+use PHPStreamServer\Plugin\FileMonitor\WatchRule;
 
 $server = new Server();
 
 $server->addPlugin(
     new FileMonitorPlugin(
-        new WatchDir(sourceDir: __DIR__, filePatterns: ['*'], recursive: true, invalidateOpcache: true),
+        new WatchRule(glob: __DIR__ . '/src/**/*.php', invalidateOpcache: true),
     ),
 );
 
@@ -46,19 +54,17 @@ exit($server->run());
 ### 🧩 FileMonitorPlugin
 Plugin class: [FileMonitorPlugin](https://github.com/phpstreamserver/file-monitor/blob/main/src/FileMonitorPlugin.php)
 
-| Parameter | Type                                                              | Default          | Description                                                          |
-|-----------|-------------------------------------------------------------------|------------------|----------------------------------------------------------------------|
-| `watch`   | [WatchDir](/docs/plugins/file-monitor#watchdir-configuration) ... | *zero arguments* | Optional. WatchDir configurations specifying which files to monitor. |
+| Parameter     | Type                                                                  | Default          | Description                                                           |
+|---------------|-----------------------------------------------------------------------|------------------|-----------------------------------------------------------------------|
+| `watchRules`  | [WatchRule](/docs/plugins/file-monitor#watchrule-configuration) ... | *zero arguments* | Optional. WatchRule configurations specifying which files to monitor. |
 
-## WatchDir Configuration
-`WatchDir` specifies a directory and the file-name patterns to monitor.
+## WatchRule Configuration
+`WatchRule` specifies an absolute glob of files to monitor. Use a globstar directory segment (`**`) followed by a file pattern to monitor files recursively.
 
-### 📂 WatchDir
-Class: [WatchDir](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchDir.php)
+### 📂 WatchRule
+Class: [WatchRule](https://github.com/phpstreamserver/file-monitor/blob/main/src/WatchRule.php)
 
-| Parameter           | Type     | Default    | Description                                                         |
-|---------------------|----------|------------|---------------------------------------------------------------------|
-| `sourceDir`         | string   | *required* | The directory to monitor for file changes.                          |
-| `filePatterns`      | string[] | ['*']      | Optional. Glob patterns to match file names (for example, `*.php`). |
-| `recursive`         | bool     | false      | Optional. Whether to monitor subdirectories recursively.            |
-| `invalidateOpcache` | bool     | false      | Optional. Whether to invalidate all scripts cached by OPCache.      |
+| Parameter           | Type   | Default    | Description                                                                 |
+|---------------------|--------|------------|-----------------------------------------------------------------------------|
+| `glob`              | string | *required* | Absolute glob of files to monitor, for example `/src/**/*.php` or `/*.php`. |
+| `invalidateOpcache` | bool   | false      | Optional. Whether to invalidate all scripts cached by OPCache.              |

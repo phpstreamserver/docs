@@ -16,5 +16,5 @@ Powered by the [Revolt](https://revolt.run/) event loop and the [AMPHP](https://
 
 - Unix-like operating system
 - **PHP 8.2** or later
-- **ext-pcntl** and **ext-posix**
+- **ext-pcntl**, **ext-posix**, and **ext-ffi**
 - **ext-uv** (optional; suggested for better event-loop performance)

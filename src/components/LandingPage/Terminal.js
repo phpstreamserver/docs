@@ -30,7 +30,6 @@ export default function Terminal() {
                     <span>Version:</span><span>0.9</span>
                     <span>PHP:</span><span>8.5.4</span>
                     <span>Event loop:</span><span>UvDriver</span>
-                    <span>Workers:</span><span>1</span>
                 </div>
 
                 <div className={styles.sectionTitle}>

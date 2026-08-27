@@ -14,6 +14,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use PHPStreamServer\Core\Server;
 use PHPStreamServer\Core\Worker\SupervisedWorker;
+use PHPStreamServer\Core\Worker\WorkerFactory;
 use PHPStreamServer\Plugin\HttpServer\HttpServerPlugin;
 
 $server = new Server(
@@ -29,6 +30,12 @@ $server->addPlugin(
 $server->addWorker(
     new SupervisedWorker(
         // Worker configuration
+    ),
+);
+
+$server->addWorkerFactory(
+    new WorkerFactory(
+        // WorkerFactory configuration
     ),
 );
 
@@ -85,6 +92,17 @@ This worker type is designed to run external processes, allowing PHPStreamServer
 | `user`       | string\|null | null       | Optional. Unix user name or user ID (UID).                     |
 | `group`      | string\|null | null       | Optional. Unix group name or group ID (GID).                   |
 
+## WorkerFactory Configuration
+Worker factory class: [WorkerFactory](https://github.com/phpstreamserver/core/blob/main/src/Worker/WorkerFactory.php)  
+A worker factory defines workers that can be created and started on demand. Unlike a worker passed to `Server::addWorker()`, registering a factory does not create or start a worker. The factory is invoked when the master process receives a [StartWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StartWorkerCommand.php) with a matching `factoryId`.
+
+| Parameter | Type    | Default    | Description                                                                                     |
+|-----------|---------|------------|-------------------------------------------------------------------------------------------------|
+| `id`      | string  | *required* | Unique factory identifier. Pass this value as `StartWorkerCommand::$factoryId`.                 |
+| `factory` | Closure | *required* | Creates a new worker from the runtime parameters supplied by `StartWorkerCommand::$parameters`. |
+
+The `factory` closure has the type `Closure(array<string, mixed>=): WorkerInterface`. It must declare a return type that implements [WorkerInterface](https://github.com/phpstreamserver/core/blob/main/src/WorkerInterface.php). It may accept no parameters or one `array` parameter.
+
 ## Reload Strategies
 Reload strategies determine when reloadable workers should restart. PHPStreamServer provides three built-in strategies, and plugins can provide additional strategies.  
 [Read more →](/docs/plugins/)
@@ -135,21 +153,22 @@ Retrieves network traffic and active connection information for worker processes
 Command class: [GetServerStatusCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/GetServerStatusCommand.php)  
 Retrieves runtime information about the running server.
 
-### ▶️  RegisterWorkerCommand
-Command class: [RegisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/RegisterWorkerCommand.php)  
-Registers a worker and returns its assigned ID.
+### ▶️  StartWorkerCommand
+Command class: [StartWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StartWorkerCommand.php)  
+Starts a worker using a registered `WorkerFactory` and returns its assigned ID, or `0` if startup fails.
 
-| Parameter | Type                                                                                         | Default      | Description                 |
-|-----------|----------------------------------------------------------------------------------------------|--------------|-----------------------------|
-| `worker`  | [WorkerInterface](https://github.com/phpstreamserver/core/blob/main/src/WorkerInterface.php) | *required*   | Configured worker instance. |
+| Parameter    | Type                    | Default    | Description                                    |
+|--------------|-------------------------|------------|------------------------------------------------|
+| `factoryId`  | string                  | *required* | ID of the registered worker factory.           |
+| `parameters` | `array<string, mixed>`  | []         | Runtime parameters passed to the factory.      |
 
-### ▶️  UnregisterWorkerCommand
-Command class: [UnregisterWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/UnregisterWorkerCommand.php)  
-Unregisters a worker from the supervisor.
+### ▶️  StopWorkerCommand
+Command class: [StopWorkerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StopWorkerCommand.php)  
+Stops all processes of a factory-created worker.
 
-| Parameter  | Type | Default    | Description              |
-|------------|------|------------|--------------------------|
-| `workerId` | int  | *required* | Worker ID to unregister. |
+| Parameter  | Type | Default    | Description                           |
+|------------|------|------------|---------------------------------------|
+| `workerId` | int  | *required* | Assigned ID of the worker to stop.    |
 
 ### ▶️  ReloadServerCommand
 Command class: [`ReloadServerCommand`](https://github.com/phpstreamserver/core/blob/main/src/Command/ReloadServerCommand.php)  
