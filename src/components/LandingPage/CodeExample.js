@@ -1,6 +1,8 @@
 const ExampleCode = `
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 use Amp\\Http\\Server\\HttpErrorException;
 use Amp\\Http\\Server\\Request;
 use Amp\\Http\\Server\\Response;

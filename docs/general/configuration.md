@@ -61,7 +61,7 @@ See the plugins documentation for detailed options and examples.
 Worker-level configuration controls how individual workers run. PHPStreamServer provides two built-in worker types, and plugins can provide additional types.  
 [Read more →](/docs/plugins/)
 
-Workers use the current process identity by default. If `user` is set without `group`, the user's primary group is used.
+Workers use the server process's effective user and group by default. If `user` is set without `group`, the server process's effective group is retained.
 
 ### ⚙️ SupervisedWorker
 Worker class: [SupervisedWorker](https://github.com/phpstreamserver/core/blob/main/src/Worker/SupervisedWorker.php)  
@@ -173,6 +173,10 @@ Stops all processes of a factory-created worker.
 ### ▶️  ReloadServerCommand
 Command class: [`ReloadServerCommand`](https://github.com/phpstreamserver/core/blob/main/src/Command/ReloadServerCommand.php)  
 Requests a server reload.
+
+| Parameter      | Type | Default | Description                                                                               |
+|----------------|------|---------|-------------------------------------------------------------------------------------------|
+| `opcacheReset` | bool | false   | Whether to invalidate scripts cached by OPCache when OPCache is enabled before reload. |
 
 ### ▶️  StopServerCommand
 Command class: [StopServerCommand](https://github.com/phpstreamserver/core/blob/main/src/Command/StopServerCommand.php)  

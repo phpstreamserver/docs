@@ -10,6 +10,12 @@ Flexible logging system supporting multiple outputs, including files, stdout, sy
 $ composer require phpstreamserver/logger
 ```
 
+HTTP and HTTPS transport for `GelfHandler` additionally requires the AMPHP HTTP client:
+
+```bash
+$ composer require amphp/http-client
+```
+
 ## Usage Example
 ```php title="server.php"
 <?php
@@ -78,7 +84,7 @@ Sends log messages to a specified file, supporting daily rotation and gzip compr
 | `filename`   | string                                                                             | *required*                                                                                               | Path to the file where logs will be saved.                                                                                             |
 | `rotate`     | bool                                                                               | false                                                                                                    | Optional. Enables daily log rotation.                                                                                                  |
 | `compress`   | bool                                                                               | false                                                                                                    | Optional. Gzip-compresses rotated logs. Requires `ext-zlib`.                                                                           |
-| `maxFiles`   | int                                                                                | 0                                                                                                        | Optional. Optional. Maximum number of archived log files to retain. Unlimited by default.                                              |
+| `maxFiles`   | int                                                                                | 0                                                                                                        | Optional. Maximum number of archived log files to retain. Unlimited by default.                                                        |
 | `permission` | int                                                                                | 0644                                                                                                     | Optional. File permissions for the created log file.                                                                                   |
 | `level`      | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php)   | LogLevel::DEBUG                                                                                          | Optional. Processes logs with severity equal to or greater than the specified level.                                                   |
 | `channels`   | string[]                                                                           | []                                                                                                       | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels. |

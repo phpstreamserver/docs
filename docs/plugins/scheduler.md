@@ -66,6 +66,8 @@ The `schedule` parameter accepts:
 | `group`    | string\|null  | null       | Optional. Unix group name or group ID (GID).                                                    |
 | `onStart`  | Closure\|null | null       | Optional. `Closure(ScheduledWorker): void` callback executed when the scheduled process starts. |
 
+Each run executes in a separate child process. Runs never overlap. If a task is still running at its next scheduled time, that run is skipped and the following run is scheduled.
+
 ## Commands
 
 ### ▶️  GetWorkersCommand
