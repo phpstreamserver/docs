@@ -70,7 +70,7 @@ export default function Terminal() {
                         <span className={styles.timestamp}>{timestamp}</span>{' '}
                         <span className={`${styles.logLevel} ${styles.logInfo}`}>INFO</span>{' '}
                         <span className={styles.logChannel}>http</span>{' › '}
-                        <span>Listening on http://0.0.0.0:8080/</span>
+                        <span>Listening on http://127.0.0.1:8080/</span>
                     </div>
                     <div><span className={styles.cursor} aria-hidden="true" /></div>
                 </div>
