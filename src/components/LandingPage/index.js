@@ -183,7 +183,7 @@ export default function LandingPage() {
                             <span/>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
-                            <div className="col-span-4">
+                            <div className="lg:col-span-4">
                                 <div className="mb-6">Install PHPStreamServer and start a simple HTTP server with the following minimal configuration.</div>
 
                                 <div className={`${styles.commandStep} mb-6`}>
@@ -205,7 +205,7 @@ export default function LandingPage() {
                                 </Link>
                             </div>
 
-                            <div className={`${styles.codeExample} col-span-6`}>
+                            <div className={`${styles.codeExample} lg:col-span-6`}>
                                 <div className={styles.editorHeader}>
                                     <div className={styles.controls} aria-hidden="true">
                                         <span />
