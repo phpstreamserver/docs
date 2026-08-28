@@ -7,7 +7,7 @@ import LogoImg from '@site/static/img/phpss-banner.svg';
 import CodeExample from './CodeExample';
 import Terminal from './Terminal';
 import styles from './index.module.css';
-import { Code, Cpu, Globe, RefreshCw, CalendarClock, SquareTerminal, Logs, ChartNoAxesCombined, FolderSync, Puzzle, TriangleAlert } from 'lucide-react';
+import { Code, Cpu, Globe, RefreshCw, CalendarClock, SquareTerminal, Logs, ChartNoAxesCombined, FolderSync, Puzzle, TriangleAlert, ChevronDown } from 'lucide-react';
 
 const features = [
     {
@@ -59,6 +59,42 @@ const features = [
         icon: Puzzle,
         title: 'Extensible Plugin System',
         description: 'Enable built-in plugins or create custom ones to add project-specific functionality.',
+    },
+];
+
+const faqItems = [
+    {
+        question: 'How is it different from PHP-FPM?',
+        answer: 'Your application remains loaded between requests instead of starting again for every request, reducing repeated startup work.',
+    },
+    {
+        question: 'Can I run an existing PHP application?',
+        answer: 'Not always without changes. Applications must be designed for an always-in-memory runtime rather than assuming a fresh start for every request.',
+    },
+    {
+        question: 'Does my application need to be asynchronous?',
+        answer: 'No. Applications can remain synchronous when running on PHPStreamServer.',
+    },
+    {
+        question: 'Can I use asynchronous PHP in my application?',
+        answer: 'Yes. PHPStreamServer is built around the Revolt event loop and AMPHP, so building asynchronous PHP applications is the most natural way to use it.',
+    },
+
+    {
+        question: 'How is PHPStreamServer installed?',
+        answer: 'Composer is all you need to install PHPStreamServer. There is no separate server binary or additional service to set up; you configure and launch it with PHP.',
+    },
+    {
+        question: 'Do I need Nginx or PHP-FPM?',
+        answer: 'You do not need PHP-FPM. PHPStreamServer keeps your application running and serves requests directly. Nginx is also optional, although you may still choose to use it as a reverse proxy.',
+    },
+    {
+        question: 'Can it replace Cron and Supervisor?',
+        answer: 'PHPStreamServer includes a scheduler for recurring tasks and a process supervisor for PHP workers and external commands, so separate Cron or Supervisor services are not required.',
+    },
+    {
+        question: 'How do code changes take effect during development?',
+        answer: 'Because application code stays in memory between requests, changes require a worker reload. The optional file monitor automatically reloads workers when monitored files change.',
     },
 ];
 
@@ -180,6 +216,29 @@ export default function LandingPage() {
                                 </div>
                                 <CodeBlock language="php">{CodeExample.trim()}</CodeBlock>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className={`${styles.faqSection} py-8 lg:py-12`}>
+                    <div className="container">
+                        <div className={`${styles.sectionHeading} mb-6 lg:mb-10`}>
+                            <h2>FAQ</h2>
+                            <span/>
+                        </div>
+
+                        <div className={styles.faqList}>
+                            {faqItems.map((item) => (
+                                <details key={item.question} className={styles.faqItem}>
+                                    <summary className={styles.faqQuestion}>
+                                        <span>{item.question}</span>
+                                        <ChevronDown aria-hidden="true" />
+                                    </summary>
+                                    <div className={styles.faqAnswer}>
+                                        <p>{item.answer}</p>
+                                    </div>
+                                </details>
+                            ))}
                         </div>
                     </div>
                 </section>

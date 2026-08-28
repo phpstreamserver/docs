@@ -284,6 +284,11 @@
     border-top: 1px solid var(--page-border);
 }
 
+.faqSection {
+    background: var(--page-background);
+    border-top: 1px solid var(--page-border);
+}
+
 .sectionHeading {
     position: relative;
 }
@@ -404,6 +409,73 @@
     line-height: 1.5;
 }
 
+.faqList {
+    @apply flex flex-col gap-3;
+}
+
+.faqItem {
+    @apply rounded-xl shadow-xs;
+    background: var(--page-surface);
+    border: 1px solid var(--page-border);
+    overflow: hidden;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.faqItem[open] {
+    border-color: color-mix(in srgb, var(--page-accent), var(--page-border) 56%);
+}
+
+.faqQuestion {
+    @apply p-4 min-h-4;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1em;
+    color: inherit;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 1.4;
+    list-style: none;
+}
+
+.faqQuestion::-webkit-details-marker {
+    display: none;
+}
+
+.faqQuestion:hover {
+    color: var(--page-accent-dark);
+}
+
+.faqQuestion:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--page-accent), transparent 58%);
+    outline-offset: -3px;
+}
+
+.faqQuestion svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--page-muted);
+    transition: color 160ms ease, transform 180ms ease;
+}
+
+.faqItem[open] .faqQuestion svg {
+    color: var(--page-accent);
+    transform: rotate(180deg);
+}
+
+.faqAnswer {
+    @apply px-4 pb-4;
+    padding: 0 1.1rem 1rem;
+    color: var(--page-muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+.faqAnswer p {
+    @apply pt-4 m-0;
+    border-top: 1px solid var(--page-border);
+}
+
 .commandStep :global(.theme-code-block) {
     margin: 0;
 }
@@ -471,7 +543,9 @@
 @media (prefers-reduced-motion: reduce) {
     .primaryButton,
     .secondaryButton,
-    .secondaryButton svg {
+    .secondaryButton svg,
+    .faqItem,
+    .faqQuestion svg {
         transition: none;
     }
 }
