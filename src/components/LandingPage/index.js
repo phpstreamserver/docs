@@ -64,12 +64,12 @@ const features = [
 
 const faqItems = [
     {
-        question: 'How is it different from PHP-FPM?',
-        answer: 'Your application remains loaded between requests instead of starting again for every request, reducing repeated startup work.',
+        question: 'How does it differ from PHP-FPM?',
+        answer: 'In a traditional PHP-FPM setup, a web server forwards each request to PHP-FPM and the application is initialized for that request. PHPStreamServer runs the AMPHP HTTP server in long-running workers and keeps the application loaded between requests.',
     },
     {
-        question: 'Can I run an existing PHP application?',
-        answer: 'Not always without changes. Applications must be designed for an always-in-memory runtime rather than assuming a fresh start for every request.',
+        question: 'Can I run an existing PHP web application?',
+        answer: 'Not always without changes. Applications must be designed for an always-in-memory runtime, and code that relies on PHP globals such as $_GET and $_POST must be adapted to use request objects instead.',
     },
     {
         question: 'Does my application need to be asynchronous?',
@@ -79,14 +79,13 @@ const faqItems = [
         question: 'Can I use asynchronous PHP in my application?',
         answer: 'Yes. PHPStreamServer is built around the Revolt event loop and AMPHP, so building asynchronous PHP applications is the most natural way to use it.',
     },
-
     {
         question: 'How is PHPStreamServer installed?',
         answer: 'Composer is all you need to install PHPStreamServer. There is no separate server binary or additional service to set up; you configure and launch it with PHP.',
     },
     {
         question: 'Do I need Nginx or PHP-FPM?',
-        answer: 'You do not need PHP-FPM. PHPStreamServer keeps your application running and serves requests directly. Nginx is also optional, although you may still choose to use it as a reverse proxy.',
+        answer: 'No. PHPStreamServer keeps your application running and serves requests directly. Nginx can still be used as a reverse proxy.',
     },
     {
         question: 'Can it replace Cron and Supervisor?',
