@@ -139,8 +139,6 @@ export default function LandingPage() {
                                         <span>GitHub</span>
                                     </Link>
                                 </div>
-
-
                             </div>
 
                             <div className="hidden xl:block xl:col-span-5 pt-2">
@@ -148,8 +146,6 @@ export default function LandingPage() {
                             </div>
                         </div>
                     </div>
-
-
                 </header>
 
                 <section className={`${styles.featuresSection} py-8 lg:py-12`}>
