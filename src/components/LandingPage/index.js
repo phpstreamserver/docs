@@ -126,11 +126,11 @@ export default function LandingPage() {
                                 <div className={`${styles.warning} my-6`}>
                                     <TriangleAlert/>
                                     <div>
-                                        <b>Preview:</b> PHPStreamServer is under active development and is not yet production-ready.
+                                        <b>Preview:</b> PHPStreamServer is currently in development and is not yet production-ready.
                                     </div>
                                 </div>
 
-                                <div className="flex gap-4 my-6">
+                                <div className="flex justify-center sm:justify-start gap-5 my-6">
                                     <Link className={styles.primaryButton} to="/docs/general/">
                                         Get Started
                                     </Link>
