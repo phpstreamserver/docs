@@ -17,7 +17,7 @@ Scheduler for running tasks at fixed intervals, at specific dates and times, or 
 [Read more →](/docs/plugins/scheduler)
 
 ### 🧩 Logger Plugin
-Flexible logging system supporting multiple outputs, including files, stdout, syslog, and Graylog.  
+Flexible logging system supporting multiple outputs, including files, stdout, syslog, Graylog, and VictoriaLogs.  
 [Read more →](/docs/plugins/logger)
 
 ### 🧩 File Monitor Plugin

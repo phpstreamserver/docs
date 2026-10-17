@@ -43,7 +43,7 @@ const features = [
     {
         icon: Logs,
         title: 'Configurable Log Routing',
-        description: 'Route logs by channel and severity to files, stdout and stderr, syslog, or Graylog.',
+        description: 'Route logs by channel and severity to files, stdout and stderr, syslog, Graylog, or VictoriaLogs.',
     },
     {
         icon: ChartNoAxesCombined,

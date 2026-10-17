@@ -3,14 +3,14 @@ title: Logger Plugin
 ---
 
 # Logger Plugin
-Flexible logging system supporting multiple outputs, including files, stdout, syslog, and Graylog.
+Flexible logging system supporting multiple outputs, including files, stdout, syslog, Graylog, and VictoriaLogs.
 
 ## Installation
 ```bash
 $ composer require phpstreamserver/logger
 ```
 
-HTTP and HTTPS transport for `GelfHandler` additionally requires the AMPHP HTTP client:
+`VictoriaLogsHandler` and HTTP and HTTPS transport for `GelfHandler` additionally require the AMPHP HTTP client:
 
 ```bash
 $ composer require amphp/http-client
@@ -100,7 +100,7 @@ Sends log messages to the system’s syslog service.
 | `flags`    | int                                                                              | 0               | Optional. Bitmask. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details.                       |
 | `facility` | int                                                                              | 8               | Optional. Specifies the syslog facility. See [php.net](https://www.php.net/manual/en/function.openlog.php#refsect1-function.openlog-parameters) for more details. |
 | `level`    | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                                                              |
-| `channels` | string[]                                                                         | `[]`            | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.                            |
+| `channels` | string[]                                                                         | []              | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.                            |
 
 ### 📝 GelfHandler
 Handler class: [GelfHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/GelfHandler.php)  
@@ -113,3 +113,15 @@ Sends GELF messages over UDP, TCP, HTTP, or HTTPS.
 | `includeStacktraces` | bool                                                                             | false           | Optional. Includes stack traces for exceptions found in log context.                                                                                   |
 | `level`              | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG | Optional. Processes logs with severity equal to or greater than the specified level.                                                                   |
 | `channels`           | string[]                                                                         | []              | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.                 |
+
+### 📝 VictoriaLogsHandler
+Handler class: [VictoriaLogsHandler](https://github.com/phpstreamserver/logger/blob/main/src/Handler/VictoriaLogsHandler.php)  
+Sends logs to VictoriaLogs over HTTP or HTTPS using JSON line ingestion.
+
+| Parameter      | Type                                                                             | Default            | Description                                                                                                                                 |
+|----------------|----------------------------------------------------------------------------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `baseUri`      | string                                                                           | *required*         | Base HTTP or HTTPS URL of VictoriaLogs, optionally with a path prefix. Query strings and fragments are not allowed.                         |
+| `appName`      | string                                                                           | app                | Optional. Application name.                                                                                                                 |
+| `streamFields` | string[]                                                                         | ['app', 'channel'] | Optional. Log field names whose values identify a [log stream](https://docs.victoriametrics.com/victorialogs/keyconcepts/#stream-fields).   |
+| `level`        | [LogLevel](https://github.com/phpstreamserver/logger/blob/main/src/LogLevel.php) | LogLevel::DEBUG    | Optional. Processes logs with severity equal to or greater than the specified level.                                                        |
+| `channels`     | string[]                                                                         | []                 | Optional. List channel names to include, or prefix them with `!` to exclude. By default, the handler processes logs from all channels.      |
