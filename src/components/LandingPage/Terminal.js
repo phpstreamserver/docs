@@ -27,8 +27,8 @@ export default function Terminal() {
                 </div>
 
                 <div className={styles.meta}>
-                    <span>Version:</span><span>0.10.0</span>
-                    <span>PHP:</span><span>8.5.10</span>
+                    <span>Version:</span><span>0.11.0</span>
+                    <span>PHP:</span><span>8.5.11</span>
                     <span>Event loop:</span><span>UvDriver</span>
                 </div>
 
